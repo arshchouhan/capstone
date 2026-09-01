@@ -8,17 +8,17 @@ function LandingPage() {
       <section className="hero">
         <div className="hero-copy">
           <div className="hero-brand-wrap">
-            <div className="brand-name hero-brand">Microgreen Manager</div>
+            <div className="brand-name hero-brand">Crop Keeper</div>
             <div className="brand-tag hero-tag">Plant more. Plan less.</div>
           </div>
-          <p className="eyebrow">MICROGREEN FARM SOFTWARE</p>
+          <p className="eyebrow">CROP FARM SOFTWARE</p>
           <h1>
             Plan and Manage Your
-            <span>Microgreen Growing</span>
+            <span>Crop Growing</span>
             Effortlessly
           </h1>
           <p className="subtitle">
-            Microgreen Manager helps you track everything in your farm so you
+            Crop Keeper helps you track everything in your farm so you
             always grow the right amount at the right time.
           </p>
 
