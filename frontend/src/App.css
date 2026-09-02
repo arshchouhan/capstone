@@ -521,20 +521,20 @@ a {
 }
 
 .dashboard-sidebar {
-  width: 260px;
-  border-right: 1px solid rgba(0, 0, 0, 0.15);
+  width: 180px;
   background: #dfe7ee;
   display: flex;
   flex-direction: column;
   padding: 18px 14px 16px;
   box-sizing: border-box;
+  border-radius: 16px 0 0 16px;
 }
 
 .brand-mini {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px 16px;
+  padding: 8px 10px 24px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   font-size: 1.1rem;
   font-weight: 600;
@@ -563,6 +563,14 @@ a {
   border: 1px solid transparent;
   font-size: 1.1rem;
   color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .nav-mark {
@@ -570,11 +578,19 @@ a {
   line-height: 1;
 }
 
+.nav-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .dashboard-main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #f5f5f4;
+  background: #dfe7ee;
+  padding: 16px;
+  gap: 16px;
 }
 
 .dashboard-topbar {
@@ -582,17 +598,17 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 18px 22px 14px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.12);
+  padding: 0px 22px 0px;
+  background: #dfe7ee;
+  border-radius: 16px 16px 0 0;
 }
 
 .search-box {
   display: flex;
   align-items: center;
   gap: 12px;
-  width: min(70%, 720px);
-  height: 48px;
+  width: min(40%, 400px);
+  height: 36px;
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: 18px;
   padding: 0 16px;
@@ -602,6 +618,19 @@ a {
 
 .search-icon {
   font-size: 1.2rem;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.8);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .top-actions {
@@ -642,8 +671,10 @@ a {
   justify-content: center;
   align-items: center;
   padding: 30px 24px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.5);
   position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
 }
 
 .center-mark {

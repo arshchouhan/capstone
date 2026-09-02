@@ -4,6 +4,9 @@ import LandingPage from './pages/LandingPage'
 import SignupPage from './pages/SignupPage'
 import SigninPage from './pages/SigninPage'
 import Dashboard from './pages/Dashboard'
+import YourCrops from './pages/YourCrops'
+import Community from './pages/Community'
+import Market from './pages/Market'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 
@@ -53,6 +56,30 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/crops"
+        element={
+          <ProtectedRoute>
+            <YourCrops />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/community"
+        element={
+          <ProtectedRoute>
+            <Community />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/market"
+        element={
+          <ProtectedRoute>
+            <Market />
           </ProtectedRoute>
         }
       />

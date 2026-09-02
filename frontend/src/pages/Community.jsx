@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { FaLeaf, FaUsers, FaStore, FaCog } from 'react-icons/fa'
 
-const Dashboard = () => {
+const Community = () => {
   const { logout } = useAuth()
   const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <main className="dashboard-shell">
       <aside className="dashboard-sidebar">
-        <div className="brand-mini">
+        <div className="brand-mini" onClick={() => navigate('/dashboard')}>
           <div className="brand-icon" />
         </div>
 
@@ -58,13 +58,13 @@ const Dashboard = () => {
         </header>
 
         <div className="content-panel">
-          <div className="center-mark">✦</div>
-          <h1>Demo Data</h1>
-          <p>dummy content sample</p>
+          <div className="center-mark">👥</div>
+          <h1>Community</h1>
+          <p>Connect with other farmers and share experiences</p>
         </div>
       </section>
     </main>
   )
 }
 
-export default Dashboard
+export default Community
