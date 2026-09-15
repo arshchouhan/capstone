@@ -304,8 +304,9 @@ const Dashboard = () => {
 
         {/* Main Scrollable Content */}
         <section className="dashboard-main" ref={mainSectionRef}>
-          {/* 1. Dashboard Hero Banner (Single Cohesive Pale-Green Banner) */}
-          <div className="dashboard-hero-card">
+          <div className="main-canvas-card">
+            {/* 1. Dashboard Hero Banner (Single Cohesive Pale-Green Banner) */}
+            <div className="dashboard-hero-card">
             <div className="hero-content">
               <h1 className="hero-headline">
                 Smarter Plant Care<br />with the Power of AI
@@ -810,7 +811,24 @@ const Dashboard = () => {
               <FaLeaf className="signature-leaf-icon" />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
+
+        {/* Far Right Vertical Toolbar */}
+        <aside className="far-right-toolbar">
+          <button className="right-tool-btn" title="Reminders / Timer">
+            <FaRegCalendarAlt />
+          </button>
+          <button className="right-tool-btn" title="Completed Tasks">
+            <FaCheckCircle />
+          </button>
+          <button className="right-tool-btn" title="Analytics">
+            <FaChartBar />
+          </button>
+          <button className="right-tool-btn" title="Profile">
+            <FaUsers />
+          </button>
+        </aside>
       </div>
 
       {/* Add Plant Modal */}
