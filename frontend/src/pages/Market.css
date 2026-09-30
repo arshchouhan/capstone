@@ -1,0 +1,69 @@
+.market-dashboard { --market-ink: #182443; --market-muted: #6a7e96; --market-green: #008b73; }
+.market-dashboard .dashboard-main { min-width: 0; min-height: 0; }
+.market-content * { box-sizing: border-box; }
+.market-content button, .market-content input, .market-content select { font: inherit; }
+.market-content button, .market-content summary, .market-content select { cursor: pointer; }
+.market-content button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+.market-content button:focus-visible, .market-content a:focus-visible, .market-content summary:focus-visible, .market-content select:focus-visible { outline: 2px solid var(--market-green); outline-offset: 3px; }
+.market-search { display: flex; align-items: center; gap: 10px; border: 1px solid #e7ecf1; border-radius: 15px; padding: 9px 15px; color: var(--market-muted); background: #fff; }
+.market-search:focus-within { border-color: var(--market-green); }
+.market-search svg { flex-shrink: 0; font-size: 12px; }
+.market-search input { width: 100%; min-width: 0; outline: none; border: none; color: var(--market-ink); background: transparent; font-size: 11px; }
+.market-search input::placeholder { color: var(--market-muted); }
+.market-content { background: #fff; border-radius: 24px; padding: 28px 32px; flex: 1; min-width: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.market-heading-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.market-heading-row h1 { margin: 0; font-size: 32px; line-height: 1.15; letter-spacing: -1px; }
+.market-heading-row p { margin: 3px 0 0; color: var(--market-muted); font-size: 14px; }
+.market-cart-button { border: 1px solid #59bca8; color: var(--market-green); background: white; border-radius: 7px; padding: 10px 15px; font-weight: 600 !important; }
+.market-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 24px 0 18px; flex-wrap: wrap; }
+.market-categories { display: flex; gap: 8px; flex-wrap: wrap; }
+.market-categories button { border: 0; border-radius: 22px; padding: 10px 16px; background: #f0f3f6; color: var(--market-ink); font-size: 11px; font-weight: 600; }
+.market-categories button.selected { background: var(--market-green); color: white; }
+.market-product-controls { display: flex; gap: 10px; }
+.market-product-controls .market-search { width: 216px; }
+.market-product-controls select { border: 1px solid #e7ecf1; border-radius: 11px; padding: 9px 12px; color: var(--market-ink); background: white; font-size: 11px; }
+.market-content h2 { margin: 0 0 10px; font-size: 18px; }
+.market-product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 16px; }
+.market-product-card { border: 1px solid #e4ebef; border-radius: 10px; padding: 6px; min-width: 0; }
+.market-product-image { aspect-ratio: 1.5; border-radius: 7px; background: #e8edf0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #687c90; }
+.market-product-image.mint { background: #e3f5ee; }
+.market-product-image svg { width: 42px; height: 42px; stroke-width: 0; }
+.market-product-image span { font-size: 14px; }
+.market-product-card h3 { font-size: 12px; margin: 9px 2px 3px; }
+.market-product-card > p { color: var(--market-muted); font-size: 11px; margin: 0 2px 7px; }
+.market-product-bottom { display: flex; justify-content: space-between; align-items: center; gap: 5px; padding: 0 2px 2px; }
+.market-price { font-weight: 700; font-size: 16px; }
+.market-product-bottom button { border: 0; border-radius: 9px; background: #e0f7ee; color: var(--market-green); padding: 8px 13px; font-size: 11px; font-weight: 600; }
+.market-product-bottom button:hover { background: #c8efdf; }
+.market-empty { padding: 60px 20px; text-align: center; color: var(--market-muted); }
+.market-notice { background: #e3f5ee; padding: 12px; border-radius: 8px; }
+.market-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.market-cart-dialog { border: 1px solid #dcebe5; border-radius: 18px; padding: 24px; width: min(480px, 90vw); color: #182443; }
+.market-cart-dialog::backdrop { background: #152d2859; }
+.market-cart-dialog h2 { margin: 0; }
+.market-cart-dialog button { border: 0; background: #e0f7ee; color: #008b73; border-radius: 6px; padding: 8px; }
+.market-cart-dialog p { color: #6a7e96; line-height: 1.5; }
+.market-cart-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-top: 1px solid #e7ecf1; }
+.market-cart-item small { display: block; margin-top: 5px; }
+@media (max-width: 1100px) {
+  .market-content { padding: 20px; }
+  .market-product-grid { gap: 10px; }
+  .market-product-bottom button { padding: 8px; font-size: 10px; }
+}
+@media (max-width: 1000px) {
+  .market-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .dashboard-shell.modern-dashboard.market-dashboard { height: 100dvh; min-height: 0; overflow: hidden; }
+  .market-dashboard .dashboard-body { min-height: 0; overflow: hidden; }
+  .market-dashboard .dashboard-sidebar { flex-shrink: 0; max-height: 30dvh; }
+  .market-content { padding: 20px 12px; }
+  .market-heading-row h1 { font-size: 28px; }
+  .market-heading-row p { font-size: 12px; }
+  .market-categories { gap: 5px; }
+  .market-categories button { padding: 9px 11px; }
+  .market-product-controls { width: 100%; }
+  .market-product-controls .market-search { flex: 1; min-width: 0; }
+  .market-product-image span { font-size: 12px; }
+  .market-product-image svg { width: 34px; height: 34px; }
+}

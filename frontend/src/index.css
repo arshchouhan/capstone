@@ -5,6 +5,16 @@ html, body, #root {
   font-family: Arial, sans-serif;
 }
 
+/* Keep scrolling available while hiding browser scrollbar tracks throughout the app. */
+*, *::before, *::after {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background: #edf3f6;
   color: #0f2233;

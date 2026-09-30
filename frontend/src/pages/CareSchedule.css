@@ -1,0 +1,82 @@
+.care-dashboard .dashboard-main { min-width: 0; min-height: 0; }
+.care-page { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; background: #fff; border-radius: 22px; padding: 28px; color: #172846; }
+.care-page * { box-sizing: border-box; }
+.care-page h1 { font-size: 28px; letter-spacing: -.7px; margin: 0 0 5px; }
+.care-page p { color: #718198; font-size: 13px; line-height: 1.5; margin: 3px 0; }
+.care-page button, .care-page input, .care-page select { font: inherit; }
+.care-page button { cursor: pointer; }
+.care-page button:focus-visible { outline: 2px solid #008773; outline-offset: 3px; }
+.care-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 24px; }
+.care-heading p { font-size: 16px; }
+.care-outline { display: flex; align-items: center; gap: 10px; background: white; color: #008773; border: 1px solid #83c9b6; border-radius: 7px; padding: 11px 16px; font-size: 12px !important; }
+.care-columns { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(290px, 1fr); gap: 20px; align-items: stretch; flex: 1; min-height: 0; }
+.care-directory { display: flex; flex-direction: column; min-height: 0; }
+.care-filters { display: flex; gap: 10px; margin-bottom: 16px; }
+.care-search { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; padding: 0 10px; border: 1px solid #dbe4ec; border-radius: 6px; color: #94a0b0; }
+.care-search:focus-within { border-color: #008773; box-shadow: 0 0 0 1px #008773; }
+.care-search input { width: 100%; min-width: 0; border: 0; outline: 0; padding: 11px 0; font-size: 12px; background: transparent; }
+.care-filter-select { position: relative; width: 155px; flex-shrink: 0; }
+.care-filter-select > button { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 39px; border: 1px solid #dbe4ec; border-radius: 6px; outline: 0; padding: 8px 10px; background: #fff; color: #61728b; font-size: 11px; text-align: left; }
+.care-filter-select > button.open { border-color: #008773; }
+.care-filter-select > button svg { color: #61728b; font-size: 11px; transition: transform .15s ease; }
+.care-filter-select > button.open svg { transform: rotate(180deg); }
+.care-filter-menu { position: absolute; z-index: 5; top: calc(100% + 5px); left: 0; right: 0; overflow: hidden; border: 1px solid #dbe4ec; border-radius: 7px; background: #fff; padding: 4px; }
+.care-filter-menu button { width: 100%; border: 0; border-radius: 4px; background: transparent; color: #61728b; padding: 8px 9px; font-size: 11px; text-align: left; white-space: nowrap; }
+.care-filter-menu button:hover, .care-filter-menu button.selected { background: #e6f7f0; color: #007f65; }
+.care-experts { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: 15px; overflow-y: auto; padding-right: 8px; }
+.care-expert { display: flex; align-items: center; gap: 16px; border: 1px solid #e3e9ef; border-radius: 10px; padding: 20px 16px; min-height: 150px; cursor: pointer; }
+.care-expert.selected { border-color: #81d9b8; background: #f1fbf7; box-shadow: 0 0 0 1px #d7f5e8; }
+.care-avatar { position: relative; display: grid; place-items: center; overflow: hidden; flex-shrink: 0; width: 86px; height: 86px; border-radius: 50%; background: linear-gradient(140deg, #d6ece2, #86b7a6); color: #185c4e; font-size: 27px; font-weight: 700; border: 4px solid #eef7f2; }
+.care-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.care-avatar b { font: inherit; }
+.care-avatar.rohan { background: linear-gradient(140deg, #e7eadb, #a2b18c); }
+.care-avatar.ananya { background: linear-gradient(140deg, #f5e9dc, #c8a887); }
+.care-avatar > span { position: absolute; right: 1px; bottom: 1px; width: 15px; height: 15px; background: #12b982; border: 3px solid white; border-radius: 50%; }
+.care-avatar.small { width: 58px; height: 58px; font-size: 19px; }
+.care-expert-copy { flex: 1; min-width: 0; }
+.care-page h2 { font-size: 16px; margin: 0 0 4px; }
+.care-expert h2 svg, .care-selected-expert h3 svg { color: #009575; font-size: 13px; margin-left: 4px; }
+.care-rating { display: flex; align-items: center; gap: 4px; font-size: 12px; margin: 6px 0; }
+.care-rating svg { color: #f3b600; }
+.care-rating span { color: #718198; font-size: 11px; }
+.care-page .care-description { font-size: 12px; margin-top: 8px; }
+.care-expert-actions { width: 146px; flex-shrink: 0; }
+.care-next { display: flex; align-items: center; gap: 10px; background: #e0f7ee; border-radius: 7px; padding: 10px; color: #61728b; font-size: 10px; margin-bottom: 12px; }
+.care-next svg { color: #008773; font-size: 17px; }
+.care-next strong { display: block; color: #24453e; font-size: 11px; margin-top: 2px; }
+.care-primary { display: flex; justify-content: center; align-items: center; gap: 12px; width: 100%; background: linear-gradient(120deg, #118b6b, #006a50); color: white; border: 0; border-radius: 7px; padding: 11px 9px; font-size: 12px !important; }
+.care-primary:hover { filter: brightness(.95); }
+.care-booking-column { display: flex; flex-direction: column; min-height: 0; gap: 14px; }
+.care-panel { border: 1px solid #e3e9ef; border-radius: 10px; padding: 16px; }
+.care-selected-expert { display: flex; align-items: center; gap: 12px; padding: 12px 0 14px; border-bottom: 1px solid #edf0f4; margin-bottom: 12px; }
+.care-selected-expert h3 { font-size: 13px; margin: 0; }
+.care-selected-expert p { font-size: 11px; }
+.care-page fieldset { padding: 0; border: 0; margin: 0 0 15px; min-width: 0; }
+.care-page legend, .care-visit-label { font-size: 12px; font-weight: 600; margin-bottom: 7px; }
+.care-dates, .care-times { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; }
+.care-dates button, .care-times button { border: 1px solid #e3e9ef; border-radius: 6px; background: white; color: #66778e; padding: 8px 3px; font-size: 10px; }
+.care-dates span, .care-dates strong { display: block; }
+.care-dates strong { margin-top: 3px; }
+.care-times { grid-template-columns: repeat(3, 1fr); }
+.care-times button { font-size: 11px; }
+.care-dates .selected, .care-times .selected { background: #d9f5e9; border-color: #28ac86; color: #007a5d; }
+.care-page button:disabled { opacity: .4; cursor: not-allowed; }
+.care-visit { display: flex; align-items: center; gap: 14px; background: #f7fafc; border: 1px solid #e9eef4; border-radius: 8px; padding: 12px; }
+.care-visit > svg { color: #0b9b70; font-size: 28px; flex-shrink: 0; }
+.care-visit strong { font-size: 12px; }
+.care-visit p, .care-page .care-timezone { font-size: 10px; }
+.care-confirm { margin-top: 13px; }
+.care-page .care-notice { color: #008773; font-size: 12px; margin-top: 8px; }
+.care-notice:empty { display: none; }
+.care-appointments-heading { display: flex; justify-content: space-between; align-items: center; }
+.care-appointments-heading button, .care-cancel { border: 0; background: transparent; color: #008773; font-size: 11px !important; padding: 3px; }
+.care-empty { padding: 20px 8px; color: #78928b; font-size: 13px; }
+.care-appointment { display: flex; gap: 10px; align-items: flex-start; padding: 15px 0 4px; font-size: 11px; }
+.care-appointment > svg { color: #008773; font-size: 20px; flex-shrink: 0; }
+.care-appointment p { font-size: 11px; }
+.care-cancel { margin-left: auto; }
+.care-demo-badge { display: inline-block; background: #e0f7ee; color: #008773; padding: 5px 8px; border-radius: 5px; margin-top: 5px; }
+.care-page .care-demo-note { display: none; }
+@media (max-width: 1250px) { .care-expert { flex-wrap: wrap; } .care-expert-actions { width: 100%; display: flex; gap: 12px; } .care-next { margin: 0; flex: 1; } .care-expert-actions button { width: auto; } .care-filters { flex-wrap: wrap; } .care-search { flex-basis: 100%; } }
+@media (max-width: 950px) { .care-page { overflow-y: auto; } .care-columns { grid-template-columns: 1fr; } .care-experts { overflow: visible; } .care-expert { flex-wrap: nowrap; } .care-expert-actions { width: 146px; display: block; } .care-next { margin-bottom: 10px; } .care-expert-actions button { width: 100%; } }
+@media (max-width: 600px) { .care-page { padding: 18px 12px; } .care-heading { align-items: flex-start; flex-direction: column; } .care-page h1 { font-size: 24px; } .care-expert { flex-wrap: wrap; gap: 12px; } .care-avatar { width: 64px; height: 64px; font-size: 22px; } .care-expert-actions { width: 100%; display: flex; gap: 10px; } .care-next { margin-bottom: 0; } .care-expert-actions button { width: auto; } }

@@ -1,0 +1,110 @@
+.plant-details-dashboard .dashboard-main { min-width: 0; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
+.plant-details-page { flex: 1; min-height: 0; overflow-y: auto; padding: 18px 32px 30px; border-radius: 22px; background: #fff; color: #172846; }
+.plant-breadcrumbs { margin-bottom: 30px; color: #4e6178; }.plant-breadcrumbs .MuiButton-root { min-width: auto; padding: 3px 0; color: #008b73; text-transform: none; font-size: 13px; font-weight: 700; }.plant-breadcrumbs > svg { color: #008b73; font-size: 12px; }.plant-breadcrumbs .MuiTypography-root { font-size: 13px; font-weight: 700; }
+.plant-reference-layout { display: grid; grid-template-columns: minmax(210px, .48fr) minmax(0, 1.1fr); column-gap: 42px; align-items: start; max-width: 1180px; }.plant-reference-side { display: flex; flex-direction: column; }.plant-reference-side h5 { font-size: 21px; }.plant-reference-side .MuiTypography-body1 { font-size: 13px; }.details-healthy, .details-alert { margin-top: 14px !important; font-size: 11px !important; font-weight: 700 !important; }.details-healthy { background: #e3f8ef !important; color: #007f65 !important; }.details-alert { background: #fff1dc !important; color: #ad7000 !important; }.plant-share { min-width: 0 !important; padding: 4px !important; color: #172846 !important; }
+.plant-care-path { margin-top: 112px; min-height: 230px; border-color: #dde8e5 !important; border-radius: 12px !important; box-shadow: none !important; }
+.plant-image-stage { position: relative; height: 420px; overflow: hidden; border-radius: 9px; background: #edf5f0; }.plant-image-stage > img { width: 100%; height: 100%; object-fit: cover; }.plant-image-stage > .MuiChip-root { position: absolute; bottom: 16px; left: 16px; }.plant-image-back, .plant-image-next { position: absolute !important; top: 50%; min-width: 0 !important; width: 34px; height: 34px; transform: translateY(-50%); color: #fff !important; background: #17284680 !important; }.plant-image-back { left: 12px; }.plant-image-next { right: 12px; }.plant-image-back.Mui-disabled, .plant-image-next.Mui-disabled { color: #ffffff77 !important; }.plant-content-heading { margin: 22px 0 8px !important; font-size: 19px !important; font-weight: 800 !important; }.plant-content-copy { max-width: 880px; color: #4d6177; font-size: 14px !important; line-height: 1.6 !important; }
+@media (max-width: 900px) { .plant-details-page { padding: 18px; }.plant-reference-layout { grid-template-columns: 1fr; gap: 24px; }.plant-care-path { margin-top: 24px; }.plant-image-stage { height: 260px; } }
+
+.plant-details-page { overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #aac2bb #f0f6f3; }
+.plant-details-page::-webkit-scrollbar { display: block; width: 7px; }
+.plant-details-page::-webkit-scrollbar-thumb { background: #aac2bb; border-radius: 10px; }
+.plant-details-page::-webkit-scrollbar-track { background: #f0f6f3; }
+.plant-reference-main { min-width: 0; padding-bottom: 24px; }
+.plant-treatment-panel { margin-top: 26px; min-height: 600px; box-sizing: border-box; padding: 40px 24px 56px; background: #e7eefb; border-radius: 12px; }
+.plant-treatment-panel h2, .plant-detail-section h2, .plant-side-observations h2 { margin: 0 0 18px; font-size: 20px; line-height: 1.4; font-weight: 600; }
+.plant-treatment-section + .plant-treatment-section { margin-top: 80px; }
+.plant-treatment-section h3 { display: flex; align-items: center; gap: 12px; margin: 0 0 16px; font-size: 19px; font-weight: 600; }
+.plant-treatment-section h3 svg { flex-shrink: 0; font-size: 21px; }
+.plant-treatment-section p, .plant-detail-section p, .plant-detail-section li, .plant-side-observations li { color: #263b57; font-size: 15px; line-height: 1.7; }
+.plant-treatment-section p, .plant-detail-section p { margin: 0; }
+.plant-detail-section { margin-top: 28px; }
+.plant-detail-section ul, .plant-side-observations ul { margin: 0; padding-left: 20px; }
+.plant-detail-section li + li, .plant-side-observations li + li { margin-top: 8px; }
+.plant-side-observations { margin-top: 28px; padding: 24px 0; border-top: 1px solid #dde8e5; border-bottom: 1px solid #dde8e5; }
+@media (max-width: 600px) { .plant-treatment-panel { padding: 18px; } .plant-treatment-section h3 { font-size: 18px; } }
+.plant-related-crops { padding: 26px 0 32px; border-bottom: 1px solid #dde8e5; }
+.plant-related-crops h2 { margin: 0 0 24px; font-size: 20px; line-height: 1.4; font-weight: 600; }
+.plant-related-crop-list { display: flex; flex-wrap: wrap; gap: 12px; }
+.plant-related-crop-list > span { display: inline-flex; align-items: center; gap: 7px; padding: 10px 14px; border: 1px solid #dce2e1; border-radius: 999px; background: #fff; color: #172846; font-size: 15px; line-height: 1.4; }
+.plant-weather-card.MuiCard-root { padding: 18px; box-sizing: border-box; background: linear-gradient(110deg, #d7f6ef 0%, #d9eafa 100%); border-color: #d7e9e9 !important; }
+.plant-weather-summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 20px; background: #fff; border: 2px solid #b8cafa; box-shadow: inset 0 0 0 6px #e0f7f3; border-radius: 32px; }
+.plant-weather-date .MuiTypography-root { color: #202624; font-size: 20px; line-height: 1.4; }
+.plant-weather-date strong.MuiTypography-root { display: block; margin-top: 7px; font-size: 25px; font-weight: 650; }
+.plant-weather-icon { display: grid; place-items: center; width: 64px; height: 64px; flex-shrink: 0; border-radius: 50%; background: #c3d5e8; border: 8px solid #eaf0f8; box-sizing: border-box; color: #115392; font-size: 31px; }
+.plant-spraying-summary { padding: 16px 20px; margin-top: 14px; border: 2px solid #c0f6d9; border-radius: 32px; background: #fff; }
+.plant-spraying-summary > .MuiTypography-root { color: #202624; font-size: 17px; margin-bottom: 8px; }
+.plant-spraying-summary strong.MuiTypography-root { color: #202624; font-size: 24px; font-weight: 650; }
+.plant-spraying-summary .plant-spraying-period { color: #3c4540; font-size: 12px; }
+.plant-weather-card .plant-weather-preview { font-size: 10px; color: #62777a; margin: 10px 2px 0; }
+.plant-new-image.MuiButton-root { position: absolute; bottom: 16px; right: 16px; background: #fff; color: #008b73; border-radius: 999px; padding: 8px 14px; text-transform: none; font-size: 12px; font-weight: 700; box-shadow: 0 2px 8px #0002; }
+.plant-new-image.MuiButton-root:hover { background: #e7f8f2; }
+
+.weather-location-form { display: flex; gap: 6px; margin-top: 14px; background: #fff; border-radius: 8px; padding: 4px 8px; }
+.weather-location-form .MuiInputBase-root { flex: 1; min-width: 0; font-size: 12px; }
+.weather-location-form .MuiButton-root, .weather-city.MuiButton-root { font-size: 11px; text-transform: none; }
+.weather-city.MuiButton-root { display: block; text-align: left; width: 100%; }
+.weather-detail.MuiTypography-root { font-size: 11px; margin-top: 8px; color: #5a6a62; }
+.weather-error.MuiTypography-root { font-size: 11px; color: #a52c2c; margin-top: 8px; }
+.plant-spraying-summary .spraying-status.MuiTypography-root { display: block; margin: 10px 0 16px; font-size: 20px; font-weight: 700; line-height: 1.3; }
+.weather-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+.weather-metrics > div { min-width: 0; }
+.plant-spraying-summary .weather-metric-label { display: block; color: #68766f; font-size: 12px; margin-bottom: 4px; }
+.plant-spraying-summary .weather-metric-value.MuiTypography-root { display: block; color: #263f35; font-size: 17px; font-weight: 600; line-height: 1.4; }
+.weather-metric-value span { font-size: 12px; color: #64746a; font-weight: 400; }
+.plant-spraying-summary .weather-assessment-reason { margin: 16px 0 0; padding-top: 12px; border-top: 1px solid #e4eee8; font-size: 12px; line-height: 1.6; color: #4c6255; }
+.plant-spraying-summary .weather-forecast-period { font-size: 10px; line-height: 1.5; margin-top: 12px; color: #78877d; }
+/* Keep plant details typography aligned with the dashboard. */
+.plant-details-page { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; }
+.plant-details-page .MuiTypography-root { font-family: inherit; }
+.plant-details-page .plant-content-heading { font-size: 16px !important; }
+.plant-details-page .plant-content-copy { font-size: 13px !important; }
+.plant-details-page .plant-reference-side h5 { font-size: 19px; }
+.plant-details-page .plant-weather-date .MuiTypography-root { font-size: 15px; }
+.plant-details-page .plant-weather-date strong.MuiTypography-root { font-size: 21px; }
+.plant-details-page .plant-spraying-summary > .MuiTypography-root { font-size: 14px; }
+.plant-details-page .plant-spraying-summary .spraying-status.MuiTypography-root { font-size: 17px; }
+.plant-details-page .plant-spraying-summary .weather-metric-label { font-size: 11px; }
+.plant-details-page .plant-spraying-summary .weather-metric-value.MuiTypography-root { font-size: 14px; }
+.plant-details-page .weather-metric-value span { font-size: 10px; }
+.plant-details-page .plant-weather-card .MuiButton-root { font-size: 11px; text-transform: none; }
+.plant-details-page .plant-side-observations h2, .plant-details-page .plant-related-crops h2 { font-size: 16px; }
+.plant-details-page .plant-side-observations li, .plant-details-page .plant-related-crop-list > span { font-size: 13px; }
+.plant-details-page .calculator-title.MuiTypography-root { font-size: 21px; margin-bottom: 20px; }
+.plant-details-page .calculator-question.MuiTypography-root { font-size: 16px; margin-bottom: 20px; }
+.plant-details-page .tool-tile h3 { font-size: 15px; }
+.plant-details-page .tool-tile p { font-size: 13px; }
+.plant-details-page .tool-icon { width: 38px; height: 38px; font-size: 20px; margin-bottom: 16px; }
+.plant-details-page .tool-tile .MuiCardActionArea-root { padding: 18px; }
+.plant-details-page .calculator-row > label, .plant-details-page .calculator-row > p, .plant-details-page .calculator-row h3, .plant-details-page .calculator-stepper > h6 { font-size: 14px; }
+.plant-details-page .calculator-row .calculator-value, .plant-details-page .calculator-row > .MuiInputBase-root, .plant-details-page .dosage-control { font-size: 14px; }
+.plant-details-page .calculator-results > h6, .plant-details-page .nutrient-heading h6, .plant-details-page .formulation-search h6 { font-size: 16px; }
+.plant-details-page .calculator-total > p:first-child { font-size: 17px; }
+.plant-details-page .calculator-total .total-number { font-size: 30px; }
+.plant-details-page .calculator-metrics p { font-size: 14px; }
+.plant-details-page .calculator-metrics strong { font-size: 18px; }
+.plant-details-page .manage-plant > .MuiStack-root > h6, .plant-details-page .manage-next h6, .plant-details-page .manage-section > h6 { font-size: 16px; }
+.plant-details-page .tool-calculate.MuiButton-root { font-size: 14px; }
+.plant-details-dashboard .dashboard-sidebar .logout-btn { font-size: 14px; }
+.plant-flip-stage { perspective: 1400px; background: transparent; }
+.plant-flip-inner { position: relative; height: 100%; width: 100%; transform-style: preserve-3d; transition: transform .55s ease; }
+.plant-flip-stage.is-flipped .plant-flip-inner { transform: rotateY(180deg); }
+.plant-flip-front, .plant-flip-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 9px; overflow: hidden; }
+.plant-flip-front img { height: 100%; width: 100%; object-fit: cover; }
+.plant-flip-back { transform: rotateY(180deg); background: #eef7f3; border: 1px solid #d4e8de; box-sizing: border-box; padding: 22px; overflow-y: auto; scrollbar-width: thin; }
+.plant-analysis-toggle.MuiButton-root { position: absolute; bottom: 16px; left: 16px; border-radius: 999px; background: #e3f8ef; color: #007d64; padding: 8px 14px; font-size: 12px; font-weight: 700; text-transform: none; }
+.plant-analysis-toggle.MuiButton-root:hover { background: #cceee0; }
+.plant-analysis-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.plant-analysis-header h2 { margin: 3px 0; font-size: 19px; font-weight: 700; }
+.plant-analysis-header .MuiButton-root { text-transform: none; font-size: 11px; color: #007d64; flex-shrink: 0; }
+.plant-analysis-eyebrow.MuiTypography-root { font-size: 9px; letter-spacing: 1.3px; color: #5d7c6e; }
+.plant-analysis-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+.plant-analysis-summary > div { padding: 12px; border-radius: 10px; background: #fff; }
+.plant-analysis-summary p { font-size: 11px; color: #708177; margin-bottom: 5px; }
+.plant-analysis-summary strong { font-size: 13px; line-height: 1.5; }
+.plant-flip-back h3 { font-size: 14px; font-weight: 700; margin-top: 16px; }
+.plant-flip-back ul { padding-left: 20px; font-size: 12px; line-height: 1.8; color: #465f53; }
+.plant-analysis-copy.MuiTypography-root { font-size: 12px; line-height: 1.7; margin-top: 10px; color: #465f53; }
+.plant-analysis-scan.MuiButton-root { margin-top: 14px; background: #008b73; text-transform: none; font-size: 12px; }
+@media (max-width: 900px) { .plant-flip-stage.is-flipped { height: 420px; } .plant-analysis-summary { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .plant-flip-inner { transition: none; } }

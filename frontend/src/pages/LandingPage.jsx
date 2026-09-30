@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar'
+import { Link } from 'react-router-dom'
 
 function LandingPage() {
   return (
@@ -22,8 +23,11 @@ function LandingPage() {
             always grow the right amount at the right time.
           </p>
 
-          <button className="cta-btn">Start Your Free Trial</button>
-          <p className="trial-note">No credit card required. Cancel anytime.</p>
+          <div className="role-login-actions">
+            <Link className="cta-btn" to="/signin?role=farm">Farm login</Link>
+            <Link className="doctor-login-btn" to="/signin?role=dr">Doctor login</Link>
+          </div>
+          <p className="trial-note">Choose the workspace that matches your role.</p>
         </div>
 
         <div className="hero-visual" aria-label="Product preview placeholder">

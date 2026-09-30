@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Navbar from '../components/Navbar'
 
 const SigninPage = () => {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const { login } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
@@ -64,7 +65,7 @@ const SigninPage = () => {
       }
 
       // Redirect to dashboard
-      navigate('/dashboard')
+      navigate(searchParams.get('role') === 'dr' ? '/dr/dashboard' : '/farm/dashboard')
     } catch (err) {
       console.error('Signin error:', err)
       setError(err.message)
@@ -82,7 +83,7 @@ const SigninPage = () => {
           <div className="signup-form-panel">
             <h1>Sign In</h1>
             <p className="signup-intro">
-              Welcome back. Access your farm dashboard and keep your growing plan on track.
+              Welcome back. Sign in to access your {searchParams.get('role') === 'dr' ? 'doctor' : 'farm'} dashboard.
             </p>
 
             {error && <div className="error-message" style={{ color: 'red', marginBottom: '16px' }}>{error}</div>}

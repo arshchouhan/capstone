@@ -1,70 +1,38 @@
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import { FaLeaf, FaUsers, FaStore, FaCog } from 'react-icons/fa'
+import { useRef, useState } from 'react'
+import { FaSearch, FaShoppingCart, FaRegImage, FaTimes } from 'react-icons/fa'
+import DashboardLayout from '../components/DashboardLayout'
+import './Market.css'
 
-const Market = () => {
-  const { logout } = useAuth()
-  const navigate = useNavigate()
+const categories = ['All Products', 'Treatments', 'Fertilizers', 'Tools', 'Plants']
+const products = Array.from({ length: 8 }, (_, index) => ({ id: index + 1, name: 'Product name', description: 'Short product description.', category: categories[index % 4 + 1] }))
 
-  const handleLogout = () => {
-    logout()
-    navigate('/signin')
-  }
+export default function Market() {
+  const cartDialog = useRef(null)
+  const [category, setCategory] = useState('All Products')
+  const [search, setSearch] = useState('')
+  const [sort, setSort] = useState('featured')
+  const [cart, setCart] = useState({})
+  const count = Object.values(cart).reduce((sum, quantity) => sum + quantity, 0)
+  const visibleProducts = products.filter(product => (category === 'All Products' || product.category === category) && `${product.name} ${product.description} ${product.category}`.toLowerCase().includes(search.toLowerCase())).sort((a, b) => sort === 'category' ? a.category.localeCompare(b.category) : a.id - b.id)
 
   return (
-    <main className="dashboard-shell">
-      <aside className="dashboard-sidebar">
-        <div className="brand-mini" onClick={() => navigate('/dashboard')}>
-          <div className="brand-icon" />
+    <DashboardLayout className="market-dashboard">
+      <section className="market-content" aria-labelledby="market-heading">
+        <div className="market-heading-row"><div><h1 id="market-heading">Market</h1><p>Find the right care for every plant</p></div><button className="market-cart-button" onClick={() => cartDialog.current.showModal()}><FaShoppingCart /> Cart ({count})</button></div>
+        <div className="market-toolbar">
+          <div className="market-categories" aria-label="Product categories">{categories.map(item => <button key={item} aria-pressed={category === item} className={category === item ? 'selected' : ''} onClick={() => setCategory(item)}>{item}</button>)}</div>
+          <div className="market-product-controls"><label className="market-search"><FaSearch /><input aria-label="Search products" placeholder="Search products..." value={search} onChange={event => setSearch(event.target.value)} /></label><select aria-label="Sort products" value={sort} onChange={event => setSort(event.target.value)}><option value="featured">Sort by: Featured</option><option value="category">Sort by: Category</option></select></div>
         </div>
-
-        <nav className="sidebar-nav">
-          <div className="nav-item" onClick={() => navigate('/dashboard/crops')}>
-            <FaLeaf className="nav-icon" />
-            <span>Your Crops</span>
-          </div>
-          <div className="nav-item" onClick={() => navigate('/dashboard/community')}>
-            <FaUsers className="nav-icon" />
-            <span>Community</span>
-          </div>
-          <div className="nav-item" onClick={() => navigate('/dashboard/market')}>
-            <FaStore className="nav-icon" />
-            <span>Market</span>
-          </div>
-          <div className="nav-item">
-            <FaCog className="nav-icon" />
-            <span>Dummy</span>
-          </div>
-        </nav>
-
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
-      </aside>
-
-      <section className="dashboard-main">
-        <header className="dashboard-topbar">
-          <div className="search-box">
-            <span className="search-icon">⌕</span>
-            <input type="text" placeholder="Search" className="search-input" />
-          </div>
-
-          <div className="top-actions">
-            <button className="top-action">Dummy</button>
-            <button className="top-action">Dummy</button>
-            <button className="small-round">◔</button>
-            <button className="small-round">D</button>
-          </div>
-        </header>
-
-        <div className="content-panel">
-          <div className="center-mark">🏪</div>
-          <h1>Market</h1>
-          <p>Buy and sell crops in the marketplace</p>
-        </div>
+        <h2>Products</h2>
+        <div className="market-product-grid">{visibleProducts.map(product => <article className="market-product-card" key={product.id}>
+          <div className={`market-product-image ${product.id % 2 === 0 ? 'mint' : ''}`}><FaRegImage /><span>Product image</span></div>
+          <h3>{product.name}</h3><p>{product.description}</p>
+          <div className="market-product-bottom"><span className="market-price">₹---</span><button aria-label={`Add ${product.category.toLowerCase()} product ${product.id} to cart`} onClick={() => setCart(previous => ({ ...previous, [product.id]: (previous[product.id] || 0) + 1 }))}><FaShoppingCart />{cart[product.id] ? `Add more (${cart[product.id]})` : 'Add to Cart'}</button></div>
+        </article>)}</div>
+        {!visibleProducts.length && <div className="market-empty">No products found. Try another search or category.</div>}
+        <span className="market-sr-only" role="status">{count} items in cart</span>
       </section>
-    </main>
+      <dialog ref={cartDialog} className="market-cart-dialog"><div className="market-heading-row"><h2>Your cart ({count})</h2><button aria-label="Close cart" onClick={() => cartDialog.current.close()}><FaTimes /></button></div>{count ? <><p>Preview items — product details and prices are coming soon.</p>{products.filter(product => cart[product.id]).map(product => <div className="market-cart-item" key={product.id}><span>{product.category} · {product.name}<small>Quantity: {cart[product.id]}</small></span><button onClick={() => setCart(previous => { const next = { ...previous }; delete next[product.id]; return next })}>Remove</button></div>)}</> : <p>Your cart is empty. Explore products to add an item.</p>}</dialog>
+    </DashboardLayout>
   )
 }
-
-export default Market

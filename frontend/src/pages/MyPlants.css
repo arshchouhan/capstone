@@ -1,0 +1,37 @@
+.plants-dashboard .dashboard-main { min-width: 0; min-height: 0; overflow: hidden; }
+.plants-page { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; padding: 22px; border-radius: 22px; background: #fff; color: #172846; }
+.plant-register-page { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; padding: 22px; border-radius: 22px; background: #fff; color: #172846; }
+.plant-register-header { flex-shrink: 0; margin-bottom: 16px; }.plant-register-header h4 { letter-spacing: -.6px; }
+.plant-register-form { position: relative; display: flex; flex: 1; min-height: 0; width: 100%; overflow: hidden; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }.plant-register-grid { display: grid; width: 100%; min-height: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; overflow-y: auto; padding: 0 0 58px; }.plant-form-section { min-width: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }.plant-form-section + .plant-form-section { padding-left: 22px; border-left: 1px solid #edf1f4; }.plant-section-title { display: flex; align-items: center; gap: 8px; margin-bottom: 14px !important; color: #008b73; font-size: 13px !important; font-weight: 800 !important; }.plant-register-actions { position: absolute; z-index: 2; right: 0; bottom: 0; left: 0; display: flex; grid-column: 1 / -1; justify-content: flex-end; padding: 12px 0; border-top: 1px solid #edf1f4; background: #fff; }.plant-register-actions .MuiButton-contained { background: #008b73; text-transform: none; }.plant-register-actions .MuiButton-contained:hover { background: #00735f; }
+.plant-register-form .MuiOutlinedInput-root { min-height: 48px; }.plant-register-form .MuiInputBase-input { padding: 13px 14px; }.plant-register-form textarea.MuiInputBase-input { padding-top: 12px; }
+.plant-photo-placeholder { display: flex; align-items: center; gap: 12px; border: 1px dashed #b9dcd1; border-radius: 8px; padding: 13px; color: #008b73; background: #f5fcf8; }.plant-photo-placeholder > svg { font-size: 20px; }.plant-photo-placeholder .MuiTypography-root { color: inherit; }
+.plant-inline-scan { position: relative; display: flex; align-items: center; min-height: 100px; gap: 14px; overflow: hidden; border: 1px dashed #9edccc; border-radius: 9px; padding: 14px; color: #008b73; background: #f5fcf8; }.plant-inline-scan > svg { align-self: flex-start; margin-top: 3px; font-size: 22px; }.plant-scan-preview { width: 58px; height: 58px; flex-shrink: 0; object-fit: cover; border-radius: 7px; }.plant-inline-scan .MuiTypography-root { color: inherit; }.plant-inline-scan .MuiButton-root { flex-shrink: 0; text-transform: none; }.plant-inline-scan.complete { border-style: solid; background: #ecf9f3; }.plant-scan-progress { display: block; width: 100%; height: 4px; margin-top: 10px; overflow: hidden; border-radius: 4px; background: #cdeee3; }.plant-scan-progress::after { content: ''; display: block; width: 45%; height: 100%; border-radius: inherit; background: #008b73; animation: plantScanProgress 1.1s ease-in-out infinite alternate; }@keyframes plantScanProgress { to { transform: translateX(125%); } }
+.plants-header { width: 100%; flex-shrink: 0; margin-bottom: 18px; }
+.plants-header h4 { font-size: 27px; letter-spacing: -.6px; }
+.plants-header .MuiTypography-body1 { font-size: 13px; }
+.plants-add { min-width: auto !important; min-height: 40px !important; height: 40px !important; background: #008b73 !important; text-transform: none !important; font-size: 11px !important; font-weight: 700 !important; line-height: 1 !important; padding: 0 13px !important; }
+.plants-add .MuiButton-startIcon { margin-right: 6px; }
+.plants-surface { display: flex; flex: 1; min-height: 0; flex-direction: column; overflow: hidden; border: 1px solid #e6edf1; border-radius: 12px !important; }
+.plants-controls { flex-shrink: 0; padding: 14px; border-bottom: 1px solid #edf1f4; }
+.plants-controls .MuiTextField-root { width: min(380px, 34%); }
+.plants-controls .MuiOutlinedInput-root { font-size: 12px; }
+.plants-controls svg { color: #74869c; }
+.plants-filters { display: flex; gap: 7px; margin-left: auto; }
+.plants-filters .MuiButton-root { min-width: 0; border: 1px solid #e3eaf0; border-radius: 18px; color: #6d7f95; padding: 6px 11px; text-transform: none; font-size: 11px; }
+.plants-filters .MuiButton-root.selected { border-color: transparent; background: #e2f7ee; color: #00856b; }
+.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #16b77d; }
+.status-dot.needs-care { background: #f6b900; }.status-dot.at-risk { background: #ec4f58; }
+.plants-table-wrap { flex: 1; min-height: 0; }
+.plants-table-wrap .MuiTableCell-root { padding: 9px 16px; border-color: #edf1f4; }
+.plants-table-wrap .MuiTableHead-root .MuiTableCell-root { background: #f7f9fa; color: #7c8ca0; text-transform: uppercase; font-size: 10px; font-weight: 800; }
+.plant-image { width: 48px !important; height: 48px !important; background: #dff4eb !important; color: #008b73 !important; font-size: 13px !important; }
+.plant-type, .plant-status { font-size: 10px !important; font-weight: 700 !important; border-radius: 14px !important; }
+.plant-type { background: #e7f8ef !important; color: #168667 !important; }.plant-type.vegetable { background: #fff0ef !important; color: #c45556 !important; }.plant-type.indoor { background: #edf6eb !important; color: #609049 !important; }.plant-type.flowering { background: #f9edf3 !important; color: #bc6282 !important; }
+.plant-status { background: #e3f8ef !important; color: #168667 !important; }.plant-status.needs-care { background: #fff5dc !important; color: #b37a00 !important; }.plant-status.at-risk { background: #ffeaec !important; color: #cf3c48 !important; }
+.plant-status .MuiChip-icon { margin-left: 8px !important; }.plant-status .status-dot { width: 7px; height: 7px; }
+.care-symbol { display: grid; place-items: center; color: #159376; }
+.plants-surface .MuiTablePagination-root { flex-shrink: 0; border-top: 1px solid #edf1f4; min-height: 44px; }
+.plants-surface .MuiTablePagination-toolbar { min-height: 44px; font-size: 11px; }
+@media (max-width: 1100px) { .plants-controls { flex-wrap: wrap; }.plants-controls .MuiTextField-root { width: 100%; }.plants-filters { margin-left: 0; }.plants-table-wrap { overflow-x: auto; }.plants-table-wrap table { min-width: 800px; } }
+@media (max-width: 700px) { .plants-page { overflow-y: auto; padding: 16px; }.plants-header { align-items: flex-start; gap: 12px; flex-direction: column; }.plants-surface { min-height: 540px; }.plants-filters { flex-wrap: wrap; } }
+@media (max-width: 800px) { .plant-register-page { overflow-y: auto; padding: 16px; }.plant-register-form { min-height: 690px; }.plant-register-grid { grid-template-columns: 1fr; }.plant-form-section + .plant-form-section { padding-left: 0; padding-top: 20px; border-top: 1px solid #edf1f4; border-left: 0; }.plant-register-actions { grid-column: 1; } }

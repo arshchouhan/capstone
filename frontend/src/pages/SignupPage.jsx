@@ -66,7 +66,7 @@ const SignupPage = () => {
       }
 
       // Redirect to dashboard
-      navigate('/dashboard')
+      navigate('/farm/dashboard')
     } catch (err) {
       console.error('Signup error:', err)
       setError(err.message)

@@ -1,0 +1,126 @@
+.farming-tools { margin-top: 28px; padding: 26px 22px; border-radius: 20px; background: #e7eefb; color: #181c1b; border: 1px solid #dce5f5; }
+.calculator-back.MuiIconButton-root { margin: 0 0 24px -8px; color: #161c1b; font-size: 24px; }
+.calculator-title.MuiTypography-root { font-size: 28px; font-weight: 750; margin: 0 0 24px; line-height: 1.2; }
+.calculator-question.MuiTypography-root { font-size: 21px; font-weight: 650; margin-bottom: 28px; }
+.tools-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.tool-tile.MuiCard-root { border: 1px solid #c5cdca; border-radius: 24px; }
+.tool-tile .MuiCardActionArea-root { padding: 22px; height: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; }
+.tool-icon { width: 48px; height: 48px; border-radius: 50%; background: #dfe2ff; display: grid; place-items: center; color: #071a45; font-size: 25px; margin-bottom: 22px; }
+.tool-tile h3 { font-size: 19px; font-weight: 700; line-height: 1.4; }
+.tool-tile p { font-size: 16px; color: #565d59; margin-top: 10px; line-height: 1.5; }
+.calculator-results { margin-bottom: 30px; }
+.calculator-results > h6 { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+.calculator-total.MuiCard-root { background: #dde2ff; border-radius: 26px; text-align: center; padding: 26px 16px; }
+.calculator-total > p:first-child { font-size: 19px; font-weight: 500; }
+.calculator-total .total-number { font-size: 36px; font-weight: 750; margin-top: 12px; line-height: 1.3; overflow-wrap: anywhere; }
+.total-number small { font-size: 22px; font-weight: 600; }
+.calculator-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
+.calculator-metrics .MuiCard-root { background: #dde2ff; border-radius: 24px; padding: 16px; }
+.metric-symbol { width: 36px; height: 36px; display: grid; place-items: center; background: #fff; border-radius: 50%; font-size: 21px; margin-bottom: 10px; }
+.calculator-metrics p { font-size: 17px; color: #285795; }
+.calculator-metrics strong { display: block; font-size: 20px; font-weight: 500; margin-top: 4px; }
+.calculator-stepper { margin: 26px 0; }
+.calculator-stepper > h6 { font-size: 18px; font-weight: 700; margin-bottom: 22px; }
+.stepper-controls { display: flex; gap: 20px; align-items: center; }
+.stepper-controls .MuiIconButton-root { width: 58px; height: 58px; background: #dde2ff; color: #071b49; font-size: 40px; font-weight: 400; flex-shrink: 0; }
+.stepper-controls .MuiIconButton-root:hover { background: #ced5fa; }
+.stepper-display { flex: 1; min-width: 0; padding: 18px 12px 12px; background: #f3f4f3; border-radius: 22px; text-align: center; }
+.stepper-display .MuiInputBase-root { width: 100%; font-size: 40px; font-weight: 650; }
+.stepper-display input { text-align: center; padding: 0; }
+.stepper-display p { font-size: 15px; color: #4d5551; margin-top: 14px; }
+.farming-tools input[type=number]::-webkit-inner-spin-button, .farming-tools input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.farming-tools input[type=number] { appearance: textfield; -moz-appearance: textfield; }
+.area-unit { margin: 28px 0 30px; padding-bottom: 30px; border-bottom: 1px solid #cdd3d0; }
+.area-unit > p { font-size: 18px; margin-bottom: 12px; }
+.area-unit .MuiFormControlLabel-label { font-size: 18px; }
+.formulation-search { padding: 24px; background: #f3f4f3; border-radius: 24px; margin: 30px 0 10px; }
+.formulation-search h6 { font-size: 18px; font-weight: 700; }
+.formulation-search > p { font-size: 17px; line-height: 1.6; margin: 12px 0; }
+.formulation-search > .MuiInputBase-root { border: 1px solid #c5ceca; border-radius: 999px; background: #fff; padding: 12px 20px; font-size: 17px; }
+.formulation-search .MuiInputAdornment-root { font-size: 30px; color: #1a211d; }
+.calculator-row { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 24px 0; border-bottom: 1px solid #cdd3d0; }
+.calculator-row > label, .calculator-row > p, .calculator-row h3 { font-size: 20px; font-weight: 700; flex: 1; }
+.calculator-row > div:first-child:not(.MuiInputBase-root) { flex: 1; min-width: 0; }
+.calculator-row .row-description { font-size: 16px; color: #606660; line-height: 1.5; margin-top: 8px; }
+.calculator-row .calculator-value, .calculator-row > .MuiInputBase-root, .dosage-control { width: 46%; min-width: 0; border: 1px solid #8e9893; border-radius: 12px; padding: 12px 16px; font-size: 19px; box-sizing: border-box; }
+.calculator-value input { width: 100%; min-width: 0; }
+.calculator-row .MuiInputAdornment-root p { font-size: 17px; color: #515b55; font-weight: 600; }
+.calculator-row .MuiSelect-select { padding: 0 26px 0 0; }
+.dosage-control { display: flex; align-items: center; gap: 6px; }
+.dosage-control > .MuiInputBase-root:first-child { flex: 1; min-width: 0; }
+.dosage-control > .MuiInputBase-root:last-child { flex-shrink: 0; font-size: 16px; font-weight: 700; }
+.nutrient-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.nutrient-heading h6 { color: #7b807b; font-size: 23px; font-weight: 650; }
+.crop-pill.MuiInputBase-root { border-radius: 999px; font-size: 18px; }
+.crop-pill .MuiSelect-select { padding: 10px 38px 10px 18px; }
+.nutrient-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 26px 0 16px; }
+.nutrient-tiles > div { display: flex; align-items: center; gap: 8px; padding: 18px 12px; border-radius: 18px; background: #f3f4f3; }
+.nutrient-tiles p { font-size: 22px; font-weight: 600; }
+.nutrient-tiles .MuiInputBase-root { width: 100%; min-width: 0; font-size: 22px; }
+.tool-calculate.MuiButton-root { width: 100%; border-radius: 999px; padding: 15px; margin-top: 34px; font-size: 20px; font-weight: 700; text-transform: none; background: #075bd5; }
+.calculator-note.MuiTypography-root { font-size: 12px; color: #68716b; line-height: 1.6; margin: 16px 0; }
+.save-formulation.MuiAccordion-root { border-top: 1px solid #dde3df; margin-top: 24px; background: transparent; }
+.save-formulation .MuiAccordionSummary-root { font-size: 13px; color: #075bd5; }
+.save-formulation .MuiAccordionDetails-root > .MuiInputBase-root { padding: 12px; border-bottom: 1px solid #cdd3d0; margin-bottom: 12px; }
+.calculator-empty-art { background: #f3f5f3; padding: 45px 20px; border-radius: 28px; text-align: center; margin-top: 34px; color: #8eb6a7; }
+.calculator-empty-art > svg { font-size: 65px; }
+.calculator-empty-art p { margin-top: 16px; font-size: 13px; color: #73867c; }
+.tool-notice { font-size: 12px !important; color: #69776e; margin-top: 14px !important; }
+.calculator-form > .calculator-results:not(:first-child) { margin-top: 28px; }
+@media (max-width: 600px) { .farming-tools { padding: 24px 16px; } .calculator-title.MuiTypography-root { font-size: 28px; } .stepper-controls { gap: 12px; } .stepper-controls .MuiIconButton-root { width: 52px; height: 52px; font-size: 38px; } .stepper-display .MuiInputBase-root { font-size: 38px; } .calculator-row { gap: 12px; } .calculator-row > label, .calculator-row > p, .calculator-row h3 { font-size: 17px; } .calculator-row .row-description { font-size: 13px; } .calculator-row .calculator-value, .calculator-row > .MuiInputBase-root, .dosage-control { padding: 10px; width: 49%; } .nutrient-tiles { gap: 8px; } .nutrient-heading h6 { font-size: 18px; } .tool-tile .MuiCardActionArea-root { padding: 16px; } .tool-tile h3 { font-size: 16px; } .tool-tile p { font-size: 14px; } .calculator-metrics strong { font-size: 20px; } }
+/* Compact calculator controls. */
+.calculator-row { padding: 16px 0; gap: 16px; }
+.calculator-row > label, .calculator-row > p, .calculator-row h3 { font-size: 16px; }
+.calculator-row .calculator-value, .calculator-row > .MuiInputBase-root, .dosage-control { padding: 8px 12px; font-size: 16px; max-width: 280px; }
+.calculator-stepper { margin: 20px 0; }
+.calculator-stepper > h6 { font-size: 16px; margin-bottom: 14px; }
+.stepper-controls { max-width: 440px; gap: 14px; }
+.stepper-controls .MuiIconButton-root { width: 44px; height: 44px; font-size: 30px; }
+.stepper-display { padding: 10px 12px 8px; border-radius: 16px; }
+.stepper-display .MuiInputBase-root { font-size: 28px; }
+.stepper-display p { font-size: 12px; margin-top: 4px; }
+.tool-calculate.MuiButton-root { padding: 10px 18px; margin-top: 22px; font-size: 16px; }
+.calculator-empty-art { padding: 24px 16px; margin-top: 22px; border-radius: 20px; }
+.calculator-empty-art > svg { font-size: 42px; }
+.farming-tools { min-width: 0; box-sizing: border-box; width: 100%; }
+.calculator-form { min-width: 0; }
+.stepper-controls { width: 100%; max-width: 440px; margin-inline: auto; box-sizing: border-box; }
+.stepper-display { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 76px; box-sizing: border-box; }
+.stepper-display .MuiInputBase-root { width: 100%; font-size: 26px; line-height: 1.2; }
+.stepper-display .MuiInputBase-input { padding: 0; text-align: center; line-height: 1.2; }
+.stepper-display .MuiInputBase-input::placeholder { opacity: .5; }
+.stepper-display .MuiTypography-root { margin: 4px 0 0; font-size: 13px; font-weight: 500; line-height: 1.2; }
+.calculator-title.MuiTypography-root { font-size: 26px; }
+.calculator-question.MuiTypography-root { font-size: 18px; }
+.calculator-row .row-description { font-size: 13px; }
+.calculator-row .MuiInputAdornment-root p { font-size: 14px; }
+.tool-calculate.MuiButton-root { font-size: 15px; box-sizing: border-box; min-width: 0; }
+.area-unit > p, .area-unit .MuiFormControlLabel-label { font-size: 15px; }
+.formulation-search h6 { font-size: 18px; }
+.formulation-search > p, .formulation-search > .MuiInputBase-root { font-size: 14px; }
+/* Match calculator controls to the site's teal palette. */
+.calculator-row .calculator-value, .calculator-row > .MuiInputBase-root, .dosage-control { background: #fff; border-color: #ccd8df; }
+.stepper-display, .nutrient-tiles > div { background: #fff; }
+.stepper-controls .MuiIconButton-root { background: #d9f1e9; color: #007e68; }
+.stepper-controls .MuiIconButton-root:hover { background: #c5e8dc; }
+.stepper-controls .MuiIconButton-root.Mui-disabled { background: #e4eeeb; color: #98aba4; }
+.tool-calculate.MuiButton-root { background: #008b73; color: #fff; }
+.tool-calculate.MuiButton-root:hover { background: #00745f; }
+.farming-tools .MuiRadio-root.Mui-checked { color: #008b73; }
+.manage-plant > .MuiStack-root > h6 { font-size: 19px; font-weight: 700; }
+.manage-next.MuiCard-root { margin: 20px 0; padding: 22px; border-radius: 18px; background: #d9f2e9; }
+.manage-next.needs-care { background: #fff0d6; }
+.manage-next .manage-eyebrow { font-size: 10px; letter-spacing: 1.4px; font-weight: 700; margin-bottom: 10px; }
+.manage-next h6 { font-size: 19px; line-height: 1.5; font-weight: 700; }
+.manage-next > p:not(.manage-eyebrow) { font-size: 13px; line-height: 1.7; margin-top: 10px; }
+.manage-section.MuiCard-root { margin-top: 16px; padding: 22px; border-radius: 18px; background: #fff; }
+.manage-section > h6 { font-size: 18px; font-weight: 700; margin-bottom: 18px; }
+.manage-section > .MuiTextField-root { margin-top: 16px; }
+.manage-plant .MuiButton-root { text-transform: none; font-size: 12px; margin-top: 14px; }
+.manage-plant .MuiStepLabel-label { font-size: 13px; }
+.manage-plant .manage-caption { font-size: 12px; color: #60716a; line-height: 1.65; margin-top: 14px; }
+.manage-task { border-bottom: 1px solid #edf0ee; padding: 4px 0; }
+.manage-task p { font-size: 13px; }
+.manage-task-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 18px; }
+.manage-task-form .MuiInputBase-root { font-size: 13px; }
+.manage-task-form .MuiButton-root { margin: 0; }
