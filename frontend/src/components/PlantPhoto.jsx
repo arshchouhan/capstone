@@ -5,7 +5,6 @@ import { FaCamera, FaChevronLeft, FaChevronRight, FaLeaf, FaUndo } from 'react-i
 
 export default function PlantPhoto({ plant, photos, photoIndex, setPhotoIndex, addPhoto }) {
   const [flipped, setFlipped] = useState(false)
-  const hasProfile = photoIndex === 0
   return <Box className={`plant-image-stage plant-flip-stage${flipped ? ' is-flipped' : ''}`}>
     <Box className="plant-flip-inner">
       <Box className="plant-flip-front" inert={flipped}>
@@ -17,8 +16,8 @@ export default function PlantPhoto({ plant, photos, photoIndex, setPhotoIndex, a
       </Box>
       <Box className="plant-flip-back" inert={!flipped}>
         <Box className="plant-analysis-header"><Box><Typography className="plant-analysis-eyebrow">PLANT HEALTH REVIEW</Typography><Typography component="h2">Disease analysis</Typography></Box><Button startIcon={<FaUndo />} onClick={() => setFlipped(false)}>Back to photo</Button></Box>
-        <Chip size="small" label={hasProfile ? 'Profile preview · no live AI result' : 'This photo has not been analyzed'} />
-        {hasProfile ? <><Box className="plant-analysis-summary"><Box><Typography>Recorded condition</Typography><strong>{plant.status}</strong></Box><Box><Typography>Possible disease</Typography><strong>{plant.status === 'Needs care' ? 'Early blight · unconfirmed' : 'None recorded'}</strong></Box><Box><Typography>Model confidence</Typography><strong>Not available</strong></Box></Box><Typography component="h3">Visible observations</Typography><ul>{plant.notes.map(note => <li key={note}>{note}</li>)}</ul><Typography component="h3">Summary & next step</Typography><Typography className="plant-analysis-copy">{plant.summary}</Typography></> : <Typography className="plant-analysis-copy">Run a scan for this image to get a disease prediction, supporting observations, confidence, and follow-up guidance.</Typography>}
+        <Chip size="small" label="Plant profile preview · no live AI result" />
+        <><Box className="plant-analysis-summary"><Box><Typography>Recorded condition</Typography><strong>{plant.status}</strong></Box><Box><Typography>Possible disease</Typography><strong>{plant.status === 'Needs care' ? 'Early blight · unconfirmed' : 'None recorded'}</strong></Box><Box><Typography>Model confidence</Typography><strong>Not available</strong></Box></Box><Typography component="h3">Visible observations</Typography><ul>{plant.notes.map(note => <li key={note}>{note}</li>)}</ul><Typography component="h3">Summary & next step</Typography><Typography className="plant-analysis-copy">{plant.summary}</Typography></>
         <section className="plant-related-crops" aria-labelledby="related-crops-heading"><h2 id="related-crops-heading">Can also be found in</h2><div className="plant-related-crop-list"><span><span aria-hidden="true">🍂</span> Almond</span><span><span aria-hidden="true">🍋</span> Apricot</span><span><span aria-hidden="true">🍒</span> Cherry</span></div></section>
         <Button component={Link} to="/farm/dashboard/scan" variant="contained" startIcon={<FaCamera />} className="plant-analysis-scan">Open plant scan</Button>
       </Box>
