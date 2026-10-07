@@ -6,8 +6,8 @@
 .plant-image-stage { position: relative; height: 420px; overflow: hidden; border-radius: 9px; background: #edf5f0; }.plant-image-stage > img { width: 100%; height: 100%; object-fit: cover; }.plant-image-stage > .MuiChip-root { position: absolute; bottom: 16px; left: 16px; }.plant-image-back, .plant-image-next { position: absolute !important; top: 50%; min-width: 0 !important; width: 34px; height: 34px; transform: translateY(-50%); color: #fff !important; background: #17284680 !important; }.plant-image-back { left: 12px; }.plant-image-next { right: 12px; }.plant-image-back.Mui-disabled, .plant-image-next.Mui-disabled { color: #ffffff77 !important; }.plant-content-heading { margin: 22px 0 8px !important; font-size: 19px !important; font-weight: 800 !important; }.plant-content-copy { max-width: 880px; color: #4d6177; font-size: 14px !important; line-height: 1.6 !important; }
 @media (max-width: 900px) { .plant-details-page { padding: 18px; }.plant-reference-layout { grid-template-columns: 1fr; gap: 24px; }.plant-care-path { margin-top: 24px; }.plant-image-stage { height: 260px; } }
 
-.plant-details-page { overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #aac2bb #f0f6f3; }
-.plant-details-page::-webkit-scrollbar { display: block; width: 7px; }
+.plant-details-page { overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none; }
+.plant-details-page::-webkit-scrollbar { display: none; }
 .plant-details-page::-webkit-scrollbar-thumb { background: #aac2bb; border-radius: 10px; }
 .plant-details-page::-webkit-scrollbar-track { background: #f0f6f3; }
 .plant-reference-main { min-width: 0; padding-bottom: 24px; }
@@ -27,12 +27,12 @@
 .plant-related-crops h2 { margin: 0 0 24px; font-size: 20px; line-height: 1.4; font-weight: 600; }
 .plant-related-crop-list { display: flex; flex-wrap: wrap; gap: 12px; }
 .plant-related-crop-list > span { display: inline-flex; align-items: center; gap: 7px; padding: 10px 14px; border: 1px solid #dce2e1; border-radius: 999px; background: #fff; color: #172846; font-size: 15px; line-height: 1.4; }
-.plant-weather-card.MuiCard-root { padding: 18px; box-sizing: border-box; background: linear-gradient(110deg, #d7f6ef 0%, #d9eafa 100%); border-color: #d7e9e9 !important; }
-.plant-weather-summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 20px; background: #fff; border: 2px solid #b8cafa; box-shadow: inset 0 0 0 6px #e0f7f3; border-radius: 32px; }
+.plant-weather-card.MuiCard-root { padding: 12px; min-height: 0; box-sizing: border-box; background: linear-gradient(110deg, #d7f6ef 0%, #d9eafa 100%); border-color: #d7e9e9 !important; }
+.plant-weather-summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; background: #fff; border: 1px solid #dbe6ef; box-shadow: none; border-radius: 12px; }
 .plant-weather-date .MuiTypography-root { color: #202624; font-size: 20px; line-height: 1.4; }
 .plant-weather-date strong.MuiTypography-root { display: block; margin-top: 7px; font-size: 25px; font-weight: 650; }
-.plant-weather-icon { display: grid; place-items: center; width: 64px; height: 64px; flex-shrink: 0; border-radius: 50%; background: #c3d5e8; border: 8px solid #eaf0f8; box-sizing: border-box; color: #115392; font-size: 31px; }
-.plant-spraying-summary { padding: 16px 20px; margin-top: 14px; border: 2px solid #c0f6d9; border-radius: 32px; background: #fff; }
+.plant-weather-icon { display: grid; place-items: center; width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; background: #c3d5e8; border: 5px solid #eaf0f8; box-sizing: border-box; color: #115392; font-size: 22px; }
+.plant-spraying-summary { padding: 12px 14px; margin-top: 10px; border: 1px solid #dce8e0; border-radius: 12px; background: #fff; }
 .plant-spraying-summary > .MuiTypography-root { color: #202624; font-size: 17px; margin-bottom: 8px; }
 .plant-spraying-summary strong.MuiTypography-root { color: #202624; font-size: 24px; font-weight: 650; }
 .plant-spraying-summary .plant-spraying-period { color: #3c4540; font-size: 12px; }
@@ -46,8 +46,8 @@
 .weather-city.MuiButton-root { display: block; text-align: left; width: 100%; }
 .weather-detail.MuiTypography-root { font-size: 11px; margin-top: 8px; color: #5a6a62; }
 .weather-error.MuiTypography-root { font-size: 11px; color: #a52c2c; margin-top: 8px; }
-.plant-spraying-summary .spraying-status.MuiTypography-root { display: block; margin: 10px 0 16px; font-size: 20px; font-weight: 700; line-height: 1.3; }
-.weather-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+.plant-spraying-summary .spraying-status.MuiTypography-root { display: block; margin: 6px 0 12px; font-size: 20px; font-weight: 700; line-height: 1.3; }
+.weather-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; }
 .weather-metrics > div { min-width: 0; }
 .plant-spraying-summary .weather-metric-label { display: block; color: #68766f; font-size: 12px; margin-bottom: 4px; }
 .plant-spraying-summary .weather-metric-value.MuiTypography-root { display: block; color: #263f35; font-size: 17px; font-weight: 600; line-height: 1.4; }
@@ -91,7 +91,8 @@
 .plant-flip-stage.is-flipped .plant-flip-inner { transform: rotateY(180deg); }
 .plant-flip-front, .plant-flip-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 9px; overflow: hidden; }
 .plant-flip-front img { height: 100%; width: 100%; object-fit: cover; }
-.plant-flip-back { transform: rotateY(180deg); background: #eef7f3; border: 1px solid #d4e8de; box-sizing: border-box; padding: 22px; overflow-y: auto; scrollbar-width: thin; }
+.plant-flip-back { transform: rotateY(180deg); background: #eef7f3; border: 1px solid #d4e8de; box-sizing: border-box; padding: 22px; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.plant-flip-back::-webkit-scrollbar { display: none; }
 .plant-analysis-toggle.MuiButton-root { position: absolute; bottom: 16px; left: 16px; border-radius: 999px; background: #e3f8ef; color: #007d64; padding: 8px 14px; font-size: 12px; font-weight: 700; text-transform: none; }
 .plant-analysis-toggle.MuiButton-root:hover { background: #cceee0; }
 .plant-analysis-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
@@ -108,3 +109,281 @@
 .plant-analysis-scan.MuiButton-root { margin-top: 14px; background: #008b73; text-transform: none; font-size: 12px; }
 @media (max-width: 900px) { .plant-flip-stage.is-flipped { height: 420px; } .plant-analysis-summary { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .plant-flip-inner { transition: none; } }
+.plant-details-page .plant-weather-date .MuiTypography-root { font-size: 12px; }
+.plant-details-page .plant-weather-date strong.MuiTypography-root { font-size: 19px; margin-top: 3px; }
+.plant-details-page .plant-spraying-summary > .MuiTypography-root { font-size: 12px; margin-bottom: 0; }
+.plant-details-page .plant-spraying-summary .spraying-status.MuiTypography-root { font-size: 15px; margin: 5px 0 12px; }
+.plant-details-page .plant-spraying-summary .weather-assessment-reason { font-size: 11px; line-height: 1.5; margin-top: 12px; padding-top: 10px; }
+.plant-details-page .plant-spraying-summary .weather-forecast-period { font-size: 10px; margin-top: 8px; }
+.plant-weather-card .weather-location-form { margin-top: 10px; padding: 2px 8px; }
+.plant-weather-card .weather-location-form .MuiButton-root { min-width: 48px; padding: 4px 6px; }
+.plant-weather-card > .MuiStack-root .MuiButton-root { padding: 4px 6px; min-width: 0; }.plant-tool-expanded .plant-reference-layout { display: block; max-width: none; }
+.plant-tool-expanded .plant-reference-side, .plant-tool-expanded .plant-reference-main > :not(.farming-tools) { display: none; }
+.plant-tool-expanded .farming-tools { width: 100%; margin: 0; min-height: 100%; box-sizing: border-box; background: transparent; border: 0; padding: 0; }
+.plant-tool-expanded .calculator-back.MuiButton-root { position: static; width: auto; height: auto; margin-bottom: 18px; padding: 7px 12px; border: 1px solid #c4dfe9; border-radius: 9px; font-size: 12px; color: #087e73; text-transform: none; }
+.plant-tool-expanded .calculator-form { max-width: 1000px; margin: 0 auto; }
+.plant-tool-expanded { scroll-behavior: auto; }
+@keyframes plantToolEnter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.plant-tool-expanded .farming-tools { animation: plantToolEnter 240ms cubic-bezier(.2,.7,.2,1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .plant-tool-expanded .farming-tools { animation: none; }
+}
+.modern-dashboard .plant-details-page.plant-tool-expanded .farming-tools { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 0; margin: 0; }
+.plant-details-page.plant-tool-expanded .calculator-form { max-width: none; margin: 0; }
+.plant-tool-expanded .calculator-results .MuiCard-root { background: #f6fafb; border-radius: 10px; box-shadow: none; }
+.plant-tool-expanded .calculator-money-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .7fr); column-gap: 48px; align-items: start; max-width: 1100px; }
+.calculator-money-form > .calculator-question, .calculator-money-form > .calculator-row, .calculator-money-form > .tool-calculate, .calculator-money-form > .calculator-note, .calculator-money-form > .MuiAlert-root { grid-column: 1; }
+.plant-tool-expanded .calculator-money-form > .calculator-question { font-size: 13px; font-weight: 400; color: #6a7e8a; margin-bottom: 24px; }
+.plant-tool-expanded .calculator-money-form .calculator-row { display: flex; flex-direction: column; align-items: stretch; gap: 8px; padding: 0; border: 0; margin-bottom: 18px; }
+.plant-tool-expanded .calculator-money-form .calculator-row > label { font-size: 12px; font-weight: 600; color: #172846; }
+.plant-tool-expanded .calculator-money-form .calculator-value { width: 100%; box-sizing: border-box; min-height: 42px; border: 1px solid #d7e5ea; border-radius: 9px; background: #fafdfe; padding: 9px 12px; font-size: 13px; }
+.plant-tool-expanded .calculator-money-form .calculator-value:focus-within { border-color: #087e73; }
+.plant-tool-expanded .calculator-money-form .tool-calculate { width: auto; justify-self: start; min-width: 145px; min-height: 40px; border-radius: 9px; padding: 9px 22px; margin-top: 4px; font-size: 12px; }
+.calculator-money-result { grid-column: 2; grid-row: 1 / span 8; border-left: 1px solid #d7e5ea; padding-left: 32px; }
+.calculator-money-result .calculator-eyebrow { color: #087e73; font-size: 10px; letter-spacing: 1px; font-weight: 700; margin-bottom: 16px; }
+.calculator-money-result h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; color: #172846; }
+.calculator-money-result > p, .calculator-explainer p { color: #6a7e8a; font-size: 12px; line-height: 1.7; }
+.calculator-explainer { margin-top: 28px; padding-top: 20px; border-top: 1px solid #e5edf1; }
+.calculator-explainer h3 { font-size: 13px; }
+.calculator-explainer p + p { margin-top: 12px; }
+@media (max-width: 800px) { .plant-tool-expanded .calculator-money-form { grid-template-columns: 1fr; } .calculator-money-result { grid-column: 1; grid-row: auto; border-left: 0; border-top: 1px solid #d7e5ea; padding: 20px 0 0; margin-top: 20px; } }
+@media (min-width: 901px) {
+  .plant-details-page:not(.plant-tool-expanded) .plant-reference-layout { align-items: stretch; }
+  .plant-reference-side .plant-weather-card { position: sticky; top: 0; align-self: stretch; flex-shrink: 0; }
+}
+.plant-tool-expanded .calculator-money-form > .calculator-stepper { grid-column: 1; margin: 0 0 18px; }
+.plant-tool-expanded .calculator-money-form .calculator-stepper > h6 { font-size: 12px; font-weight: 600; margin-bottom: 8px; color: #172846; }
+.plant-tool-expanded .calculator-money-form .stepper-controls { gap: 8px; max-width: 350px; }
+.plant-tool-expanded .calculator-money-form .stepper-controls .MuiIconButton-root { width: 36px; height: 36px; font-size: 23px; background: #e4f5f1; color: #087e73; border: 1px solid #c4dfe9; border-radius: 9px; }
+.plant-tool-expanded .calculator-money-form .stepper-controls .Mui-disabled { background: #f1f5f6; color: #a4b4b8; }
+.plant-tool-expanded .calculator-money-form .stepper-display { display: flex; align-items: center; padding: 9px 12px; gap: 8px; border: 1px solid #d7e5ea; background: #fafdfe; border-radius: 9px; }
+.plant-tool-expanded .calculator-money-form .stepper-display .MuiInputBase-root { font-size: 14px; font-weight: 500; }
+.plant-tool-expanded .calculator-money-form .stepper-display input { text-align: left; }
+.plant-tool-expanded .calculator-money-form .stepper-display p { font-size: 12px; margin: 0; }
+.plant-weather-card .weather-assessment-reason { min-height: 44px; }
+.plant-weather-card .plant-weather-date > .MuiTypography-root:first-child { min-height: 20px; }
+.plant-weather-card .plant-weather-date > strong { min-height: 30px; }
+.plant-weather-card .weather-metric-label, .plant-weather-card .weather-metric-value { min-height: 20px; }
+.plant-weather-card .weather-forecast-period, .plant-weather-card .plant-weather-preview { min-height: 18px; }
+.plant-weather-card .plant-weather-icon.weather-icon-loading { background: transparent; border: 0; box-shadow: none; padding: 0; }
+.plant-weather-card .plant-weather-icon.weather-icon-loading::before, .plant-weather-card .plant-weather-icon.weather-icon-loading::after { content: none; }
+.plant-weather-card .weather-icon-loading .MuiSkeleton-root { margin: 0; flex-shrink: 0; }
+/* Integrated quantity control, aligned with the other financial inputs. */
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-controls { width: 100%; max-width: 350px; height: 44px; margin: 0; gap: 0; border: 1px solid #d7e5ea; border-radius: 9px; background: #fafdfe; overflow: hidden; box-sizing: border-box; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-controls .MuiIconButton-root { width: 42px; height: 42px; margin: 0; border: 0; border-radius: 0; background: transparent; font-size: 21px; color: #087e73; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-controls .MuiIconButton-root:first-child { border-right: 1px solid #e2ebef; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-controls .MuiIconButton-root:last-child { border-left: 1px solid #e2ebef; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-controls .MuiIconButton-root:hover { background: #e9f5f6; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-controls .Mui-disabled { color: #a4b4b8; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-display { display: flex; flex-direction: row; align-items: center; gap: 8px; height: 42px; padding: 0 12px; margin: 0; min-width: 0; border: 0; border-radius: 0; background: transparent; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-display .MuiInputBase-root { flex: 1; width: 0; min-width: 0; font-size: 13px; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-display p { margin: 0; font-size: 12px; line-height: 1; color: #728894; }
+.budget-preview-illustration { display: block; width: min(240px, 100%); height: 160px; object-fit: contain; margin: 4px auto 22px; }
+.plant-tool-expanded .calculator-money-form > .financial-input-help { grid-column: 1; font-size: 12px; line-height: 1.7; color: #728894; max-width: 440px; margin: 0 0 16px; }
+.plant-tool-expanded .calculator-money-form > .financial-reset { grid-column: 1; justify-self: start; text-transform: none; color: #728894; font-size: 11px; margin-top: 6px; }
+.financial-result-reveal { animation: financialReveal 300ms ease-out both; }
+@keyframes financialReveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.plant-tool-expanded .financial-result-reveal .calculator-total { text-align: left; border-radius: 0; background: transparent; padding: 0 0 18px; border-bottom: 1px solid #d7e5ea; }
+.plant-tool-expanded .financial-result-reveal .calculator-total .total-number { color: #087e73; font-size: 32px; }
+.financial-breakdown h3 { font-size: 13px; }
+.financial-line { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; }
+.financial-line p { font-size: 12px; color: #6a7e8a; }
+.financial-line strong { font-size: 12px; font-weight: 600; }
+.financial-line-total { border-top: 1px solid #e5edf1; color: #087e73; }
+.financial-scenarios { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 14px 0; }
+.financial-scenarios > div { padding: 10px 0; border-top: 2px solid #d7e5ea; }
+.financial-scenarios > div:nth-child(2) { border-color: #087e73; }
+.financial-scenarios p { font-size: 10px; color: #728894; }
+.financial-scenarios strong { display: block; font-size: 14px; margin: 6px 0; overflow-wrap: anywhere; }
+.financial-caption.MuiTypography-root { font-size: 11px; color: #728894; line-height: 1.6; }
+@media (prefers-reduced-motion: reduce) { .financial-result-reveal { animation: none; } }
+.plant-details-page.plant-tool-expanded .calculator-money-form { width: 100%; max-width: 940px; margin: 0 auto; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 32px; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .calculator-value { width: 100%; max-width: none; }
+.plant-details-page.plant-tool-expanded .calculator-money-form .stepper-controls { max-width: none; }
+.plant-details-page.plant-tool-expanded .calculator-money-result { padding-left: 28px; }
+@media (max-width: 800px) { .plant-details-page.plant-tool-expanded .calculator-money-form { grid-template-columns: 1fr; } .plant-details-page.plant-tool-expanded .calculator-money-result { padding-left: 0; } }
+.calculator-choice-layout { display: grid; grid-template-columns: minmax(150px, .65fr) minmax(0, 1.7fr); gap: 22px; align-items: start; }
+.calculator-choice-art { padding: 14px 0; }
+.calculator-choice-art img { width: 100%; max-height: 200px; object-fit: contain; }
+.calculator-choice-art h3 { font-size: 14px; font-weight: 600; margin: 14px 0 6px; color: #172846; }
+.calculator-choice-art p { font-size: 12px; line-height: 1.6; color: #728894; }
+.plant-details-page .calculator-choice-layout .tool-tile.MuiCard-root { border-radius: 18px; border-color: #cbd7dc; background: #fff; }
+.plant-details-page .calculator-choice-layout .tool-tile .MuiCardActionArea-root { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 16px; }
+.plant-details-page .calculator-choice-layout .tool-tile .tool-icon { width: 34px; height: 34px; margin: 0 0 12px; font-size: 18px; background: #e0e5ff; }
+.plant-details-page .calculator-choice-layout .tool-tile h3 { font-size: 13px; margin-bottom: 5px; }
+.plant-details-page .calculator-choice-layout .tool-tile p { font-size: 11px; line-height: 1.5; }
+.calculator-money-form > .calculator-input-art { grid-column: 1; width: 180px; height: 120px; object-fit: contain; margin: 16px 0; justify-self: start; }
+@media (max-width: 1100px) { .calculator-choice-layout { grid-template-columns: 1fr; } .calculator-choice-art { display: none; } }
+.plant-details-page .calculator-choice-layout .tool-tile .tool-info { width: 100%; margin-top: 12px; padding-top: 10px; border-top: 1px solid #e5edf1; }
+.plant-details-page .calculator-choice-layout .tool-info p { display: flex; flex-direction: column; gap: 2px; margin-bottom: 7px; color: #516977; font-size: 11px; }
+.tool-info p > span { color: #80929c; font-size: 9px; text-transform: uppercase; letter-spacing: .4px; }
+.tool-open-label { display: flex; justify-content: space-between; width: 100%; color: #087e73; font-size: 11px; font-weight: 600; margin-top: 8px; }
+.plant-details-page .calculator-choice-layout .tool-tile .tool-icon { align-self: flex-start; }
+.plant-details-page .calculator-choice-layout { display: flex; flex-direction: column; gap: 24px; }
+.calculator-choice-layout .tools-grid { order: 1; width: 100%; }
+.plant-details-page .calculator-choice-layout .calculator-choice-art { order: 2; display: block; width: 100%; box-sizing: border-box; padding: 16px 0 0; text-align: center; border-top: 1px solid #d7e5ea; }
+.calculator-choice-art img { width: 180px; height: 140px; }
+.calculator-choice-art p { max-width: 380px; margin: 6px auto 0; }
+.plant-details-page .calculator-choice-art img { width: min(320px, 100%); height: 230px; max-height: none; }
+.plant-detail-tabs { margin-top: 20px; margin-bottom: 16px; }
+.plant-detail-tabs .MuiTab-root { min-width: 0; padding: 10px 5px; min-height: 40px; font-size: 11px; text-transform: none; color: #728894; }
+.plant-detail-tabs .MuiTab-root.Mui-selected { color: #172846; }
+.plant-detail-tabs .MuiTabs-indicator { background: #83b6d1; }
+.plant-tab-panel { padding: 16px 0 0; }
+.plant-tab-panel .MuiTypography-root { font-size: 12px; color: #617986; line-height: 1.6; }
+.plant-tab-panel h3.MuiTypography-root { font-weight: 600; color: #172846; }
+.plant-tab-panel dl { margin: 0; display: grid; grid-template-columns: 100px 1fr; gap: 8px; }
+.plant-tab-panel dd { margin: 0; color: #172846 !important; }
+.plant-tab-panel .MuiInputBase-root { font-size: 12px; }
+.plant-tab-panel .MuiButton-root { text-transform: none; font-size: 11px; color: #355b7a; margin-top: 8px; }
+.plant-profile-info { margin-top: 26px; color: #172846; }
+.plant-profile-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.plant-profile-heading h2 { font-size: 19px; font-weight: 600; }
+.plant-profile-heading .MuiButton-root { text-transform: none; font-size: 11px; color: #355b7a; }
+.plant-profile-source.MuiTypography-root { font-size: 11px; color: #80929c; margin: 4px 0 20px; }
+.plant-profile-section { margin-bottom: 24px; }
+.plant-profile-section h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.plant-profile-section p { font-size: 12px; line-height: 1.7; color: #617986; }
+.plant-info-inline { display: flex; align-items: center; gap: 12px; }
+.plant-info-inline svg { color: #587d96; font-size: 22px; }
+.plant-requirements-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.plant-requirements-grid > div { padding: 14px; border: 1px solid #e1ebf0; background: #f7fafc; border-radius: 12px; }
+.plant-requirements-grid h4 { font-size: 12px; font-weight: 600; }
+.plant-requirements-grid .plant-requirement-wide { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; }
+.plant-requirement-wide > span { display: grid; place-items: center; width: 34px; height: 34px; background: #fff; border: 1px solid #d7e5ea; border-radius: 9px; color: #587d96; font-size: 20px; }
+.plant-classifications { margin: 0; }
+.plant-classifications > div { display: flex; justify-content: space-between; gap: 20px; padding: 12px 0; border-bottom: 1px solid #e5edf1; }
+.plant-classifications .MuiTypography-root { font-size: 12px; }
+.plant-classifications dd { margin: 0; color: #617986; text-align: right; }
+.plant-details-page .plant-analysis-toggle.MuiButton-root, .plant-details-page .plant-new-image.MuiButton-root { background: linear-gradient(110deg, #e5f5f5, #d9eafa); color: #172846; border: 1px solid #b9d7e4; border-radius: 11px; padding: 9px 14px; font-size: 12px; font-weight: 600; text-transform: none; box-shadow: 0 2px 8px #17284614; transition: background 180ms ease, box-shadow 180ms ease; }
+.plant-details-page .plant-new-image.MuiButton-root { background: #fafdfff2; }
+.plant-details-page .plant-analysis-toggle.MuiButton-root:hover, .plant-details-page .plant-new-image.MuiButton-root:hover { background: #e2eff9; box-shadow: 0 4px 12px #17284620; }
+.plant-details-page .plant-analysis-toggle .MuiButton-startIcon, .plant-details-page .plant-new-image .MuiButton-startIcon { color: #355b7a; }
+.plant-notes-content { margin-top: 26px; }
+.plant-notes-content h2 { font-size: 19px; font-weight: 600; margin-bottom: 16px; }
+.plant-notes-content .MuiInputBase-root { font-size: 13px; }
+.plant-notes-content .MuiButton-root { margin-top: 14px; color: #355b7a; border-color: #c4dfe9; text-transform: none; font-size: 12px; }
+.plant-notes-content > p { color: #728894; font-size: 11px; margin-top: 10px; }
+.plant-tab-panel .plant-tab-identity { display: flex; flex-direction: column; gap: 0; margin: 0; padding: 4px 14px; border: 1px solid #d5e5ed; border-radius: 12px; background: linear-gradient(125deg, #f7fbfc, #f1f6fc); }
+.plant-tab-identity > div { display: grid; grid-template-columns: 105px minmax(0, 1fr); align-items: center; gap: 12px; padding: 11px 0; }
+.plant-tab-identity > div + div { border-top: 1px solid #e1ebf1; }
+.plant-tab-identity dt.MuiTypography-root { font-size: 11px; color: #728894; }
+.plant-tab-identity dd { margin: 0; overflow-wrap: anywhere; }
+.plant-tab-identity dd.MuiTypography-root { font-size: 12px; font-weight: 600; color: #172846; }
+.plant-tab-identity dd.plant-identity-scientific { font-weight: 400; font-style: italic; }
+.plant-identity-status.MuiChip-root { height: 23px; background: #e1edf6; color: #355b7a; font-size: 10px; font-weight: 600; }
+.plant-reference-side .plant-weather-card { margin-top: 8px; }
+.plant-reference-side .plant-detail-tabs { margin-top: 16px; margin-bottom: 12px; }
+.plant-detail-tabs .plant-tab-panel { padding-top: 12px; }
+.plant-care-guide-content { margin-top: 26px; }
+.plant-care-guide-content > h2 { font-size: 19px; font-weight: 600; margin-bottom: 16px; }
+.plant-ai-analysis { margin-top: 22px; padding: 24px; border: 1px solid #c4dfe9; border-radius: 16px; background: #f5f9fd; }
+.plant-ai-analysis h3 { font-size: 16px; font-weight: 700; margin-top: 20px; }
+.plant-ai-analysis ul { padding-left: 20px; color: #4d6177; font-size: 14px; line-height: 1.8; }
+.plant-ai-analysis .plant-analysis-scan.MuiButton-root { background: #355b7a; border-radius: 10px; }
+.plant-detail-tabs .MuiTab-root { min-width: 0; padding-left: 6px; padding-right: 6px; }
+.plant-diagnosis { display: grid; gap: 14px; color: #172846; }
+.diagnosis-title { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.diagnosis-title h2 { font-size: 20px; font-weight: 750; }.diagnosis-title p,.diagnosis-help { color: #648097; font-size: 12px; line-height: 1.7; }
+.diagnosis-health,.diagnosis-card { padding: 16px; border: 1px solid #c4dfe9; border-radius: 14px; background: #f7fbfe; box-shadow: 0 4px 16px #17284606; }
+.diagnosis-health { background: linear-gradient(120deg,#e5f5f5,#e7effb); }.diagnosis-health.needs-care { border-color: #d9c7a7; }
+.diagnosis-card-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }.diagnosis-card-heading h3 { flex: 1; font-size: 16px; font-weight: 700; }.diagnosis-card-heading .MuiChip-root { background: #e4eef8; color: #355b7a; }.diagnosis-icon { display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0; background: #deedf6; color: #355b7a; border-radius: 10px; font-size: 20px; }
+.diagnosis-health-body { display: grid; grid-template-columns: 124px 1fr; gap: 20px; align-items: center; }.diagnosis-score { text-align: center; }.diagnosis-score-ring { position: relative; width: 104px; height: 104px; margin: 0 auto 6px; }.diagnosis-score-ring > .MuiCircularProgress-root { position: absolute; inset: 0; color: #527ea5; }.diagnosis-score-ring > .score-track { color: #cfdfeb; }.diagnosis-score-ring > div { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; }.diagnosis-score-ring strong { font-size: 30px; font-weight: 750; }.diagnosis-score p { font-size: 12px; color: #648097; }.diagnosis-health-meta { display: grid; gap: 10px; justify-items: start; width: 100%; }.diagnosis-confidence { box-sizing: border-box; width: 100%; padding: 12px; background: #ffffffb5; border: 1px solid #d6e5ee; border-radius: 14px; }.diagnosis-confidence p { font-size: 12px; color: #648097; }.diagnosis-confidence strong { display: block; margin: 4px 0 8px; font-size: 15px; }.diagnosis-confidence .MuiLinearProgress-root { border-radius: 6px; height: 4px; margin-bottom: 6px; background: #d9e6f0; }
+.diagnosis-content-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }.diagnosis-content-grid .diagnosis-card-heading { gap: 8px; }.diagnosis-content-grid .diagnosis-card-heading h3 { font-size: 16px; }.diagnosis-card-heading .MuiIconButton-root { color: #527ea5; padding: 5px; }
+.analysis-photo-stage { position: relative; overflow: hidden; border-radius: 14px; background: #e9f0f5; min-height: 200px; display: grid; place-items: center; }.analysis-photo-stage img { display: block; width: 100%; height: auto; max-height: 300px; object-fit: contain; }.analysis-region { position: absolute; border: 2px solid #527ea5; border-radius: 10px; background: #527ea51a; color: #172846; cursor: pointer; }.analysis-region.selected { border-color: #172846; background: #527ea544; }
+.diagnosis-help { margin-top: 12px !important; }.diagnosis-summary-copy { padding: 12px; border-radius: 14px; background: #fff; border: 1px solid #dce8f0; }.diagnosis-summary-copy p { font-size: 13px; line-height: 1.65; }.diagnosis-summary-label { display: flex; gap: 8px; align-items: center; color: #527ea5; margin-bottom: 10px !important; font-weight: 650 !important; }.diagnosis-findings { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }.diagnosis-findings .MuiButton-root { text-transform: none; text-align: left; justify-content: flex-start; font-size: 12px; border-radius: 9px; border-color: #c4dfe9; color: #355b7a; }.diagnosis-findings .selected { background: #e2eef8; }.diagnosis-summary > .MuiButton-contained { background: #355b7a; text-transform: none; border-radius: 10px; margin-top: 12px; }
+.diagnosis-next-step { display: flex; align-items: center; gap: 14px; border: 1px solid #c4dfe9; padding: 12px 16px; border-radius: 16px; background: #edf5fb; }.diagnosis-next-step > div { flex: 1; }.diagnosis-next-step p { font-size: 10px; letter-spacing: 1px; color: #648097; }.diagnosis-next-step h3 { font-size: 15px; font-weight: 650; margin-top: 4px; }
+@media(max-width:1100px) { .diagnosis-content-grid { grid-template-columns: 1fr; } }
+@media(max-width:600px) { .diagnosis-health-body { grid-template-columns: 1fr; }.diagnosis-health,.diagnosis-card { padding: 16px; }.diagnosis-next-step { flex-wrap: wrap; }.diagnosis-card-heading { flex-wrap: wrap; } }
+
+.plant-diagnosis .diagnosis-confidence { width: 100%; max-width: 350px; padding: 12px 14px; border-radius: 16px; background: #edf4fa; border: 1px solid #c4d8e6; box-shadow: inset 0 1px 0 #ffffffb3; }
+.confidence-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.confidence-heading > svg { flex-shrink: 0; font-size: 22px; color: #527ea5; }
+.plant-diagnosis .confidence-heading p { flex: 1; font-size: 11px; line-height: 1.35; color: #648097; }
+.confidence-heading .MuiChip-root { height: 28px; background: #dce9f5; color: #355b7a; font-size: 12px; font-weight: 600; }
+.plant-diagnosis .diagnosis-confidence .MuiLinearProgress-root { height: 7px; margin: 0; border-radius: 6px; background: #d2e0eb; }
+.plant-diagnosis .diagnosis-confidence .MuiLinearProgress-bar { background: #527ea5; border-radius: 6px; }
+.plant-diagnosis .diagnosis-health-body { width: 100%; max-width: 510px; margin-inline: auto; grid-template-columns: 124px minmax(0, 1fr); gap: 28px; }
+@media (max-width: 600px) { .plant-diagnosis .diagnosis-health-body { grid-template-columns: 1fr; gap: 16px; }.plant-diagnosis .diagnosis-health-meta { justify-items: center; } }
+.plant-diagnosis .diagnosis-health-status.MuiChip-root { margin-left: auto; height: 32px; border: 1px solid #94b6d0; border-radius: 18px; background: #e2edf7; color: #355b7a; padding: 0 5px; font-size: 13px; font-weight: 500; }
+.plant-diagnosis .diagnosis-health-status .MuiChip-icon { color: #527ea5; font-size: 20px; }
+.plant-diagnosis .diagnosis-summary-copy { padding: 16px; background: #eef4fa; border-color: #d1e1ed; }
+.plant-diagnosis .diagnosis-summary-copy > p + p { margin-top: 12px; }
+.plant-diagnosis .diagnosis-summary-copy > p { font-size: 13px; line-height: 1.75; }
+.plant-diagnosis .diagnosis-content-grid { align-items: start; }
+.plant-diagnosis .diagnosis-summary-copy { max-height: 300px; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.plant-diagnosis .diagnosis-summary-copy::-webkit-scrollbar { display: none; }
+@media (min-width: 1101px) {
+  .plant-diagnosis .diagnosis-content-grid { align-items: stretch; }
+  .plant-diagnosis .diagnosis-content-grid > .diagnosis-card { height: 440px; box-sizing: border-box; display: flex; flex-direction: column; min-height: 0; }
+  .plant-diagnosis .diagnosis-content-grid .diagnosis-card-heading { flex-shrink: 0; }
+  .plant-diagnosis .diagnosis-content-grid .analysis-photo-stage { flex: 1; min-height: 0; }
+  .plant-diagnosis .diagnosis-content-grid .analysis-photo-stage img { width: 100%; height: 100%; max-height: none; object-fit: contain; }
+  .plant-diagnosis .diagnosis-content-grid > .diagnosis-card > .diagnosis-help { flex-shrink: 0; }
+  .plant-diagnosis .diagnosis-summary { overflow-y: auto; scrollbar-width: none; }
+  .plant-diagnosis .diagnosis-summary::-webkit-scrollbar { display: none; }
+  .plant-diagnosis .diagnosis-summary-copy { flex: 1; min-height: 120px; max-height: none; }
+  .plant-diagnosis .diagnosis-findings { flex-shrink: 0; gap: 6px; margin-bottom: 0; }
+}
+.diagnosis-treatment { padding: 18px; border: 1px solid #c4dfe9; border-radius: 16px; background: #f5f9fd; }
+.diagnosis-treatment > .diagnosis-card-heading > div { flex: 1; }.diagnosis-treatment .diagnosis-help { margin-top: 3px !important; }
+.treatment-task-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.treatment-task { display: flex; align-items: flex-start; gap: 8px; padding: 14px 12px; border: 1px solid #d5e4ee; border-radius: 12px; background: #fff; transition: background 180ms; }
+.treatment-task .MuiCheckbox-root { padding: 2px; color: #7298b9; }.treatment-task .Mui-checked { color: #355b7a; }.treatment-task-content { flex: 1; min-width: 0; }.treatment-task-heading { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }.treatment-task-heading h4 { flex: 1; font-size: 13px; font-weight: 650; line-height: 1.5; }.treatment-task-heading .MuiChip-root { height: 23px; background: #edf4fa; color: #527ea5; font-size: 10px; }.treatment-task-heading .MuiChip-icon { color: #527ea5; font-size: 14px; }.treatment-task-content > p { font-size: 12px; line-height: 1.7; color: #648097; }.treatment-task.is-complete { background: #edf4fa; }.treatment-task.is-complete h4 { text-decoration: line-through; color: #648097; }
+@media(max-width:700px) { .treatment-task-grid { grid-template-columns: 1fr; }.treatment-task-heading { flex-wrap: wrap; } }
+
+.analysis-recovery-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 380px; margin: 4px auto; }.analysis-recovery-actions .MuiButton-root { text-transform: none; border-radius: 12px; font-size: 13px; }.analysis-recovery-actions .MuiButton-contained { padding: 12px; background: linear-gradient(110deg,#d7f0f2,#d9eafa); color: #172846; border: 1px solid #bdd9e7; box-shadow: none; }.analysis-recovery-actions .MuiButton-text { color: #648097; }
+.recovery-check { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 12px 8px; color: #172846; text-align: center; }.recovery-check-icon { display: grid; place-items: center; width: 76px; height: 76px; background: #e4f0f8; border: 1px solid #c4dfe9; border-radius: 50%; font-size: 36px; color: #527ea5; }.recovery-check h3 { font-size: 20px; font-weight: 700; }.recovery-check > p { color: #648097; font-size: 13px; }.recovery-check img,.recovery-check video { width: 100%; max-height: 280px; object-fit: contain; border-radius: 12px; }.recovery-photo-actions { display: grid; gap: 10px; width: 100%; }.recovery-check .MuiButton-root { text-transform: none; border-radius: 10px; }.recovery-check .MuiButton-contained { background: #355b7a; }.recovery-check .MuiButton-outlined { border-color: #bdd9e7; color: #355b7a; }
+.recovery-progress-section { width: 100%; box-sizing: border-box; padding: 18px; text-align: left; border: 1px solid #c4dfe9; border-radius: 14px; background: #f5f9fd; display: grid; gap: 12px; }.recovery-progress-section h3 { font-size: 18px; }.recovery-progress-caption { font-size: 11px !important; color: #648097; }.recovery-comparison { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }.recovery-comparison img { height: 140px; width: 100%; object-fit: contain; background: #e5eef5; }.recovery-comparison p { margin-top: 5px; text-align: center; font-size: 12px; color: #648097; }.recovery-progress-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }.recovery-progress-metrics > div { padding: 12px; background: #fff; border: 1px solid #d5e4ee; border-radius: 10px; }.recovery-progress-metrics p { font-size: 12px; color: #648097; }.recovery-progress-metrics strong { display: block; font-size: 22px; margin-top: 4px; }.recovery-progress-section .MuiLinearProgress-root { height: 6px; border-radius: 5px; background: #d9e7f2; }.recovery-progress-section .MuiLinearProgress-bar { background: #527ea5; }.recovery-progress-section h4 { font-size: 14px; font-weight: 650; }.recovery-history { list-style: none; margin: 0; padding: 0; max-height: 180px; overflow-y: auto; scrollbar-width: none; }.recovery-history li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #d5e4ee; }.recovery-history p { font-size: 11px; color: #648097; }
+.diagnosis-history-section { display: grid; gap: 18px; margin: 18px 0 24px; color: #172846; }
+.diagnosis-history-overview { padding: 20px; border: 1px solid #c4dfe9; border-radius: 18px; background: linear-gradient(120deg,#e4f3f4,#e7eefb); }
+.diagnosis-history-overview .diagnosis-card-heading { margin-bottom: 16px; }.diagnosis-history-overview .diagnosis-help { margin-top: 3px !important; }
+.diagnosis-history-stats { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
+.diagnosis-history-stats > div { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px; text-align: center; }.diagnosis-history-stats > div + div { border-left: 1px solid #cbdde9; }.diagnosis-history-stats svg { font-size: 19px; color: #527ea5; }.diagnosis-history-stats strong { font-size: 24px; font-weight: 650; }.diagnosis-history-stats p { font-size: 11px; color: #648097; }
+.diagnosis-history-group h4 { font-size: 12px; color: #648097; margin-bottom: 10px; }.diagnosis-history-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.diagnosis-history-record.MuiButton-root { display: flex; gap: 12px; align-items: center; padding: 16px; border: 1px solid #d0e2ed; border-radius: 14px; background: #f8fbfe; text-transform: none; text-align: left; color: #172846; transition: background 180ms,border-color 180ms; }.diagnosis-history-record.MuiButton-root:hover { background: #edf4fa; border-color: #94b6d0; }.diagnosis-history-record > div { min-width: 0; flex: 1; }.diagnosis-history-record > svg { font-size: 22px; color: #648097; }.diagnosis-history-record-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }.diagnosis-history-record-meta p { font-size: 10px; color: #648097; }.diagnosis-history-record .MuiChip-root { height: 22px; font-size: 10px; color: #355b7a; background: #e1edf6; }.diagnosis-history-record .MuiChip-icon { color: #527ea5; font-size: 14px; }.diagnosis-history-record h5 { font-size: 13px; font-weight: 650; }.diagnosis-record-preview { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 12px !important; line-height: 1.6 !important; color: #648097; margin-top: 4px !important; }.diagnosis-record-source { font-size: 10px !important; color: #527ea5; margin-top: 8px !important; }
+.diagnosis-history-empty { padding: 24px; text-align: center; border: 1px dashed #c4dfe9; border-radius: 14px; background: #f8fbfe; }.diagnosis-history-empty svg { font-size: 28px; color: #527ea5; }.diagnosis-history-empty p { font-size: 13px; margin-top: 6px; color: #648097; }
+@media(max-width:700px) { .diagnosis-history-list { grid-template-columns: 1fr; }.diagnosis-history-overview { padding: 16px; } }
+.plant-care-guide-content .diagnosis-history-overview { display: grid; grid-template-columns: minmax(160px,1fr) minmax(300px,1.4fr); align-items: center; column-gap: 24px; row-gap: 10px; padding: 16px 18px; border-radius: 14px; background: linear-gradient(110deg,#f2f9fa,#f2f6fc); box-shadow: none; }
+.plant-care-guide-content .diagnosis-history-overview .diagnosis-card-heading { margin: 0; gap: 10px; }
+.plant-care-guide-content .diagnosis-history-overview .diagnosis-icon { width: 32px; height: 32px; font-size: 19px; border-radius: 9px; }
+.plant-care-guide-content .diagnosis-history-overview h3.MuiTypography-root { font-size: 15px; font-weight: 650; line-height: 1.4; }
+.plant-care-guide-content .diagnosis-history-overview .diagnosis-help.MuiTypography-root { font-size: 11px; line-height: 1.5; margin-top: 2px !important; }
+.plant-care-guide-content .diagnosis-history-overview > .diagnosis-help { grid-column: 1 / -1; padding-top: 9px; border-top: 1px solid #deE8f0; }
+.plant-care-guide-content .diagnosis-history-stats > div { display: grid; grid-template-columns: 18px auto; justify-content: center; align-items: center; gap: 3px 7px; padding: 4px 10px; }
+.plant-care-guide-content .diagnosis-history-stats svg { font-size: 16px; }.plant-care-guide-content .diagnosis-history-stats strong { font-size: 20px; line-height: 1.2; }.plant-care-guide-content .diagnosis-history-stats p.MuiTypography-root { grid-column: 1 / -1; font-size: 10px; line-height: 1.4; }
+.plant-care-guide-content .diagnosis-history-record.MuiButton-root { padding: 12px; border-radius: 12px; gap: 10px; }.plant-care-guide-content .diagnosis-history-record .diagnosis-icon { width: 30px; height: 30px; border-radius: 9px; font-size: 18px; }.plant-care-guide-content .diagnosis-history-record-meta { margin-bottom: 5px; }.plant-care-guide-content .diagnosis-record-source { margin-top: 5px !important; }
+@media(max-width:700px) { .plant-care-guide-content .diagnosis-history-overview { grid-template-columns: 1fr; gap: 12px; padding: 14px; }.plant-care-guide-content .diagnosis-history-overview > .diagnosis-help { grid-column: auto; } }
+.plant-care-guide-content .diagnosis-history-record.MuiButton-root { padding: 0 12px 0 0; gap: 12px; min-height: 104px; overflow: hidden; border-radius: 14px; }
+.plant-care-guide-content .diagnosis-history-record > .diagnosis-record-photo { flex: 0 0 76px; align-self: stretch; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: #e8f0f6; color: #648097; }
+.diagnosis-record-photo img { width: 76px; height: 100%; min-height: 104px; object-fit: cover; }.diagnosis-record-photo svg { font-size: 22px; }.diagnosis-record-photo span { font-size: 8px; text-align: center; }
+.plant-care-guide-content .diagnosis-record-content { padding: 10px 0; }.plant-care-guide-content .diagnosis-history-record h5 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 11px; font-weight: 500; line-height: 1.5; }
+.plant-care-guide-content .diagnosis-record-preview { display: none; }.plant-care-guide-content .diagnosis-record-source { display: flex; gap: 4px; align-items: center; font-size: 9px !important; line-height: 1.4; }.diagnosis-record-source svg { flex-shrink: 0; font-size: 12px; }
+.plant-care-guide-content .diagnosis-record-score { width: 32px; height: 32px; flex: 0 0 32px; display: grid; place-items: center; border: 1px solid #8fb0ca; border-radius: 50%; color: #527ea5; font-size: 11px; font-weight: 500; }
+.plant-care-guide-content .diagnosis-history-record .MuiChip-root { height: 19px; font-size: 9px; }.plant-care-guide-content .diagnosis-history-record-meta { gap: 6px; }.plant-care-guide-content .diagnosis-history-record-meta p { font-size: 9px; }
+.plant-care-guide-content .diagnosis-history-list { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 2px; }
+.plant-care-guide-content .diagnosis-history-list::-webkit-scrollbar { display: none; }
+.plant-care-guide-content .diagnosis-history-record.MuiButton-root { flex: 0 0 calc((100% - 24px) / 3); min-width: 260px; scroll-snap-align: start; }
+.scan-history-row-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; min-height: 28px; }.scan-history-row-heading h4 { margin-bottom: 0; }.scan-history-row-heading > div { display: flex; gap: 6px; }.scan-history-row-heading .MuiIconButton-root { color: #527ea5; border: 1px solid #c4dfe9; border-radius: 8px; padding: 3px; background: #f5f9fd; }.scan-history-row-heading .Mui-disabled { opacity: .4; }
+@media(max-width:700px) { .plant-care-guide-content .diagnosis-history-record.MuiButton-root { flex-basis: 85%; } }
+
+.plant-reference-main .diagnosis-history-section,
+.plant-reference-main .diagnosis-history-group,
+.plant-reference-main .diagnosis-history-list { min-width: 0; max-width: 100%; }
+.plant-reference-main { min-width: 0; }
+.plant-care-guide-content .diagnosis-history-list { width: 100%; box-sizing: border-box; }
+.plant-care-guide-content .diagnosis-history-list .diagnosis-history-record.MuiButton-root { flex: 0 0 280px; width: 280px; min-width: 280px; max-width: 280px; box-sizing: border-box; }
+.recovery-section-heading { display: flex; justify-content: space-between; gap: 12px; align-items: center; }.recovery-section-heading .MuiChip-root { background: #e1edf6; color: #355b7a; font-size: 11px; }.recovery-section-heading .recovery-progress-caption { margin-top: 4px; }
+.recovery-photo-frame { height: 200px; overflow: hidden; border: 1px solid #d5e4ee; border-radius: 12px; background: #e8f0f6; }.recovery-comparison .recovery-photo-frame img { width: 100%; height: 100%; object-fit: contain; }.recovery-photo-empty { height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; color: #648097; }.recovery-photo-empty svg { font-size: 28px; }
+.recovery-progress-section .recovery-progress-metrics { grid-template-columns: repeat(3,minmax(0,1fr)); }.recovery-progress-section .recovery-progress-metrics > div { padding: 10px 12px; }.recovery-progress-section .recovery-progress-metrics strong { font-size: 20px; }
+.recovery-task-summary,.recovery-save-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }.recovery-task-summary p { font-size: 12px; color: #648097; }.recovery-progress-section .MuiButton-root { text-transform: none; border-radius: 9px; font-size: 12px; }.recovery-progress-section .MuiButton-contained { background: #355b7a; }.recovery-progress-section .MuiButton-outlined { color: #527ea5; border-color: #c4dfe9; }.recovery-observation-form { display: grid; gap: 12px; padding: 16px; border: 1px solid #d5e4ee; border-radius: 12px; background: #fff; }.recovery-condition-options { display: flex; gap: 8px; flex-wrap: wrap; }.recovery-observation-timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; max-height: 260px; overflow-y: auto; scrollbar-width: none; }.recovery-observation-timeline li { padding: 12px; background: #fff; border: 1px solid #d5e4ee; border-radius: 10px; }.recovery-observation-timeline li > div { display: flex; justify-content: space-between; align-items: center; gap: 8px; }.recovery-observation-timeline p { font-size: 12px; line-height: 1.6; color: #648097; }.recovery-observation-timeline li > p { margin-top: 8px; }.recovery-observation-timeline .MuiChip-root { background: #e1edf6; color: #355b7a; font-size: 11px; }
+@media(max-width:600px) { .recovery-photo-frame { height: 150px; }.recovery-section-heading { align-items: flex-start; flex-wrap: wrap; }.recovery-observation-timeline li > div { flex-wrap: wrap; } }
+.diagnosis-scan-detail { margin: 18px 0 24px; }.diagnosis-scan-detail > .MuiButton-root { text-transform: none; color: #355b7a; margin-bottom: 8px; }.diagnosis-scan-date.MuiTypography-root { font-size: 12px; color: #648097; margin-bottom: 16px; }
+.plant-care-schedule { margin-top: 22px; padding: 16px; border: 1px solid #c4dfe9; border-radius: 14px; background: #f5f9fd; color: #172846; }
+.care-schedule-heading { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }.care-schedule-heading > svg { color: #527ea5; font-size: 19px; }.care-schedule-heading h2 { flex: 1; font-size: 16px; font-weight: 650; }.care-schedule-heading .MuiIconButton-root { color: #355b7a; background: #deedf6; border: 1px solid #c4dfe9; }
+.plant-care-empty { padding: 22px 16px; border: 1px dashed #d0e2ed; border-radius: 12px; background: #fff; display: flex; align-items: center; flex-direction: column; gap: 10px; text-align: center; }.plant-care-empty > svg { color: #7298b9; font-size: 32px; }.plant-care-empty h3 { font-size: 14px; font-weight: 600; }.plant-care-empty > p { font-size: 12px; color: #648097; max-width: 320px; line-height: 1.6; }.plant-care-schedule .MuiButton-root { text-transform: none; border-radius: 9px; color: #355b7a; border-color: #bdd9e7; font-size: 12px; }
+.plant-care-task-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }.plant-care-task { padding: 14px; border: 1px solid #d0e2ed; border-radius: 12px; background: #fff; }.plant-care-task-heading { display: flex; align-items: center; gap: 9px; }.plant-care-task-heading > span { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; color: #527ea5; background: #e5eff7; font-size: 20px; }.plant-care-task-heading > div { flex: 1; }.plant-care-task-heading h3 { font-size: 13px; font-weight: 650; }.plant-care-task-heading p { color: #648097; font-size: 11px; margin-top: 2px; }.plant-care-task-heading .MuiIconButton-root { color: #648097; }.plant-care-task-footer { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }.plant-care-task-footer p { display: flex; align-items: center; gap: 4px; color: #648097; font-size: 10px; }.plant-care-task-footer .MuiButton-root { font-size: 10px; padding: 3px 8px; }.care-task-last-done.MuiTypography-root,.care-schedule-message.MuiTypography-root { font-size: 11px; color: #648097; margin-top: 10px; }
+@media(max-width:1100px) { .plant-care-task-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }@media(max-width:600px) { .plant-care-task-grid { grid-template-columns: 1fr; } }

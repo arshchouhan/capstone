@@ -1,0 +1,10 @@
+const router=require('express').Router(),controller=require('../controllers/cameraController');
+router.use((_req,res,next)=>{res.set({'Cache-Control':'no-store','Referrer-Policy':'no-referrer','X-Content-Type-Options':'nosniff','Permissions-Policy':'camera=(self), microphone=()'});next();});
+router.get('/phone-camera',(_req,res)=>res.sendFile(require('path').join(__dirname,'../public/phone-camera.html')));
+router.get('/phone-camera.js',(_req,res)=>res.sendFile(require('path').join(__dirname,'../public/phone-camera.js')));
+router.post('/api/camera-phone/:sessionId/join',controller.join);
+router.post('/api/camera-phone/:sessionId/frame',controller.frame);
+router.post('/api/camera-phone/:sessionId/capture',controller.sendCapture);
+router.post('/api/camera-phone/:sessionId/photo',controller.uploadPhoto);
+router.delete('/api/camera-phone/:sessionId',controller.stop);
+module.exports=router;

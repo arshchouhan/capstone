@@ -1,41 +1,6 @@
 import Navbar from '../components/Navbar'
-import { Link } from 'react-router-dom'
-
-function LandingPage() {
-  return (
-    <main className="landing-page">
-      <Navbar />
-
-      <section className="hero">
-        <div className="hero-copy">
-          <div className="hero-brand-wrap">
-            <div className="brand-name hero-brand">Crop Keeper</div>
-            <div className="brand-tag hero-tag">Plant more. Plan less.</div>
-          </div>
-          <p className="eyebrow">CROP FARM SOFTWARE</p>
-          <h1>
-            Plan and Manage Your
-            <span>Crop Growing</span>
-            Effortlessly
-          </h1>
-          <p className="subtitle">
-            Crop Keeper helps you track everything in your farm so you
-            always grow the right amount at the right time.
-          </p>
-
-          <div className="role-login-actions">
-            <Link className="cta-btn" to="/signin?role=farm">Farm login</Link>
-            <Link className="doctor-login-btn" to="/signin?role=dr">Doctor login</Link>
-          </div>
-          <p className="trial-note">Choose the workspace that matches your role.</p>
-        </div>
-
-        <div className="hero-visual" aria-label="Product preview placeholder">
-          <div className="image-placeholder" />
-        </div>
-      </section>
-    </main>
-  )
-}
-
-export default LandingPage
+import {Link} from 'react-router-dom'
+import {FaLeaf,FaUserMd,FaCamera,FaCalendarAlt,FaUsers,FaArrowRight} from 'react-icons/fa'
+import plant from '../assets/plant_basil.jpg'
+import './PublicTheme.css'
+export default function LandingPage(){return <main className="plantaexa-home"><Navbar/><section className="public-hero"><div><span className="public-eyebrow">A little care. A lot of growth.</span><h1>Healthier plants.<br/><span>Connected care.</span></h1><p>Keep your plants, care routine, and expert consultations together. A workspace for growers and the specialists who help them thrive.</p><Link className="public-primary" to="#workspaces">Find your workspace <FaArrowRight/></Link><div className="public-feature-line"><span><FaCamera/>Plant scans</span><span><FaCalendarAlt/>Care planning</span><span><FaUsers/>Expert support</span></div></div><div className="public-hero-image"><img src={plant} alt="Lush basil plant growing in a terracotta pot"/><span><FaLeaf/>Make room for growth</span></div></section><section className="public-workspaces" id="workspaces"><div className="public-section-heading"><span className="public-eyebrow">Two roles. One growing community.</span><h2>Your space to grow</h2><p>Choose the portal that fits how you care for plants.</p></div><div className="public-portal-grid"><article className="public-portal"><span className="public-role-icon"><FaLeaf/></span><h3>For growers</h3><p>Manage your plants, track care, review scans, and connect with a plant specialist.</p><ul><li>Plant profiles and care schedules</li><li>Diagnosis history and recovery tracking</li><li>Community and expert appointments</li></ul><div><Link className="public-primary" to="/grower/register">Create grower account <FaArrowRight/></Link><Link className="public-secondary" to="/grower/login">Grower login</Link></div></article><article className="public-portal"><span className="public-role-icon"><FaUserMd/></span><h3>For plant doctors</h3><p>Build your specialist profile and stay connected with the growers who book your consultations.</p><ul><li>Your professional expert profile</li><li>Grower connections and shared concerns</li><li>Consultation history and community</li></ul><div><Link className="public-primary" to="/doctor/register">Create doctor account <FaArrowRight/></Link><Link className="public-secondary" to="/doctor/login">Doctor login</Link></div></article></div></section><footer className="public-footer"><strong>Plantaexa</strong><span>Care for what you grow.</span></footer></main>}

@@ -1,0 +1,1 @@
+exports.nextDue = (due,frequency,now=new Date()) => { const date = new Date(due); if(!Number.isFinite(date.getTime()) || !Number.isInteger(frequency) || frequency<1 || frequency>365) throw new Error('Invalid recurring task.'); const base = date>now ? date : new Date(now); base.setDate(base.getDate()+frequency); return base; };

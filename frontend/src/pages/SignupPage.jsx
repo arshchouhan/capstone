@@ -1,3 +1,6 @@
+import { apiBase } from '../services/api'
+import { readAuthResponse } from '../services/authResponse'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
@@ -30,31 +33,23 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    const details = { ...formData, firstName: formData.firstName.trim(), lastName: formData.lastName.trim(), email: formData.email.trim().toLowerCase(), confirmEmail: formData.confirmEmail.trim().toLowerCase(), farmName: formData.farmName.trim() }
+    if (!details.firstName || !details.lastName) { setError('Enter your first and last name.'); return }
+    if (details.email !== details.confirmEmail) { setError('Emails do not match.'); return }
+    if (details.password !== details.confirmPassword) { setError('Passwords do not match.'); return }
     setLoading(true)
 
     try {
-      const response = await fetch('http://localhost:5000/api/signup', {
+      const response = await fetch(`${apiBase}/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         credentials: 'include', // Include cookies
-        body: JSON.stringify(formData),
+        body: JSON.stringify(details),
       })
 
-      // Check response status first
-      if (!response.ok) {
-        const text = await response.text()
-        try {
-          const data = JSON.parse(text)
-          throw new Error(data.message || `Error: ${response.status}`)
-        } catch (parseError) {
-          throw new Error(`Server error: ${response.status}`)
-        }
-      }
-
-      const data = await response.json()
-      console.log('Signup response:', data)
+      const data = await readAuthResponse(response)
 
       if (!data.success) {
         throw new Error(data.message || 'Signup failed')
@@ -82,17 +77,17 @@ const SignupPage = () => {
       <section className="signup-shell">
         <div className="signup-layout">
           <div className="signup-form-panel">
-            <h1>Start Your Free Trial</h1>
+            <h1>Create your grower account</h1><p className="signup-intro">Plant expert? <Link to="/doctor/register">Register as a doctor</Link></p>
             <p className="signup-intro">
-              Join hundreds of crop farmers using our platform
+              Keep your plants, care routines, and consultations together.
             </p>
 
             <div className="signup-trust-row">
-              <span>✓ 30-day free trial</span>
-              <span>✓ No credit card required</span>
+              <span>Plant care and scan history</span>
+              <span>Connect with plant experts</span>
             </div>
 
-            {error && <div className="error-message" style={{ color: 'red', marginBottom: '16px' }}>{error}</div>}
+            {error && <div role="alert" className="error-message" style={{ color: 'red', marginBottom: '16px' }}>{error}{/already registered/i.test(error) && <> <Link to="/signin">Sign in</Link></>}</div>}
 
             <form className="signup-form" onSubmit={handleSubmit}>
               <div className="field-row two-col">

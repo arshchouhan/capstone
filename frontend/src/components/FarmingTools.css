@@ -124,3 +124,22 @@
 .manage-task-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 18px; }
 .manage-task-form .MuiInputBase-root { font-size: 13px; }
 .manage-task-form .MuiButton-root { margin: 0; }
+/* Compact tool chooser to match dashboard panels. */
+.plant-details-page .farming-tools { padding: 20px; border-radius: 14px; }
+.plant-details-page .tools-grid { gap: 10px; }
+.plant-details-page .tool-tile.MuiCard-root { border-radius: 12px; border-color: #dce3e9; }
+.plant-details-page .tool-tile .MuiCardActionArea-root { padding: 14px; }
+.plant-details-page .tool-icon { width: 32px; height: 32px; font-size: 17px; margin-bottom: 10px; }
+.plant-details-page .tool-tile h3 { font-size: 14px; line-height: 1.4; }
+.plant-details-page .tool-tile p { font-size: 12px; line-height: 1.5; margin-top: 6px; }
+.plant-details-page .calculator-question.MuiTypography-root { font-size: 15px; margin-bottom: 16px; }
+.plant-details-page .calculator-title.MuiTypography-root { font-size: 19px; margin-bottom: 16px; }
+@media (max-width: 600px) { .plant-details-page .farming-tools { padding: 16px; } }
+/* Short, horizontal tool tiles. */
+.plant-details-page .tool-tile .MuiCardActionArea-root { display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 10px; row-gap: 3px; align-content: center; padding: 12px; }
+.plant-details-page .tool-tile .tool-icon { grid-column: 1; grid-row: 1 / 3; width: 28px; height: 28px; font-size: 15px; margin: 0; align-self: center; }
+.plant-details-page .tool-tile h3 { grid-column: 2; grid-row: 1; font-size: 13px; margin: 0; }
+.plant-details-page .tool-tile p { grid-column: 2; grid-row: 2; font-size: 11px; margin: 0; line-height: 1.4; }
+.plant-details-page .farming-tools { padding: 16px; }
+.plant-details-page .calculator-title.MuiTypography-root { font-size: 18px; margin-bottom: 12px; }
+.plant-details-page .calculator-question.MuiTypography-root { font-size: 14px; margin-bottom: 12px; }

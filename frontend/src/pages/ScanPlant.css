@@ -174,3 +174,41 @@
 @media (max-width: 1050px) { .scan-page { overflow-y: auto; } .scan-columns { grid-template-columns: 1fr; } .scan-left-column { justify-content: flex-start; } }
 @media (max-width: 650px) { .scan-analysis-state { grid-template-columns: 1fr; gap: 20px; text-align: center; } .scan-analysis-details { align-items: center; } .scan-analysis-details h2 { font-size: 21px; } .scan-rising-copy { align-items: flex-start; text-align: left; } }
 @media (max-width: 550px) { .scan-workspace .scan-result-body { grid-template-columns: 1fr; } .scan-ai-report { padding: 14px; gap: 14px; } .scan-tabs { gap: 16px; } }
+.scan-capture-page { background: #fff; border-radius: 22px; padding: 22px 28px 32px; flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; color: #172846; }
+.scan-capture-page::-webkit-scrollbar { display: none; }.scan-capture-page * { box-sizing: border-box; }.scan-capture-header { display: flex; justify-content: space-between; align-items: center; }.scan-capture-page .MuiButton-root { text-transform: none; color: #355b7a; border-radius: 10px; }.scan-capture-title { max-width: 660px; margin: 18px auto; }.scan-capture-title h1 { font-size: 24px; font-weight: 700; }.scan-capture-title p { font-size: 13px; color: #648097; line-height: 1.6; margin-top: 6px; }
+.scan-capture-card { max-width: 660px; margin: 0 auto; padding: 18px; background: #f7fbfe; border: 1px solid #c4dfe9; border-radius: 18px; display: grid; gap: 16px; }.scan-selected-photos { display: grid; gap: 10px; }.scan-selected-photos.multiple { grid-template-columns: repeat(3,minmax(0,1fr)); }.scan-photo-preview { position: relative; height: 300px; overflow: hidden; border-radius: 13px; background: #e8f0f6; }.scan-photo-preview img { width: 100%; height: 100%; object-fit: contain; }.scan-selected-photos.multiple .scan-photo-preview { height: 240px; }.scan-photo-preview .MuiIconButton-root { position: absolute; top: 8px; right: 8px; color: #355b7a; background: #ffffffed; border: 1px solid #c4dfe9; padding: 5px; }.scan-photo-placeholder { height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 1px dashed #bad3e5; border-radius: 13px; background: #edf5fb; text-align: center; padding: 20px; }.scan-photo-placeholder > svg { font-size: 46px; color: #7298b9; }.scan-photo-placeholder p { font-size: 14px; color: #355b7a; }.scan-photo-placeholder p:last-child { font-size: 12px; color: #648097; }
+.scan-capture-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }.scan-capture-options .MuiButton-root { display: flex; flex-direction: column; gap: 8px; min-height: 82px; background: #edf4fa; border: 1px solid #c4dfe9; font-size: 12px; }.scan-capture-options .MuiButton-root:hover { background: #e1edf7; }.scan-capture-options svg { font-size: 25px; color: #527ea5; }.scan-photo-count.MuiChip-root { justify-self: center; color: #355b7a; background: #e0edf7; font-size: 11px; }.scan-photo-count .MuiChip-icon { color: #527ea5; }.scan-capture-card .scan-diagnose-button.MuiButton-root { padding: 12px; background: linear-gradient(110deg,#d7f0f2,#d9eafa); border: 1px solid #bdd9e7; color: #172846; box-shadow: none; font-weight: 650; }.scan-capture-card .scan-diagnose-button.Mui-disabled { opacity: .5; }.scan-capture-caption.MuiTypography-root { font-size: 11px; text-align: center; color: #648097; }.scan-camera-preview { width: 100%; border-radius: 12px; }.scan-capture-progress { display: grid; gap: 12px; }.scan-capture-progress > p { font-size: 13px; color: #355b7a; }.scan-capture-progress .MuiLinearProgress-root { height: 6px; border-radius: 6px; background: #dae7f1; }.scan-capture-progress .MuiLinearProgress-bar { background: #527ea5; }.scan-capture-progress > div:last-child { display: grid; gap: 5px; }.scan-capture-progress > div:last-child p { font-size: 11px; color: #8a9ba8; }.scan-capture-progress .active { color: #355b7a !important; }
+.scan-capture-beam { position: absolute; left: 0; right: 0; height: 3px; background: #7aa5c4; box-shadow: 0 0 24px 8px #7aa5c450; animation: capture-scan 2.5s ease-in-out infinite alternate; }@keyframes capture-scan { from { top: 5%; } to { top: 95%; } }
+@media(max-width:600px) { .scan-capture-page { padding: 16px; }.scan-capture-card { padding: 12px; }.scan-selected-photos.multiple .scan-photo-preview { height: 150px; }.scan-capture-title h1 { font-size: 21px; } }@media(prefers-reduced-motion:reduce) { .scan-capture-beam { animation: none; top: 50%; } }
+
+.scan-dashboard .scan-capture-page { display: flex; flex-direction: column; padding: 18px 24px 24px; }
+.scan-dashboard .scan-capture-title { display: none; }
+.scan-dashboard .scan-capture-card { width: 100%; max-width: none; margin: 12px 0 0; flex: 1; min-height: 480px; grid-template-columns: minmax(0,1.5fr) minmax(300px,1fr); grid-template-rows: auto minmax(180px,1fr) auto auto auto auto; gap: 16px 24px; align-content: start; padding: 0; border: none; border-radius: 0; background: transparent; }
+.scan-dashboard .scan-selected-photos { grid-column: 1; grid-row: 1 / 6; min-height: 380px; height: 100%; }
+.scan-dashboard .scan-photo-placeholder { height: 100%; min-height: 380px; border: none; }
+.scan-dashboard .scan-photo-preview { height: 100%; min-height: 380px; }
+.scan-dashboard .scan-selected-photos.multiple { grid-template-columns: 1fr 1fr; grid-auto-rows: minmax(180px,1fr); }
+.scan-dashboard .scan-selected-photos.multiple .scan-photo-preview { min-height: 180px; height: 100%; }
+.scan-dashboard .scan-selected-photos.multiple .scan-photo-preview:first-child { grid-column: 1 / -1; }
+.scan-dashboard .scan-capture-card > :not(.scan-selected-photos) { grid-column: 2; }
+.scan-dashboard .scan-capture-options .MuiButton-root { min-height: 94px; }
+.scan-dashboard .scan-photo-count { justify-self: start; }
+.scan-dashboard .scan-capture-options { grid-row: 1; }
+.scan-dashboard .scan-care-notes { grid-row: 2; height: 100%; }
+.scan-dashboard .scan-care-notes .MuiInputBase-root { height: 100%; align-items: flex-start; }
+.scan-dashboard .scan-care-notes textarea { height: 100% !important; overflow-y: auto !important; }
+.scan-dashboard .scan-photo-count { grid-row: 3; }
+.scan-dashboard .scan-capture-progress { grid-row: 4; }
+.scan-dashboard .scan-capture-card .scan-diagnose-button { grid-row: 5; align-self: end; }
+.scan-dashboard .scan-capture-caption { grid-row: 6; }
+.scan-dashboard .scan-capture-caption { text-align: left; }
+@media(max-width:900px) {
+  .scan-dashboard .scan-capture-card { display: flex; flex-direction: column; padding: 14px; }
+  .scan-dashboard .scan-selected-photos { width: 100%; min-height: 240px; height: 280px; }
+  .scan-dashboard .scan-photo-placeholder,.scan-dashboard .scan-photo-preview { min-height: 240px; }
+  .scan-dashboard .scan-selected-photos.multiple { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .scan-dashboard .scan-selected-photos.multiple .scan-photo-preview:first-child { grid-column: auto; }
+  .scan-dashboard .scan-capture-options { width: 100%; }
+  .scan-dashboard .scan-capture-page { padding: 16px; }
+}
+

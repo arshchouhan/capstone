@@ -1,6 +1,7 @@
 .mui-dashboard .dashboard-main { min-width: 0; min-height: 0; overflow: hidden; padding: 14px 4px 18px 0; }
 .mui-dashboard .far-right-toolbar { width: 36px; }
-.mui-dashboard-page { flex: 1; min-height: 0; overflow: hidden; padding: 18px; border-radius: 22px; background: #fff; color: #172846; display: flex; flex-direction: column; }
+.mui-dashboard-page { flex: 1; min-height: 0; min-width: 0; overflow-y: auto; overflow-x: hidden; box-sizing: border-box; padding: 18px; border-radius: 22px; background: #fff; color: #172846; display: flex; flex-direction: column; scrollbar-width: thin; }
+.mui-dashboard-page > * { flex-shrink: 0; }
 .dr-dashboard-page { padding: 0; }
 .mui-dashboard-header { margin-bottom: 12px; }
 .mui-dashboard-header h4 { letter-spacing: -.55px; font-size: clamp(21px, 1.8vw, 27px); }
@@ -12,14 +13,18 @@
 .mui-summary-item { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; padding: 10px 14px; }
 .mui-summary-icon { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #def5eb; color: #00866d; font-size: 16px; }
 .mui-summary-icon.alert { background: #ffe3e4; color: #ef4250; }
-.mui-summary-item .MuiTypography-root:first-child { font-size: 24px !important; }
-.mui-summary-item .MuiTypography-root:last-child { font-size: 12px !important; }
+.mui-summary-copy { display:flex; flex-direction:column; gap:2px; }
+.mui-summary-copy strong { font-size:24px; font-weight:800; line-height:1.15; }
+.mui-summary-copy span { font-size:12px; color:#64849e; }
 .mui-overview-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(260px, 1fr); gap: 12px; }
 .mui-panel .MuiCardContent-root { padding: 12px; }
 .mui-panel-title { display: flex; align-items: center; gap: 8px; font-weight: 800 !important; font-size: 15px !important; }
 .mui-panel-title svg { color: #00866d; font-size: 16px; }
 .mui-attention-content { padding: 4px 0 0; }
-.mui-diagnosis-image { width: 94px !important; height: 94px !important; }
+.mui-diagnosis-image { width: 64px !important; height: 64px !important; flex-shrink:0; }
+.mui-attention-content { align-items:center; }
+.mui-task-more { font-size:11px !important; color:#64849e; margin-top:8px !important; }
+.mui-dashboard-header h4 { font-weight:800; }
 .mui-attention-content .MuiTypography-root { font-size: 13px; }
 .mui-attention-content .MuiChip-label { font-size: 11px; }
 .mui-attention-content .MuiChip-root { font-weight: 700; }
@@ -29,7 +34,7 @@
 .mui-task-row .MuiTypography-caption { font-size: 11px; }
 .mui-task-row .MuiCheckbox-root { color: #90a2ad; }
 .mui-plants-panel { margin-top: 12px; }
-.mui-plant-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.mui-plant-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; }
 .mui-plant-card { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border: 0; border-radius: 8px; color: #172846 !important; text-decoration: none; transition: background .15s ease; }
 .mui-plant-card:hover { background: #f4fbf7; }
 .mui-plant-card + .mui-plant-card { border-left: 1px solid #e9eef0; }
@@ -59,4 +64,14 @@
 @media (max-height: 720px) and (min-width: 1001px) { .mui-dashboard-page { padding: 14px; } .mui-dashboard-header { margin-bottom: 8px; } .mui-dashboard-header h4 { font-size: 23px; } .mui-summary-card { margin-bottom: 8px; } .mui-summary-item { padding: 7px 12px; } .mui-summary-icon { width: 30px; height: 30px; font-size: 13px; } .mui-overview-grid { gap: 8px; } .mui-panel .MuiCardContent-root { padding: 9px; } .mui-panel-title { font-size: 13px !important; } .mui-attention-content { padding: 6px; } .mui-diagnosis-image { width: 76px !important; height: 76px !important; } .mui-task-row { padding: 5px 0; } .mui-task-date { width: 34px; height: 34px; font-size: 8px; } .mui-plants-panel, .mui-explore-panel { margin-top: 8px; } .mui-plant-grid { gap: 7px; } .mui-plant-card { padding: 6px; } .mui-plant-card .MuiAvatar-root { width: 45px; height: 40px; } .mui-explore-item { padding: 2px 10px; } }
 @media (max-width: 1000px) { .mui-dashboard-page { overflow-y: auto; } .mui-overview-grid { grid-template-columns: 1fr; } .mui-summary-card .MuiStack-root { flex-wrap: wrap; } .mui-summary-card .MuiDivider-root { display: none; } .mui-summary-item { min-width: 30%; } }
 @media (max-width: 700px) { .mui-dashboard .dashboard-main { padding: 12px; } .mui-dashboard-page { padding: 20px 14px; } .mui-summary-item { min-width: 100%; padding: 13px 16px; } .mui-plant-grid, .mui-explore-grid { grid-template-columns: 1fr; } .mui-explore-item + .mui-explore-item { border-left: 0; border-top: 1px solid #e7edef; padding-top: 14px; margin-top: 14px; } }
-@media (max-width: 460px) { .mui-attention-content { padding: 10px; } .mui-diagnosis-image { width: 100% !important; height: 155px !important; } }
+@media (max-width: 460px) { .mui-attention-content { padding: 4px 0; } .mui-diagnosis-image { width: 48px !important; height: 48px !important; } .mui-panel-title { font-size:13px !important; } }
+
+.mui-dashboard .mui-summary-card { background: #f8fbfd; border-color: #c4dfe9; }
+.mui-dashboard .mui-panel { border-color: #d7e5ea; }
+.mui-dashboard .mui-summary-icon:not(.alert) { background: #d9efe6; color: #176d50; border: 1px solid #b1d9c7; box-sizing: border-box; }
+.mui-dashboard .mui-summary-item:last-child .mui-summary-icon { background: #dceafa; color: #315f89; border-color: #b8cfe7; }
+.mui-dashboard .mui-summary-icon.alert { background: #ffe2e7; color: #c62945; border: 1px solid #f4bbc7; box-sizing: border-box; }
+.mui-dashboard .mui-task-date { background: linear-gradient(110deg, #d7f6ef 0%, #d9eafa 100%); color: #172846; }
+.mui-dashboard .mui-plant-card:hover { background: linear-gradient(110deg, #edf9f5 0%, #edf4fc 100%); }
+.mui-dashboard .mui-health-progress:not(.alert) { background: #e0eef1 !important; }
+.mui-dashboard .mui-health-progress:not(.alert) .MuiLinearProgress-bar { background: linear-gradient(90deg, #48b8a3 0%, #79aed3 100%); }

@@ -1,0 +1,3 @@
+const { Schema, model } = require('mongoose');
+const { text, options } = require('./schemaHelpers');
+module.exports = model('Expert', new Schema({ user:{type:Schema.Types.ObjectId,ref:'User'}, name:text(120,true), specialty:text(120,true), description:text(2500), avatarUrl:text(500), qualifications:text(500), location:text(200), languages:[String], experienceYears:{type:Number,min:0,max:80}, verified:{type:Boolean,default:false}, consultationMinutes:{type:Number,min:15,max:180,default:30}, consultationFee:{type:Number,min:0,default:0}, availableSlots:[Date], rating:{type:Number,min:0,max:5,default:0}, reviews:{type:Number,min:0,default:0}, day:{type:Number,min:0,max:30,default:0}, active:{type:Boolean,default:true} }, options));

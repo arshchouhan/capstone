@@ -1,0 +1,12 @@
+.phone-camera-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;align-items:center;color:#172846}
+.phone-camera-pairing{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:8px 0}
+.phone-camera-qr{width:240px;height:240px;max-width:100%;border:1px solid #d1e3ef;border-radius:14px;background:#fff}
+.phone-camera-pairing h3{font-size:18px;font-weight:700;margin:0}
+.phone-camera-pairing p{font-size:13px;line-height:1.6;color:#64849e}
+.phone-camera-preview{min-height:330px;border-radius:16px;background:#edf5fa;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.phone-camera-preview>img{width:100%;max-height:420px;object-fit:contain;display:block}
+.phone-camera-preview>div{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;color:#6d91ad;padding:24px}
+.phone-camera-preview svg{font-size:42px}
+.phone-camera-preview p{font-size:14px}
+@media(max-width:650px){.phone-camera-layout{grid-template-columns:1fr;gap:16px}.phone-camera-preview{min-height:220px}.phone-camera-qr{width:220px;height:220px}}
+.phone-camera-preview>video{width:100%;max-height:420px;object-fit:contain;display:block}

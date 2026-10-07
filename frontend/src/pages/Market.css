@@ -1,4 +1,24 @@
-.market-dashboard { --market-ink: #182443; --market-muted: #6a7e96; --market-green: #008b73; }
+.market-dashboard { --market-ink: #172846; --market-muted: #648097; --market-green: #355b7a; }
+.market-dashboard .market-heading-row h1 { font-size:26px; letter-spacing:-.5px; }
+.market-dashboard .market-content { scrollbar-width:none; }
+.market-dashboard .market-content::-webkit-scrollbar { display:none; }
+.market-dashboard .market-cart-button { border-color:#bddde3; color:#172846; background:linear-gradient(110deg,#d7f6ef,#d9eafa); border-radius:10px; font-size:12px; }
+.market-dashboard .market-categories button { background:#edf5fa; color:#355b7a; border:1px solid #d7e5ea; }
+.market-dashboard .market-categories button.selected { background:linear-gradient(110deg,#d7f6ef,#d9eafa); color:#172846; border-color:#bddde3; }
+.market-dashboard .market-categories button:hover { background:#dfeef8; }
+.market-dashboard .market-product-card { border-color:#d7e5ea; border-radius:14px; padding:10px; transition:box-shadow .18s ease,border-color .18s ease; }
+.market-dashboard .market-product-card:hover { box-shadow:0 6px 20px #355b7a12; border-color:#9bbfd7; }
+.market-dashboard .market-product-image { background:#edf5fa; color:#7298b9; border-radius:10px; overflow:hidden; }
+.market-dashboard .market-product-image.mint { background:#edf5fa; }
+.market-dashboard .market-product-image img { width:100%; height:100%; object-fit:contain; }
+.market-dashboard .market-product-bottom button { background:linear-gradient(110deg,#d7f6ef,#d9eafa); color:#172846; border:1px solid #bddde3; }
+.market-dashboard .market-product-bottom button:hover,.market-dashboard .market-cart-button:hover { background:linear-gradient(110deg,#c8eee5,#cbdef4); }
+.market-dashboard .market-search,.market-dashboard .market-product-controls select { border-color:#c4dfe9; border-radius:10px; }
+.market-dashboard .market-search input:focus,.market-dashboard .market-search input:focus-visible { outline:none; box-shadow:none; border:0; }
+.market-dashboard .market-search:focus-within { border-color:#527ea5; }
+.market-dashboard .market-cart-dialog { border-color:#c4dfe9; color:#172846; }
+.market-dashboard .market-cart-dialog button { background:#e0edf7; color:#355b7a; }
+.market-dashboard .market-cart-dialog::backdrop { background:#17284659; }
 .market-dashboard .dashboard-main { min-width: 0; min-height: 0; }
 .market-content * { box-sizing: border-box; }
 .market-content button, .market-content input, .market-content select { font: inherit; }

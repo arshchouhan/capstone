@@ -23,6 +23,8 @@ const userSchema = new mongoose.Schema(
       enum: ['user', 'admin'],
       default: 'user',
     },
+    accountType: { type: String, enum: ['grower','doctor'], default: 'grower' },
+    demoAccount: { type: Boolean, default: false },
   },
   {
     timestamps: true,

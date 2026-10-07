@@ -1,4 +1,49 @@
 .community-dashboard .dashboard-main { min-width: 0; min-height: 0; }
+.community-dashboard .community-page .community-comment-actions button,
+.community-dashboard .community-page .community-delete-confirm button { font-size: 11px; line-height: 1.4; font-weight: 400; }
+.community-dashboard .community-comment-actions svg { width: 12px; height: 12px; font-size: 12px; }
+.community-comment-actions,.community-delete-confirm { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:10px; }
+.community-comment-actions button,.community-delete-confirm button { display:inline-flex; align-items:center; gap:5px; border:0; background:transparent; color:#355b7a; padding:3px 0; font-size:11px; }
+.community-comment-actions button:hover { text-decoration:underline; }
+.community-delete-confirm { padding:10px; border-radius:8px; background:#fff1f2; font-size:12px; }
+.community-delete-confirm button:first-of-type { color:#b33c48; font-weight:600; }
+.community-reply-heading,.community-reply-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.community-reply-heading { margin-bottom:14px; font-size:12px; color:#355b7a; }
+.community-reply-heading .community-text-button { margin:0; }
+.community-reply { display:flex; gap:10px; padding:12px 0; border-bottom:1px solid #e7eef4; }
+.community-reply>div { flex:1; min-width:0; }
+.community-reply header { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:5px; font-size:12px; }
+.community-reply time { color:#71819c; font-size:10px; }
+.community-reply p { white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.6; }
+.community-reply-footer { color:#71819c; font-size:11px; }
+.community-page .community-primary:disabled { opacity:.5; cursor:default; }
+.community-dashboard .community-reply-error { color:#b33c48; }
+.community-dashboard .community-replies textarea { min-height:86px; background:#f7fbfe; border-color:#c4dfe9; }
+.community-dashboard .community-page :is(button,input,textarea,select):focus-visible { outline-color: #527ea5; }
+.community-dashboard .community-title-icon { background: linear-gradient(135deg,#d7f0f2,#d9eafa); border: 1px solid #b9d7e4; color: #355b7a; }
+.community-dashboard .community-page .community-primary { background: linear-gradient(110deg,#d7f6ef,#d9eafa); color: #172846; border: 1px solid #bddde3; border-radius: 10px; }
+.community-dashboard .community-page .community-primary:hover { background: linear-gradient(110deg,#c8eee5,#cbdef4); }
+.community-dashboard .community-tabs button.active { color: #355b7a; }
+.community-dashboard .community-tabs button.active::after { background: #527ea5; }
+.community-dashboard .community-avatar { background: #e0edf7; color: #355b7a; }
+.community-dashboard .community-tag { background: #e7f0f8; color: #355b7a; }
+.community-dashboard .community-actions button:hover,
+.community-dashboard .community-actions button[aria-pressed=true],
+.community-dashboard .community-card h2 svg,
+.community-dashboard .community-card-heading button,
+.community-dashboard .community-text-button,
+.community-dashboard .community-empty > svg { color: #355b7a; }
+.community-dashboard .community-topics button,
+.community-dashboard .community-clear { background: #eaf3fa; color: #355b7a; }
+.community-dashboard .community-topics button:hover { background: #dfeef8; }
+.community-dashboard .community-topics button[aria-pressed=true] { border-color: #527ea5; background: #d9eafa; }
+.community-dashboard .community-replies > div { background: #f2f7fb; }
+.community-dashboard .community-search:focus-within { border-color: #7298b9; }
+.community-dashboard .community-search input,
+.community-dashboard .community-search input:focus,
+.community-dashboard .community-search input:focus-visible { border: 0; outline: none; box-shadow: none; border-radius: 0; padding: 0; background: transparent; }
+.community-dashboard .community-search:focus-within { border-color: #527ea5; outline: none; box-shadow: none; }
+.community-dashboard :is(.community-post,.community-info,.community-tabs,.community-card,.community-search) { border-color: #d7e5ea; }
 .community-question-page { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; background: #fff; border-radius: 24px; padding: 18px; color: #172846; }
 .community-question-header { width: 100%; flex-shrink: 0; margin-bottom: 14px; }
 .community-question-form { display: flex; flex: 1; min-height: 0; width: 100%; overflow: hidden; }

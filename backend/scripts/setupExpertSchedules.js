@@ -1,0 +1,3 @@
+require('dotenv').config();
+const mongoose=require('mongoose'),connect=require('../config/db'),Expert=require('../models/Expert');
+(async()=>{await connect();const slots=[];const now=new Date();for(let day=1;day<=5;day++)for(const hour of [10,15,17]){const date=new Date(now);date.setDate(date.getDate()+day);date.setHours(hour,0,0,0);slots.push(date)}const result=await Expert.updateMany({name:{$in:['Demo garden specialist','Demo indoor specialist']}},{$set:{availableSlots:slots,consultationMinutes:30,consultationFee:0,languages:['English','Hindi']}});console.log(`Updated ${result.modifiedCount} demo expert schedules.`);await mongoose.disconnect()})().catch(async error=>{console.error(error.message);await mongoose.disconnect();process.exitCode=1});

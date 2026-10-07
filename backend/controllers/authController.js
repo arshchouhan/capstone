@@ -9,13 +9,14 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-producti
 // Signup with full auth flow
 exports.signup = async (req, res) => {
   try {
-    console.log('Signup request received:', req.body);
     
-    const { firstName, lastName, email, confirmEmail, password, confirmPassword, farmName, newsletter } = req.body;
+    const normalize = value => typeof value === 'string' ? value.trim() : '';
+    const firstName = normalize(req.body.firstName), lastName = normalize(req.body.lastName);
+    const email = normalize(req.body.email).toLowerCase(), confirmEmail = normalize(req.body.confirmEmail).toLowerCase();
+    const { password, confirmPassword, farmName, newsletter } = req.body;
 
     // Validation
     if (!firstName || !lastName || !email || !password) {
-      console.log('Missing required fields:', { firstName, lastName, email, password });
       return res.status(400).json({ success: false, message: 'Missing required fields' });
     }
 
@@ -33,7 +34,7 @@ exports.signup = async (req, res) => {
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       console.log('User already exists:', email);
-      return res.status(400).json({ success: false, message: 'Email already registered' });
+      return res.status(409).json({ success: false, message: 'This email is already registered. Sign in to continue.' });
     }
 
     // Hash password
@@ -93,6 +94,7 @@ exports.signup = async (req, res) => {
         userId: user._id,
         email: user.email,
         fullName: user.fullName,
+        accountType: user.accountType,
       },
       token,
     });
@@ -105,13 +107,11 @@ exports.signup = async (req, res) => {
 // Signin with authentication
 exports.signin = async (req, res) => {
   try {
-    console.log('Signin request received:', req.body);
     
     const { email, password } = req.body;
 
     // Validation
     if (!email || !password) {
-      console.log('Missing email or password');
       return res.status(400).json({ success: false, message: 'Email and password are required' });
     }
 
@@ -158,6 +158,7 @@ exports.signin = async (req, res) => {
         userId: user._id,
         email: user.email,
         fullName: user.fullName,
+        accountType: user.accountType,
       },
       token,
     });
@@ -192,4 +193,19 @@ exports.createSignInInfo = async (req, res) => {
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
+};
+exports.doctorSignup=async(req,res)=>{
+ const Expert=require('../models/Expert');
+ const name=String(req.body.fullName||'').trim(),email=String(req.body.email||'').trim().toLowerCase(),specialty=String(req.body.specialty||'').trim();
+ if(!name||!specialty||!/^\S+@\S+\.\S+$/.test(email)||typeof req.body.password!=='string'||req.body.password.length<8)return res.status(400).json({success:false,message:'Enter your name, specialty, valid email and a password of at least 8 characters.'});
+ if(req.body.password!==req.body.confirmPassword)return res.status(400).json({success:false,message:'Passwords do not match.'});
+ const profile=new Expert({name,specialty,qualifications:req.body.qualifications,location:req.body.location,languages:req.body.languages,experienceYears:req.body.experienceYears,verified:false,active:true});
+ try{
+ await profile.validate();if(await User.findOne({email}))return res.status(409).json({success:false,message:'This email is already registered. Sign in to continue.'});
+ const user=await User.create({fullName:name,email,password:await bcrypt.hash(req.body.password,10),accountType:'doctor'});
+ try{profile.user=user._id;await profile.save()}catch(error){await User.deleteOne({_id:user._id});throw error}
+ const token=jwt.sign({userId:user._id,email:user.email},JWT_SECRET,{expiresIn:'7d'});
+ res.cookie('authToken',token,{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'lax',maxAge:7*86400000});if(req.session)req.session.userId=user._id;
+ res.status(201).json({success:true,token,data:{userId:user._id,email:user.email,fullName:user.fullName,accountType:user.accountType}});
+ }catch(error){res.status(error.code===11000?409:error.name==='ValidationError'?400:500).json({success:false,message:error.code===11000?'This email is already registered. Sign in to continue.':error.name==='ValidationError'?error.message:'Could not create your doctor account. Please retry.'})}
 };

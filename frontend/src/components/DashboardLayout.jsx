@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import DashboardPageSkeleton from './DashboardPageSkeleton'
 import { useAuth } from '../context/AuthContext'
+import useApiData from '../hooks/useApiData'
+import { api } from '../services/api'
+import EmptyState from './EmptyState'
 import {
   FaLeaf,
   FaUsers,
@@ -11,14 +15,13 @@ import {
   FaChevronDown,
   FaSeedling,
   FaRegCalendarAlt,
-  FaThLarge,
   FaSignOutAlt,
   FaCheckCircle,
   FaChartBar,
-  FaTimes
+  FaTimes,
+  FaRobot
 } from 'react-icons/fa'
 
-import sidebarPlantImg from '../assets/sidebar_plant_decor.jpg'
 
 const PanelSkeleton = () => <div className="right-panel-skeleton" aria-label="Loading panel content"><span className="skeleton-line short" /><span className="skeleton-line" /><span className="skeleton-card" /><span className="skeleton-line" /><span className="skeleton-card" /></div>
 
@@ -27,9 +30,19 @@ const DashboardLayout = ({ children, className = '', dashboardPath }) => {
   const navigate = useNavigate()
   const location = useLocation()
   
+  const [pageLoading, setPageLoading] = useState(true)
+  useEffect(() => {
+    setPageLoading(true)
+    const transitionTimer = setTimeout(() => setPageLoading(false), 550)
+    return () => clearTimeout(transitionTimer)
+  }, [location.pathname])
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [rightPanel, setRightPanel] = useState(null)
+  const {data: overview} = useApiData('/dashboard', {plants:[],tasks:[],recentScans:[]})
+  const {data: notifications,reload:reloadNotifications} = useApiData('/notifications')
+  const completedTasks = overview.tasks.filter(task=>task.lastCompleted)
+  const markRead = async notification => {try {await api(`/notifications/${notification.id}/read`,{method:'PUT'});await reloadNotifications()}catch{/* Retry on next open. */}}
   const [rightPanelLoading, setRightPanelLoading] = useState(false)
   const panelTimer = useRef(null)
 
@@ -60,6 +73,7 @@ const DashboardLayout = ({ children, className = '', dashboardPath }) => {
   const userInitial = userName.charAt(0).toUpperCase()
   const basePath = dashboardPath || (location.pathname.startsWith('/dr/dashboard') ? '/dr/dashboard' : '/farm/dashboard')
 
+  const isDoctorPortal = basePath === '/dr/dashboard'
   const isActive = (path) => location.pathname === path
 
   return (
@@ -67,12 +81,12 @@ const DashboardLayout = ({ children, className = '', dashboardPath }) => {
       {/* Top Navigation Bar */}
       <header className="dashboard-topbar">
         <div className="topbar-left">
-          <div className="brand-logo" onClick={() => navigate(basePath)}>
+          <button type="button" className="brand-logo" aria-label="Open dashboard" onClick={() => navigate(basePath)}>
             <span className="brand-leaf-icon">
               <FaLeaf />
             </span>
             <span className="brand-title">Plantaexa</span>
-          </div>
+          </button>
         </div>
 
         <div className="topbar-right">
@@ -89,9 +103,38 @@ const DashboardLayout = ({ children, className = '', dashboardPath }) => {
 
           <button className="icon-badge-btn" aria-label="Notifications">
             <FaBell />
-            <span className="notification-dot" />
+            {notifications.some(notification=>!notification.readAt) && <span className="notification-dot" />}
           </button>
+          <button type="button" className="topbar-ai-button" onClick={()=>openRightPanel('ai')}><FaRobot /><span>Your AI</span></button>
 
+        </div>
+      </header>
+
+      <div className="dashboard-body">
+        {/* Left Sidebar */}
+        <aside id="dashboard-sidebar" className="dashboard-sidebar">
+          {!isDoctorPortal && <button type="button" className={`sidebar-scan-action ${isActive(`${basePath}/scan`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/scan`)}><FaCamera /><span>Scan Plant</span></button>}
+          <nav className="sidebar-nav">{isDoctorPortal ? <><button type="button" className={`nav-item ${isActive(`${basePath}/connections`) ? 'active' : ''}`} onClick={()=>navigate(`${basePath}/connections`)}><FaUsers className="nav-icon"/><span>My Connections</span></button><button type="button" className={`nav-item ${location.pathname.startsWith(`${basePath}/community`) ? 'active' : ''}`} onClick={()=>navigate(`${basePath}/community`)}><FaUsers className="nav-icon"/><span>Community</span></button></> : <>
+            <div className={`nav-item ${isActive(`${basePath}/crops`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/crops`)}>
+              <FaSeedling className="nav-icon" />
+              <span>My Plants</span>
+            </div>
+
+
+
+            <div className={`nav-item ${isActive(`${basePath}/schedule`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/schedule`)}>
+              <FaRegCalendarAlt className="nav-icon" />
+              <span>Experts</span>
+            </div>
+            <div className={`nav-item ${isActive(`${basePath}/community`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/community`)}>
+              <FaUsers className="nav-icon" />
+              <span>Community</span>
+            </div>
+            <div className={`nav-item ${isActive(`${basePath}/market`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/market`)}>
+              <FaStore className="nav-icon" />
+              <span>Market</span>
+            </div>
+          </>}</nav>
           <div className="user-profile-menu">
             <button
               className="user-profile-btn"
@@ -122,67 +165,19 @@ const DashboardLayout = ({ children, className = '', dashboardPath }) => {
               </div>
             )}
           </div>
-        </div>
-      </header>
-
-      <div className="dashboard-body">
-        {/* Left Sidebar */}
-        <aside className="dashboard-sidebar">
-          <nav className="sidebar-nav">
-            <div className={`nav-item ${isActive(basePath) ? 'active' : ''}`} onClick={() => navigate(basePath)}>
-              <FaThLarge className="nav-icon" />
-              <span>Dashboard</span>
-            </div>
-            <div className={`nav-item ${isActive(`${basePath}/scan`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/scan`)}>
-              <FaCamera className="nav-icon" />
-              <span>Scan Plant</span>
-            </div>
-            <div className={`nav-item ${isActive(`${basePath}/crops`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/crops`)}>
-              <FaSeedling className="nav-icon" />
-              <span>My Plants</span>
-            </div>
-            <div className={`nav-item ${isActive(`${basePath}/schedule`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/schedule`)}>
-              <FaRegCalendarAlt className="nav-icon" />
-              <span>Care Schedule</span>
-            </div>
-            <div className={`nav-item ${isActive(`${basePath}/community`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/community`)}>
-              <FaUsers className="nav-icon" />
-              <span>Community</span>
-            </div>
-            <div className={`nav-item ${isActive(`${basePath}/market`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/market`)}>
-              <FaStore className="nav-icon" />
-              <span>Market</span>
-            </div>
-          </nav>
-
-          {/* Sidebar Promo Card */}
-          <div className="sidebar-promo-card">
-            <div className="promo-badge-icon">
-              <FaLeaf />
-            </div>
-            <h3>Healthy Plants<br />Brighter Tomorrows</h3>
-            <p>Detect. Treat. Prevent. Grow with AI.</p>
-            <div className="promo-leaf-art">
-              <img src={sidebarPlantImg} alt="Botanical leaf foliage" />
-            </div>
-          </div>
-
-          <button className="logout-btn" onClick={handleLogout}>
-            <FaSignOutAlt className="logout-icon" />
-            <span>Logout</span>
-          </button>
         </aside>
 
         {/* Main Scrollable Content */}
         <section className="dashboard-main">
-          {children}
+          {pageLoading ? <DashboardPageSkeleton path={location.pathname} /> : children}
         </section>
 
-        {rightPanel && <aside className="right-slide-panel" aria-label="Dashboard side panel">
+        {rightPanel === 'ai' && <aside className="right-slide-panel" aria-label="Your AI"><header className="right-slide-panel-header"><h2>Your AI</h2><button aria-label="Close AI panel" onClick={closeRightPanel}><FaTimes /></button></header><div className="right-slide-panel-content"><p>{isDoctorPortal?'Review the plant concerns shared by your growers.':'Choose a plant to review its latest analysis and care recommendations.'}</p><button type="button" className="panel-primary-action" onClick={()=>{closeRightPanel();navigate(isDoctorPortal?'/dr/dashboard/connections':'/farm/dashboard/crops')}}>{isDoctorPortal?'View your connections':'View my plants'}</button></div></aside>}
+        {rightPanel && rightPanel !== 'ai' && <aside className="right-slide-panel" aria-label="Dashboard side panel">
           <header className="right-slide-panel-header"><div><span>{rightPanel === 'schedule' ? 'CARE' : rightPanel === 'completed' ? 'TASKS' : rightPanel === 'analytics' ? 'INSIGHTS' : 'PROFILE'}</span><h2>{rightPanel === 'schedule' ? 'Upcoming care' : rightPanel === 'completed' ? 'Completed tasks' : rightPanel === 'analytics' ? 'Garden insights' : userName}</h2></div><button aria-label="Close side panel" onClick={closeRightPanel}><FaTimes /></button></header>
-          {rightPanelLoading ? <PanelSkeleton /> : <>{rightPanel === 'schedule' && <div className="right-slide-panel-content"><button className="panel-primary-action" onClick={() => navigate(`${basePath}/schedule`)}><FaRegCalendarAlt /> Open care schedule</button><article className="panel-task"><span>Today</span><div><strong>Apply fungicide</strong><p>Tomato plant</p></div></article><article className="panel-task"><span>In 7 days</span><div><strong>Re-scan plant</strong><p>Check for improvement</p></div></article></div>}
-          {rightPanel === 'completed' && <div className="right-slide-panel-content"><article className="panel-task"><FaCheckCircle /><div><strong>Watered basil</strong><p>Completed yesterday</p></div></article><article className="panel-task"><FaCheckCircle /><div><strong>Checked chili plant</strong><p>Completed 3 days ago</p></div></article><p className="panel-empty-copy">Complete a care task to see it here.</p></div>}
-          {rightPanel === 'analytics' && <div className="right-slide-panel-content"><div className="panel-stat"><span>Plant health score</span><strong>78%</strong><div><i style={{ width: '78%' }} /></div></div><div className="panel-stat"><span>Care tasks completed</span><strong>2 / 4</strong><div><i style={{ width: '50%' }} /></div></div><p className="panel-empty-copy">Your tomato plant needs attention. Open its scan result for treatment guidance.</p></div>}
+          {rightPanelLoading ? <PanelSkeleton /> : <>{rightPanel === 'schedule' && <div className="right-slide-panel-content">{overview.tasks.map(task=><article key={task.id} className="panel-task"><span>{new Date(task.due).toLocaleDateString()}</span><div><strong>{task.type}</strong><p>{task.plant?.name}</p></div></article>)}{!overview.tasks.length && <EmptyState kind="care" title="No tasks scheduled" description="Add care tasks from a plant’s Care tab." />}{notifications.map(notification=><article key={notification.id} className="panel-task" onClick={()=>markRead(notification)}><FaBell /><div><strong>{notification.title}</strong><p>{notification.body}</p>{!notification.readAt && <button onClick={()=>markRead(notification)}>Mark read</button>}</div></article>)}</div>}
+          {rightPanel === 'completed' && <div className="right-slide-panel-content">{completedTasks.map(task=><article key={task.id} className="panel-task"><FaCheckCircle /><div><strong>{task.type} · {task.plant?.name}</strong><p>{new Date(task.lastCompleted).toLocaleDateString()}</p></div></article>)}{!completedTasks.length && <EmptyState kind="care" title="No completed tasks yet" description="Completed care tasks appear here." />}</div>}
+          {rightPanel === 'analytics' && <div className="right-slide-panel-content"><div className="panel-stat"><span>Plants in your garden</span><strong>{overview.plants.length}</strong></div><div className="panel-stat"><span>Plants needing care</span><strong>{overview.plants.filter(plant=>['Needs Care','At Risk'].includes(plant.status)).length}</strong></div><div className="panel-stat"><span>Recently completed scans</span><strong>{overview.recentScans.length}</strong></div><div className="panel-stat"><span>Care tasks completed</span><strong>{completedTasks.length} / {overview.tasks.length}</strong></div></div>}
           {rightPanel === 'profile' && <div className="right-slide-panel-content"><div className="panel-profile-avatar">{userInitial}</div><strong className="panel-profile-name">{userName}</strong><p className="panel-profile-email">{user?.email || 'user@plantaexa.com'}</p><button className="panel-primary-action" onClick={() => { setRightPanel(null); setUserMenuOpen(true) }}>Account options</button></div>}</>}
         </aside>}
 

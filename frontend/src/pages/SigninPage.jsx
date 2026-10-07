@@ -1,11 +1,14 @@
+import { apiBase } from '../services/api'
+import { readAuthResponse } from '../services/authResponse'
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Navbar from '../components/Navbar'
 
-const SigninPage = () => {
+const SigninPage = ({portal}) => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+  const isDoctor = portal === 'doctor' || (!portal && searchParams.get('role') === 'dr')
   const { login } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
@@ -29,7 +32,7 @@ const SigninPage = () => {
     setLoading(true)
 
     try {
-      const response = await fetch('http://localhost:5000/api/signin', {
+      const response = await fetch(`${apiBase}/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,31 +44,20 @@ const SigninPage = () => {
         }),
       })
 
-      // Check response status first
-      if (!response.ok) {
-        const text = await response.text()
-        try {
-          const data = JSON.parse(text)
-          throw new Error(data.message || `Error: ${response.status}`)
-        } catch (parseError) {
-          throw new Error(`Server error: ${response.status}`)
-        }
-      }
-
-      const data = await response.json()
-      console.log('Signin response:', data)
+      const data = await readAuthResponse(response)
 
       if (!data.success) {
         throw new Error(data.message || 'Signin failed')
       }
 
+      if(portal && (data.data?.accountType === 'doctor') !== isDoctor) throw new Error(isDoctor ? 'Use the Grower login for this account.' : 'Use the Doctor login for this account.')
       // Use auth context to login
       if (data.token && data.data) {
         login(data.data, data.token)
       }
 
       // Redirect to dashboard
-      navigate(searchParams.get('role') === 'dr' ? '/dr/dashboard' : '/farm/dashboard')
+      navigate(data.data?.accountType === 'doctor' ? '/dr/dashboard' : '/farm/dashboard')
     } catch (err) {
       console.error('Signin error:', err)
       setError(err.message)
@@ -83,7 +75,7 @@ const SigninPage = () => {
           <div className="signup-form-panel">
             <h1>Sign In</h1>
             <p className="signup-intro">
-              Welcome back. Sign in to access your {searchParams.get('role') === 'dr' ? 'doctor' : 'farm'} dashboard.
+              Welcome back. Sign in to access your {isDoctor ? 'doctor' : 'farm'} dashboard.
             </p>
 
             {error && <div className="error-message" style={{ color: 'red', marginBottom: '16px' }}>{error}</div>}
@@ -131,7 +123,7 @@ const SigninPage = () => {
               </button>
 
               <p className="signup-intro" style={{ marginTop: '8px' }}>
-                Need to create an account? <strong>Sign up.</strong>
+                Need to create an account? <a href={isDoctor ? '/doctor/register' : '/grower/register'}>Sign up.</a>
               </p>
 
               <p className="signup-intro" style={{ marginTop: '4px' }}>

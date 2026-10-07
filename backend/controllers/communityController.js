@@ -1,0 +1,12 @@
+const Post=require('../models/CommunityPost'),Comment=require('../models/Comment');
+const {id,pick,page,ok,fail}=require('./helpers');
+const postFor=async req=>{const post=await Post.findById(id(req.params.postId));if(!post)throw fail(404,'Discussion not found.');return post;};
+exports.list=async(req,res)=>{const {limit,skip}=page(req);ok(res,await Post.find().populate('owner','fullName').sort({createdAt:-1}).skip(skip).limit(limit));};
+exports.create=async(req,res)=>{const data=pick(req.body,['title','body','category','topic','image']);if(data.image?.startsWith('/api/media/')&&!data.image.startsWith(`/api/media/${req.user._id}-`))throw fail(400,'Choose one of your own uploaded photos.');ok(res,await Post.create({...data,owner:req.user._id}),201);};
+exports.remove=async(req,res)=>{const post=await postFor(req);if(String(post.owner)!==String(req.user._id))throw fail(403,'Only your own discussion can be deleted.');await post.deleteOne();await Comment.deleteMany({post:post._id});ok(res,{deleted:true});};
+exports.like=async(req,res)=>{await postFor(req);ok(res,await Post.findByIdAndUpdate(req.params.postId,req.body.liked===false?{$pull:{likedBy:req.user._id}}:{$addToSet:{likedBy:req.user._id}},{returnDocument:'after'}));};
+exports.comments=async(req,res)=>{await postFor(req);const {limit,skip}=page(req);ok(res,await Comment.find({post:req.params.postId}).populate('owner','fullName').sort({createdAt:1}).skip(skip).limit(limit));};
+exports.reply=async(req,res)=>{const post=await postFor(req);const comment=await Comment.create({owner:req.user._id,post:post._id,body:req.body.body});await Post.updateOne({_id:post._id},{$inc:{replyCount:1}});ok(res,comment,201);};
+const ownComment=async req=>{const comment=await Comment.findOne({_id:id(req.params.commentId),post:id(req.params.postId)});if(!comment)throw fail(404,'Reply not found.');if(String(comment.owner)!==String(req.user._id))throw fail(403,'You can only change your own replies.');return comment;};
+exports.editReply=async(req,res)=>{const comment=await ownComment(req);comment.body=req.body.body;await comment.save();await comment.populate('owner','fullName');ok(res,comment);};
+exports.deleteReply=async(req,res)=>{const comment=await ownComment(req);const removed=await Comment.deleteOne({_id:comment._id,owner:req.user._id});if(removed.deletedCount)await Post.updateOne({_id:comment.post,replyCount:{$gt:0}},{$inc:{replyCount:-1}});ok(res,{deleted:true});};

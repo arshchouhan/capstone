@@ -2,9 +2,11 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { AuthProvider, useAuth } from './context/AuthContext'
 import LandingPage from './pages/LandingPage'
 import SignupPage from './pages/SignupPage'
+import DoctorSignup from './pages/DoctorSignup'
 import SigninPage from './pages/SigninPage'
 import FarmDashboard from './pages/FarmDashboard'
 import DrDashboard from './pages/DrDashboard'
+import MyConnections from './pages/MyConnections'
 import ComingSoon from './pages/ComingSoon'
 import Market from './pages/Market'
 import ScanPlant from './pages/ScanPlant'
@@ -19,7 +21,7 @@ import './App.css'
 
 // Component to handle redirect for authenticated users trying to access auth pages
 const AuthRedirect = ({ children }) => {
-  const { isAuthenticated, loading } = useAuth()
+  const { isAuthenticated, loading, user } = useAuth()
   const location = useLocation()
 
   if (loading) {
@@ -27,7 +29,7 @@ const AuthRedirect = ({ children }) => {
   }
 
   if (isAuthenticated) {
-    return <Navigate to={new URLSearchParams(location.search).get('role') === 'dr' ? '/dr/dashboard' : '/farm/dashboard'} replace />
+    return <Navigate to={user?.accountType === 'doctor' ? '/dr/dashboard' : '/farm/dashboard'} replace />
   }
 
   return children
@@ -42,7 +44,7 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={<LandingPage />} /><Route path="/grower/login" element={<AuthRedirect><SigninPage portal="grower"/></AuthRedirect>} /><Route path="/doctor/login" element={<AuthRedirect><SigninPage portal="doctor"/></AuthRedirect>} /><Route path="/grower/register" element={<AuthRedirect><SignupPage/></AuthRedirect>} /><Route path="/doctor/register" element={<AuthRedirect><DoctorSignup /></AuthRedirect>} />
       <Route
         path="/signup"
         element={
@@ -68,6 +70,9 @@ function AppRoutes() {
         }
       />
       <Route path="/dr/dashboard" element={<ProtectedRoute><DrDashboard /></ProtectedRoute>} />
+      <Route path="/dr/dashboard/connections" element={<ProtectedRoute><MyConnections /></ProtectedRoute>} />
+      <Route path="/dr/dashboard/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
+      <Route path="/dr/dashboard/community/ask" element={<ProtectedRoute><CommunityQuestion /></ProtectedRoute>} />
       <Route path="/dashboard" element={<Navigate to="/farm/dashboard" replace />} />
       <Route path="/dashboard/crops" element={<ProtectedRoute><MyPlants /></ProtectedRoute>} />
       <Route

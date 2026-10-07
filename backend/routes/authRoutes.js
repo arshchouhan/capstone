@@ -10,8 +10,6 @@ const {
 
 router.post('/signup', signup);
 router.post('/signin', signin);
-router.post('/users', createUser);
-router.post('/signup-info', createSignupInfo);
-router.post('/signin-info', createSignInInfo);
 
 module.exports = router;
+router.post('/doctor/signup',require('../controllers/authController').doctorSignup);

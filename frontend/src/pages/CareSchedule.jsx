@@ -1,95 +1,90 @@
-import { useRef, useState } from 'react'
-import { FaArrowRight, FaCheckCircle, FaChevronDown, FaRegCalendarAlt, FaSearch, FaStar, FaVideo } from 'react-icons/fa'
+import { useEffect, useRef, useState } from 'react'
+import { Box, Button, Avatar, TextField, InputAdornment, Select, MenuItem, Typography, Stack, Tabs, Tab, Divider, Alert, ThemeProvider, createTheme, Skeleton, IconButton } from '@mui/material'
+import { FaArrowRight, FaCheckCircle, FaRegCalendarAlt, FaSearch, FaStar, FaRegCommentDots } from 'react-icons/fa'
 import DashboardLayout from '../components/DashboardLayout'
+import useApiData from '../hooks/useApiData'
+import { api, mediaUrl } from '../services/api'
+import EmptyState from '../components/EmptyState'
 import './CareSchedule.css'
 
-const avatar = (name, color) => `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${color}&color=ffffff&bold=true&size=160`
-const experts = [
-  { id: 'mira', name: 'Dr. Mira Sharma', initials: 'MS', avatarUrl: avatar('Mira Sharma', '188b74'), specialty: 'Plant Pathologist', rating: '4.9', reviews: 128, day: 0, description: 'Specializes in plant diseases, pest management and healthy plant care.' },
-  { id: 'rohan', name: 'Prof. Rohan Mehta', initials: 'RM', avatarUrl: avatar('Rohan Mehta', '799477'), specialty: 'Horticulture Specialist', rating: '4.8', reviews: 96, day: 1, description: 'Expert in plant growth, soil health, and outdoor gardening.' },
-  { id: 'ananya', name: 'Ananya Rao', initials: 'AR', avatarUrl: avatar('Ananya Rao', 'bd8967'), specialty: 'Indoor Plant Expert', rating: '4.7', reviews: 74, day: 2, description: 'Specializes in indoor plants, plant styling and low-maintenance care.' },
-  { id: 'vikram', name: 'Dr. Vikram Singh', initials: 'VS', avatarUrl: avatar('Vikram Singh', '5d967e'), specialty: 'Soil Health Specialist', rating: '4.9', reviews: 112, day: 1, description: 'Helps diagnose soil nutrition, drainage, and root health issues.' },
-  { id: 'neha', name: 'Neha Kapoor', initials: 'NK', avatarUrl: avatar('Neha Kapoor', '9d8760'), specialty: 'Organic Gardening Expert', rating: '4.8', reviews: 88, day: 3, description: 'Focuses on natural treatments, composting, and sustainable plant care.' },
-  { id: 'aarav', name: 'Aarav Menon', initials: 'AM', avatarUrl: avatar('Aarav Menon', '678aa5'), specialty: 'Plant Pathologist', rating: '4.7', reviews: 69, day: 2, description: 'Specializes in identifying fungal, bacterial, and viral plant diseases.' },
-  { id: 'isha', name: 'Dr. Isha Verma', initials: 'IV', avatarUrl: avatar('Isha Verma', 'a46978'), specialty: 'Horticulture Specialist', rating: '4.9', reviews: 141, day: 4, description: 'Offers practical guidance for seasonal growth and outdoor plant care.' },
-  { id: 'kabir', name: 'Kabir Nair', initials: 'KN', avatarUrl: avatar('Kabir Nair', '738b66'), specialty: 'Indoor Plant Expert', rating: '4.6', reviews: 57, day: 0, description: 'Supports plant placement, lighting, and day-to-day indoor care.' },
-]
-const expertsApiUrl = import.meta.env.VITE_EXPERTS_API_URL || 'http://localhost:5000/api/experts'
-const toExpert = (data, fallback) => ({ ...fallback, ...data, avatarUrl: data.avatarUrl || data.profileImage || fallback.avatarUrl, reviews: Number(data.reviews ?? fallback.reviews), day: Number(data.day ?? fallback.day) })
-
-async function getExpertDetails(fallback) {
-  try {
-    const response = await fetch(`${expertsApiUrl}/${fallback.id}`)
-    if (!response.ok) throw new Error('Expert details are unavailable')
-    return toExpert(await response.json(), fallback)
-  } catch {
-    return fallback
-  }
-}
-const times = ['10:00 AM', '3:00 PM', '5:00 PM']
+async function getExpertDetails(expert) { return api(`/experts/${expert.id}`) }
+const slotLabel = value => new Date(value).toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit'})
+const nextSlot = expert => expert.availableSlots?.filter(slot=>new Date(slot)>new Date()).sort((a,b)=>new Date(a)-new Date(b))[0]
 const dateKey = date => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-const specialties = [...new Set(experts.map(expert => expert.specialty))]
 
-function FilterSelect({ label, value, options, onChange }) {
-  const [open, setOpen] = useState(false)
-  const selected = options.find(option => option.value === value)?.label || label
-  return <div className="care-filter-select">
-    <button type="button" className={open ? 'open' : ''} aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen(previous => !previous)}>{selected}<FaChevronDown /></button>
-    {open && <div className="care-filter-menu" role="listbox">{options.map(option => <button key={option.value} type="button" role="option" aria-selected={option.value === value} className={option.value === value ? 'selected' : ''} onClick={() => { onChange(option.value); setOpen(false) }}>{option.label}</button>)}</div>}
-  </div>
-}
+
+const theme = createTheme({ palette: { primary: { main: '#355b7a' }, text: { primary: '#172846', secondary: '#6a7e8a' } }, typography: { fontFamily: 'Segoe UI, Arial, sans-serif', fontSize: 13 }, shape: { borderRadius: 12 } })
 
 export default function CareSchedule() {
+  const {data: experts,error:expertError} = useApiData('/experts')
+  const {data: rawAppointments,reload:reloadAppointments} = useApiData('/appointments')
+  const specialties = [...new Set(experts.map(expert=>expert.specialty))]
+  const [directoryTab,setDirectoryTab]=useState('all')
   const [query, setQuery] = useState('')
   const [specialty, setSpecialty] = useState('all')
   const [availability, setAvailability] = useState('all')
-  const [expert, setExpert] = useState(experts[0])
+  const [expert, setExpert] = useState(null)
   const [loadingExpert, setLoadingExpert] = useState(false)
+  const [detailsOpen, setDetailsOpen] = useState(false)
   const [day, setDay] = useState(0)
   const [time, setTime] = useState('3:00 PM')
-  const [appointments, setAppointments] = useState([])
-  const [notice, setNotice] = useState('')
+  const appointments = rawAppointments.filter(item=>item.status === 'booked').map(item=>({...item,expertId:item.expert?.id,expert:item.expert?.name,date:dateKey(new Date(item.startsAt)),time:new Date(item.startsAt).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),label:new Date(item.startsAt).toLocaleDateString()}))
+  const [notice, setNotice] = useState(''), [noticeError,setNoticeError]=useState(false), [consultationNotes,setConsultationNotes]=useState(''), [bookingBusy,setBookingBusy]=useState(false), [refreshing,setRefreshing]=useState(false)
   const bookingRef = useRef(null)
   const expertRequest = useRef(0)
-  const days = Array.from({ length: 5 }, (_, index) => { const date = new Date(); date.setDate(date.getDate() + index); return date })
-  const available = (index, slot) => {
-    const date = new Date(days[index])
-    date.setHours(slot === '10:00 AM' ? 10 : slot === '3:00 PM' ? 15 : 17, 0, 0, 0)
-    return index >= expert.day && date > new Date() && !appointments.some(item => item.date === dateKey(date) && item.time === slot)
-  }
-  const filtered = experts.filter(item => `${item.name} ${item.specialty} ${item.description}`.toLowerCase().includes(query.toLowerCase()) && (specialty === 'all' || specialty === item.specialty) && (availability === 'all' || item.day <= Number(availability)))
-  const chooseExpert = async item => {
+  const dismissExpert = () => { expertRequest.current++; setDetailsOpen(false); setExpert(null); setLoadingExpert(false); setTime(''); setNotice('') }
+  useEffect(()=>{
+    if(!expert)return
+    const outside=event=>{if(event.target instanceof Element && !event.target.closest('.expert-list-row, .expert-detail-pane, .MuiPopover-root'))dismissExpert()}
+    const escape=event=>{if(event.key==='Escape')dismissExpert()}
+    document.addEventListener('pointerdown',outside);document.addEventListener('keydown',escape)
+    return()=>{document.removeEventListener('pointerdown',outside);document.removeEventListener('keydown',escape)}
+  },[expert])
+  const slots=expert?.availableSlots||[]
+  const days=[...new Set(slots.map(value=>new Date(value).toDateString()))].slice(0,5).map(value=>new Date(value))
+  const times=slots.filter(value=>days[day]&&dateKey(new Date(value))===dateKey(days[day]))
+  const available=(_index,slot)=>slots.includes(slot)&&new Date(slot)>new Date()&&!rawAppointments.some(item=>item.status==='booked'&&item.expert?.id===expert?.id&&new Date(item.startsAt).getTime()===new Date(slot).getTime())
+  const connectedExpertIds=new Set(rawAppointments.filter(item=>item.status==='booked'||item.status==='completed').map(item=>item.expert?.id||item.expert?._id))
+  const filtered = experts.filter(item => (directoryTab==='all'||connectedExpertIds.has(item.id)) && `${item.name} ${item.specialty} ${item.description}`.toLowerCase().includes(query.toLowerCase()) && (specialty === 'all' || specialty === item.specialty) && (availability === 'all' || item.availableSlots?.some(slot=>{const date=new Date(slot),end=new Date();end.setDate(end.getDate()+Number(availability));end.setHours(23,59,59,999);return date>new Date()&&date<=end})))
+  const chooseExpert = async (item, booking = false) => {
     const request = ++expertRequest.current
-    setLoadingExpert(true); setExpert(item); setDay(item.day); setTime(''); setNotice('')
+    setDetailsOpen(true); setLoadingExpert(true); setExpert(item); setDay(0); setTime(''); setNotice('');setNoticeError(false);setConsultationNotes('')
     bookingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-    const details = await getExpertDetails(item)
+    let details; try { details=await getExpertDetails(item) } catch(err){if(request===expertRequest.current){setNotice(err.message);setLoadingExpert(false)}return}
     if (request !== expertRequest.current) return
-    setExpert(details); setDay(details.day); setLoadingExpert(false)
+    setExpert(details); setDay(0); setLoadingExpert(false); if(booking)setTimeout(()=>document.getElementById('expert-booking-slots')?.scrollIntoView({behavior:'smooth',block:'start'}),250)
   }
-  const book = () => {
-    if (!available(day, time) || !time) return
-    setAppointments(previous => [...previous, { id: Date.now(), expert: expert.name, date: dateKey(days[day]), label: days[day].toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }), time }])
-    setNotice('Demo appointment added. No expert has been contacted.'); setTime('')
+
+  const refreshSlots=async()=>{if(!expert||refreshing)return;const selected=expert.id,request=expertRequest.current;setRefreshing(true);try{const details=await getExpertDetails(expert);if(request!==expertRequest.current)return;setExpert(details);setDay(0);setTime('');await reloadAppointments()}catch(err){setNoticeError(true);setNotice(err.message)}finally{setRefreshing(false)}}
+  const book = async () => {
+    if(bookingBusy||!time || !available(day,time))return
+    const selected=expert.id;setBookingBusy(true);setNotice('');setNoticeError(false)
+    try{await api('/appointments',{method:'POST',body:{expert:selected,startsAt:new Date(time).toISOString(),notes:consultationNotes.trim()}});await reloadAppointments();setNotice('Appointment reserved.');setTime('');setConsultationNotes('')}
+    catch(err){setNoticeError(true);setNotice(err.message)}finally{setBookingBusy(false)}
   }
-  return <DashboardLayout className="care-dashboard">
-    <div className="care-page">
-      <header className="care-heading"><div><h1>Meet a Plant Expert</h1><p>Get one-on-one help for your plants.</p></div></header>
-      <div className="care-columns">
-        <section className="care-directory" aria-label="Plant experts">
-          <div className="care-filters"><label className="care-search"><FaSearch /><input aria-label="Search experts" placeholder="Search experts by name or expertise..." value={query} onChange={event => setQuery(event.target.value)} /></label><FilterSelect label="All specialties" value={specialty} onChange={setSpecialty} options={[{ value: 'all', label: 'All specialties' }, ...specialties.map(item => ({ value: item, label: item }))]} /><FilterSelect label="Availability: Any time" value={availability} onChange={setAvailability} options={[{ value: 'all', label: 'Availability: Any time' }, { value: '0', label: 'Today' }, { value: '1', label: 'By tomorrow' }]} /></div>
-          <div className="care-experts">{filtered.map(item => <article key={item.id} className={`care-expert ${expert.id === item.id ? 'selected' : ''}`} onClick={() => chooseExpert(item)} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') chooseExpert(item) }} role="button" tabIndex="0"><div className={`care-avatar ${item.id}`} aria-hidden="true"><img src={item.avatarUrl} alt="" onError={event => { event.currentTarget.style.display = 'none' }} /><b>{item.initials}</b><span /></div><div className="care-expert-copy"><h2>{item.name} <FaCheckCircle /></h2><p>{item.specialty}</p><div className="care-rating"><FaStar /> {item.rating} <span>({item.reviews} reviews)</span></div><p className="care-description">{item.description}</p></div><div className="care-expert-actions"><div className="care-next"><FaRegCalendarAlt /><div>Sample availability<strong>{item.day === 0 ? 'Today' : item.day === 1 ? 'Tomorrow' : days[item.day].toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</strong></div></div><button className="care-primary" onClick={event => { event.stopPropagation(); chooseExpert(item) }}>View availability <FaArrowRight /></button></div></article>)}</div>
-          {filtered.length === 0 && <div className="care-empty">No experts match your filters. Try another specialty or search.</div>}
-          <p className="care-demo-note">Sample expert profiles and availability. Bookings are a demo for this session.</p>
-        </section>
-        <aside className="care-booking-column">
-          <section className="care-panel" ref={bookingRef}><h2>Book a consultation</h2><div className="care-selected-expert"><div className={`care-avatar small ${expert.id}`} aria-hidden="true"><img src={expert.avatarUrl} alt="" onError={event => { event.currentTarget.style.display = 'none' }} /><b>{expert.initials}</b></div><div><h3>{expert.name} <FaCheckCircle /></h3><p>{loadingExpert ? 'Loading doctor details…' : expert.specialty}</p><div className="care-rating"><FaStar /> {expert.rating} <span>({expert.reviews} reviews)</span></div></div></div>
-            <fieldset><legend>Select a date</legend><div className="care-dates">{days.map((date, index) => <button key={dateKey(date)} disabled={index < expert.day} aria-pressed={day === index} className={day === index ? 'selected' : ''} onClick={() => { setDay(index); setTime(''); setNotice('') }}><span>{index === 0 ? 'Today' : date.toLocaleDateString(undefined, { weekday: 'short' })}</span><strong>{date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</strong></button>)}</div></fieldset>
-            <fieldset><legend>Select a time</legend><div className="care-times">{times.map(slot => <button key={slot} disabled={!available(day, slot)} aria-pressed={time === slot} className={time === slot ? 'selected' : ''} onClick={() => { setTime(slot); setNotice('') }}>{slot}</button>)}</div></fieldset>
-            <p className="care-timezone">Times shown in your local time zone.</p><h3 className="care-visit-label">Visit type</h3><div className="care-visit"><FaVideo /><div><strong>Google Meet video call</strong><p>A meeting link will be available when live booking launches.</p></div></div>
-            <button className="care-primary care-confirm" disabled={loadingExpert || !time || !available(day, time)} onClick={book}>Confirm demo booking <FaArrowRight /></button><p role="status" className="care-notice">{notice}</p>
-          </section>
-        </aside>
-      </div>
-    </div>
-  </DashboardLayout>
+  const cancel = async item => {try{await api('/appointments/'+item.id,{method:'DELETE'});await reloadAppointments();setNoticeError(false);setNotice('Appointment cancelled.')}catch(err){setNoticeError(true);setNotice(err.message)}}
+  const downloadCalendar=item=>{
+    const escape=value=>String(value||'').replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/[,;]/g,value=>'\\'+value)
+    const stamp=date=>new Date(date).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')
+    const duration=item.expertId===expert?.id?expert.consultationMinutes:30
+    const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Plantaexa//Consultation//EN','BEGIN:VEVENT','UID:'+item.id+'@plantaexa','DTSTAMP:'+stamp(new Date()),'DTSTART:'+stamp(item.startsAt),'DTEND:'+stamp(new Date(new Date(item.startsAt).getTime()+(duration||30)*60000)),'SUMMARY:'+escape('Plant consultation with '+item.expert),'DESCRIPTION:'+escape(item.notes),'END:VEVENT','END:VCALENDAR']
+    const url=URL.createObjectURL(new Blob([lines.join('\r\n')+'\r\n'],{type:'text/calendar;charset=utf-8'})),link=document.createElement('a');link.href=url;link.download='plant-consultation.ics';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)
+  }
+  return <DashboardLayout className="care-dashboard"><ThemeProvider theme={theme}><Box className="care-page expert-split-page">
+    <Box className="care-columns"><Box component="section" className="care-directory" aria-label="Plant experts">
+      <Box className="care-directory-heading"><Typography component="h2">Find your plant’s person</Typography><Typography>{filtered.length} experts to explore</Typography></Box>
+      <Tabs className="expert-directory-tabs" value={directoryTab} onChange={(_,value)=>{setDirectoryTab(value);dismissExpert()}} aria-label="Expert directory"><Tab value="all" label="All experts"/><Tab value="yours" label="Your doctor"/></Tabs><Box className="care-filters"><TextField size="small" placeholder="Search name or expertise" value={query} onChange={event => setQuery(event.target.value)} slotProps={{ input: { startAdornment: <InputAdornment position="start"><FaSearch /></InputAdornment> }, htmlInput: { 'aria-label': 'Search experts' } }} /><Select size="small" value={specialty} onChange={event => setSpecialty(event.target.value)} inputProps={{ 'aria-label': 'Specialty' }}><MenuItem value="all">All specialties</MenuItem>{specialties.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)}</Select><Select size="small" value={availability} onChange={event => setAvailability(event.target.value)} inputProps={{ 'aria-label': 'Availability' }}><MenuItem value="all">Any time</MenuItem><MenuItem value="0">Today</MenuItem><MenuItem value="1">By tomorrow</MenuItem></Select></Box>
+      <Box className="expert-list">{!filtered.length && <EmptyState kind="experts" title={directoryTab==='yours'?'No doctor connected yet':undefined} description={directoryTab==='yours'?'Experts you book consultations with will appear here.':undefined} />}{filtered.map(item=><button type="button" key={item.id} className={`expert-list-row ${expert?.id===item.id?'selected':''}`} aria-pressed={expert?.id===item.id} onClick={()=>chooseExpert(item)}><Avatar src={mediaUrl(item.avatarUrl)||'/images/expert-placeholder.svg'} /><span className="expert-list-copy"><strong>{item.name}</strong><span>{item.specialty}</span><small>{item.reviews ? item.rating+' · '+item.reviews+' reviews' : 'Not rated yet'}</small></span><FaRegCommentDots className="expert-chat-icon" aria-hidden="true" /></button>)}</Box>
+    </Box>
+    <Box component="section" className="expert-detail-pane" aria-label="Expert details"><Box className="care-drawer-toolbar">{expert && <IconButton aria-label="Close expert details" onClick={dismissExpert}>×</IconButton>}</Box>{!expert ? <Box className="expert-detail-empty"><EmptyState kind="experts" title="Select an expert" description="Choose a specialist from the list to see their profile and appointment times." /></Box> : loadingExpert ? <Box className="care-details-skeleton" role="status" aria-label="Loading expert details"><Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}><Skeleton variant="circular" width={48} height={48} /><Box sx={{ flex: 1 }}><Skeleton width="70%" /><Skeleton width="50%" /></Box></Stack><Skeleton height={70} /><Skeleton width="45%" /><Skeleton variant="rounded" height={64} /><Skeleton sx={{ mt: 3 }} width="45%" /><Skeleton variant="rounded" height={40} /><Skeleton variant="rounded" height={80} sx={{ mt: 3 }} /><Skeleton variant="rounded" height={44} sx={{ mt: 2 }} /></Box> : expert && <Box component="aside" className="care-booking-column"><Box className="care-panel" ref={bookingRef}><Stack className="care-selected-expert" direction="row" spacing={1.5} sx={{ alignItems: 'center' }}><Avatar src={mediaUrl(expert.avatarUrl) || '/images/expert-placeholder.svg'} /><Box><Typography component="h3">{expert.name}</Typography><Typography>{loadingExpert ? 'Loading expert details…' : expert.specialty}</Typography></Box></Stack>
+    <Box className="expert-profile-summary"><Typography component="h4" className="expert-section-title">About the expert</Typography><Typography>{expert.description || 'Profile details not provided.'}</Typography><Box component="dl" className="expert-card-facts"><div><dt>Qualifications</dt><dd>{expert.qualifications || 'Not provided'}</dd></div><div><dt>Experience</dt><dd>{expert.experienceYears != null ? expert.experienceYears+' years' : 'Not provided'}</dd></div><div><dt>Location</dt><dd>{expert.location || 'Not provided'}</dd></div><div><dt>Languages</dt><dd>{expert.languages?.join(', ') || 'Not provided'}</dd></div></Box></Box>
+    <Box className="expert-appointment-section"><Typography component="h4" className="expert-section-title">Book a consultation</Typography>{!slots.length && <Alert severity="info">No appointment times available. Check back later.</Alert>}<Box id="expert-booking-slots" className="care-booking-step"><Typography component="h3"><span>1</span> Pick a day</Typography><Box className="care-dates">{days.map((date, index) => <Button key={dateKey(date)}  aria-pressed={day === index} className={day === index ? 'selected' : ''} onClick={() => { setDay(index); setTime(''); setNotice('') }}><Typography component="span">{dateKey(date) === dateKey(new Date()) ? 'Today' : date.toLocaleDateString('en-IN', { weekday: 'short' })}</Typography><strong>{date.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })}</strong></Button>)}</Box></Box>
+    <Box className="care-booking-step"><Typography component="h3"><span>2</span> Find your time</Typography><Box className="care-times">{times.map(slot => <Button key={slot} disabled={!available(day, slot)} aria-pressed={time === slot} className={time === slot ? 'selected' : ''} onClick={() => { setTime(slot); setNotice('') }}>{slotLabel(slot)}</Button>)}</Box><Typography className="care-timezone">Times in your device’s local time zone.</Typography></Box>
+    <Box className="expert-slot-actions"><Button size="small" disabled={refreshing||bookingBusy} onClick={refreshSlots}>{refreshing?'Refreshing…':'Refresh availability'}</Button><Button size="small" disabled={!time||bookingBusy} onClick={()=>setTime('')}>Clear selection</Button></Box></Box><Box className="expert-notes-section"><Typography component="h4" className="expert-section-title">What would you like help with?</Typography><TextField label="Consultation notes" placeholder="Describe the plant, symptoms, and care you have tried…" multiline minRows={3} fullWidth size="small" value={consultationNotes} disabled={bookingBusy} onChange={event=>setConsultationNotes(event.target.value)} slotProps={{htmlInput:{maxLength:2000}}} helperText="Shared with your expert when you reserve." sx={{mb:2}} /></Box>{time&&<Typography className="expert-selection-summary" sx={{mb:2,fontSize:12}}>Selected: {new Date(time).toLocaleString()} · {expert.consultationMinutes} minutes</Typography>}<Button variant="contained" disableElevation fullWidth className="care-confirm" disabled={bookingBusy || refreshing || loadingExpert || !time || !available(day, time)} onClick={book} endIcon={<FaArrowRight />}>{bookingBusy?'Reserving…':'Reserve slot'}</Button>{notice && <Alert severity={noticeError?'error':'success'} sx={{ mt: 1.5 }}>{notice}</Alert>}
+    </Box>{!!appointments.length && <Box className="care-appointments"><Typography component="h3">Your appointments</Typography>{appointments.filter(item=>item.expertId===expert.id).map(item => <Box key={item.id}><Typography>{item.expert}</Typography><Typography>{item.label} · {item.time}</Typography>{item.notes && <Typography>{item.notes}</Typography>}<Button size="small" onClick={()=>downloadCalendar(item)}>Add to calendar</Button><Button size="small" onClick={() => cancel(item)}>Cancel slot</Button></Box>)}</Box>}</Box>}</Box></Box>
+  </Box></ThemeProvider></DashboardLayout>
 }
+
+
+
+
