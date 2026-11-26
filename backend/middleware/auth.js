@@ -5,7 +5,7 @@ exports.requireAuth = async (req,res,next) => {
     const token = req.headers.authorization?.startsWith('Bearer ') ? req.headers.authorization.slice(7) : req.cookies?.authToken;
     if (!token) return res.status(401).json({success:false,message:'Please sign in.'});
     const payload = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key-change-in-production');
-    const user = await User.findById(payload.userId).select('_id fullName role email');
+    const user = await User.findById(payload.userId).select('_id fullName role email accountType demoAccount');
     if (!user) return res.status(401).json({success:false,message:'Account not found.'});
     req.user = user; next();
   } catch (error) { if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') return res.status(401).json({success:false,message:'Please sign in again.'}); next(error); }

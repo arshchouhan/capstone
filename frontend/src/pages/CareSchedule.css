@@ -167,6 +167,65 @@
 .expert-detail-pane .care-times .MuiButton-root { min-width:100px; }
 @media(max-width:800px) { .care-page.expert-split-page .care-columns { grid-template-columns:1fr; overflow:auto; } .expert-split-page .care-directory { border-right:0; padding-right:0; max-height:320px; flex-shrink:0; } .expert-detail-pane { padding:20px 0 0; overflow:visible; border-top:1px solid #d7e5ea; } .expert-detail-empty { min-height:240px; } }
 .expert-list-row > .expert-chat-icon { width:18px; height:18px; font-size:18px; color:#527ea5; flex-shrink:0; }
+.nearby-expert-directory { display:grid; gap:12px; margin-top:14px; }.nearby-expert-directory>p { color:#648097; font-size:12px; line-height:1.5; }.nearby-expert-directory>.MuiButton-root { justify-self:start; border-color:#bdd9e7; color:#087e73; text-transform:none; }.nearby-expert-directory .expert-list { margin-top:0; }.nearby-expert-directory .MuiAvatar-root,.nearby-expert-profile .MuiAvatar-root { background:#dff3ef; color:#087e73; }.nearby-expert-profile .expert-profile-summary>p { display:flex; align-items:flex-start; gap:7px; line-height:1.5; }.nearby-expert-profile .expert-profile-summary>p svg { flex:0 0 auto; margin-top:2px; color:#527ea5; }.nearby-expert-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }.nearby-expert-actions .MuiButton-root { border-radius:9px; text-transform:none; font-size:12px; }.nearby-expert-note { margin-top:16px; padding-top:12px; border-top:1px solid #d7e5ea; color:#6a7e8a; font-size:11px; line-height:1.55; }
+.expert-list-row { padding:0; gap:0; }
+.expert-list-main { display:flex; align-items:center; gap:12px; flex:1; min-width:0; padding:15px 6px 15px 12px; border:0; background:transparent; color:inherit; font:inherit; text-align:left; cursor:pointer; }
+.expert-row-action.MuiIconButton-root { color:#527ea5; padding:8px; }
+.expert-meet-action.MuiButton-root { min-width:0; padding:5px 8px; margin-right:5px; color:#087e73; font-size:10px; }
+.expert-detail-pane:has(.expert-chat-panel), .expert-detail-pane:has(.meet-request-panel) { overflow:hidden; display:flex; flex-direction:column; }
+/* The Meet form shares the original compact heading. */
+.expert-chat-heading { display:flex; flex:0 0 auto; justify-content:space-between; align-items:center; padding:2px 0 14px; border-bottom:1px solid #e7eef4; }
+.expert-chat-heading h3.MuiTypography-root { font-size:16px; font-weight:700; }
+.expert-chat-heading p.MuiTypography-root { color:#71819c; font-size:11px; }
+
+.expert-chat-panel {
+  display: flex; flex: 1; flex-direction: column; min-height: 0; overflow: hidden;
+  border: 1px solid #d5e4ec; border-radius: 16px; background: #f7fafc;
+}
+.expert-conversation-header {
+  display: flex; align-items: center; flex: none; gap: 12px;
+  padding: 14px 16px; background: linear-gradient(135deg, #eef8f6, #f1f7fc);
+  border-bottom: 1px solid #d5e4ec;
+}
+.expert-conversation-header .MuiAvatar-root { width: 42px; height: 42px; background: #d5eee9; color: #214f54; }
+.expert-conversation-identity { flex: 1; min-width: 0; }
+.expert-conversation-identity h3.MuiTypography-root { font-size: 16px; font-weight: 700; overflow-wrap: anywhere; }
+.expert-conversation-identity p.MuiTypography-root { font-size: 12px; color: #557186; }
+.expert-conversation-header .MuiButton-root { border-radius: 9px; white-space: nowrap; flex-shrink: 0; }
+.expert-chat-error { margin: 10px 12px 0; }
+.expert-chat-thread {
+  flex: 1; min-height: 160px; display: flex; flex-direction: column; gap: 12px;
+  padding: 16px; overflow-y: auto; overscroll-behavior: contain;
+}
+.expert-chat-message { display: flex; flex-direction: column; gap: 10px; }
+.expert-chat-date.MuiTypography-root {
+  align-self: center; color: #4d687f; font-size: 11px;
+  background: #edf4f8; border: 1px solid #e0ebf1; padding: 3px 10px; border-radius: 20px;
+}
+.expert-chat-bubble {
+  align-self: flex-start; max-width: min(80%, 480px); min-width: 0; padding: 9px 12px;
+  border: 1px solid #dae7ef; border-radius: 12px 12px 12px 3px; background: #fff;
+  overflow-wrap: anywhere;
+}
+.expert-chat-bubble.outgoing { align-self: flex-end; background: #e2f5ed; border-color: #c7e6db; border-radius: 12px 12px 3px 12px; }
+.expert-chat-bubble strong { display: block; font-size: 11px; color: #315a71; margin-bottom: 3px; }
+.expert-chat-bubble p.MuiTypography-root { font-size: 13px; line-height: 1.45; white-space: pre-wrap; }
+.expert-chat-bubble time { display: block; font-size: 10px; color: #557186; margin-top: 5px; }
+.expert-chat-empty { align-self: center; text-align: center; margin: auto 0; color: #557186; }
+.expert-chat-empty svg { font-size: 24px; margin-bottom: 8px; color: #477697; }
+.expert-chat-compose { display: flex; align-items: flex-end; flex: none; gap: 10px; padding: 12px; border-top: 1px solid #d5e4ec; background: #fff; }
+.expert-chat-compose .MuiTextField-root { flex: 1; min-width: 0; }
+.expert-chat-compose .MuiOutlinedInput-root { border-radius: 10px; background: #f7fbfd; font-size: 13px; padding: 10px 12px; }
+.expert-chat-compose .MuiButton-root { flex: none; min-height: 40px; border-radius: 9px; white-space: nowrap; }
+@media (max-width: 800px) { .expert-chat-panel { min-height: 410px; } }
+@media (max-width: 480px) {
+  .expert-conversation-header { flex-wrap: wrap; gap: 8px; padding: 10px; }
+  .expert-conversation-header .MuiAvatar-root { width: 34px; height: 34px; }
+  .expert-chat-thread { padding: 10px; }
+  .expert-chat-compose { padding: 8px; gap: 6px; }
+  .expert-chat-compose .MuiButton-root { padding-inline: 8px; }
+}
+.meet-request-panel { flex:1; min-height:0; overflow-y:auto; scrollbar-width:none; padding-right:2px; }.meet-request-panel::-webkit-scrollbar { display:none; }.meet-request-panel .MuiOutlinedInput-root { border-radius:11px; background:#f7fbfd; font-size:12px; }.meet-request-panel .MuiButton-root { text-transform:none; font-size:11px; }
 .expert-split-page .expert-detail-pane { scrollbar-width:none; -ms-overflow-style:none; }
 .expert-split-page .expert-detail-pane::-webkit-scrollbar { display:none; width:0; height:0; }
 .expert-directory-tabs { margin-bottom:16px; border-bottom:1px solid #d7e5ea; }
@@ -203,3 +262,64 @@
 .expert-detail-pane .care-appointments { margin-top:24px; padding-top:18px; border-top:1px solid #d7e5ea; }
 .expert-detail-pane .care-appointments>h3 { font-size:13px; margin-bottom:12px; }
 @media(max-width:800px) { .expert-split-page .expert-detail-pane { padding-left:0; } }
+
+/* Expert profile and consultation */
+.expert-detail-pane .care-panel {
+  display: grid;
+  gap: 16px;
+}
+.expert-profile-header, .expert-detail-card {
+  min-width: 0;
+  border: 1px solid #d5e4ec;
+  border-radius: 16px;
+  background: #fff;
+  padding: clamp(14px, 2vw, 22px);
+}
+.expert-profile-header { background: linear-gradient(135deg, #eef8f6, #f1f7fc); }
+.expert-detail-pane .expert-profile-header .care-selected-expert { padding: 0; border: 0; }
+.expert-detail-pane .expert-profile-header .care-selected-expert h3.MuiTypography-root {
+  font-size: clamp(19px, 2.1vw, 25px);
+  overflow-wrap: anywhere;
+}
+.expert-profile-badges, .expert-profile-actions, .expert-booking-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.expert-profile-badges:not(:empty) { margin-top: 8px; }
+.expert-profile-badges .MuiChip-root { border: 1px solid #d3e5e9; background: #fff; }
+.expert-profile-badges .MuiChip-icon { color: #087e73; }
+.expert-profile-actions { margin-top: 18px; }
+.expert-profile-actions .MuiButton-root, .expert-booking-header .MuiButton-root, .expert-booking-footer .MuiButton-root {
+  border-radius: 9px; min-height: 38px; padding-inline: 13px;
+}
+.expert-detail-pane .expert-profile-summary.expert-detail-card { padding: clamp(14px, 2vw, 22px); }
+.expert-detail-pane .expert-section-title.MuiTypography-root { font-size: 16px; }
+.expert-fact-grid, .expert-slot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.expert-fact-grid { margin: 0; }
+.expert-fact {
+  display: flex; align-items: flex-start; gap: 10px; border: 1px solid #e0eaf0;
+  border-radius: 11px; background: #f7fafc; padding: 12px; min-width: 0;
+}
+.expert-fact svg { color: #477697; margin-top: 2px; flex: none; }
+.expert-fact dt, .expert-booking-meta.MuiTypography-root { color: #557186; font-size: 12px; }
+.expert-fact dd { margin: 3px 0 0; font-size: 13px; color: #203a55; overflow-wrap: anywhere; }
+.expert-booking-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.expert-booking-header .expert-section-title.MuiTypography-root { margin-bottom: 3px; }
+.expert-booking-meta:empty { display: none; }
+.expert-detail-pane .expert-slot-grid .care-booking-step { margin: 0; padding: 12px; border: 1px solid #e0eaf0; border-radius: 11px; }
+.expert-slot-grid h5.MuiTypography-root, .expert-availability-empty h5.MuiTypography-root { font-weight: 700; font-size: 13px; margin-bottom: 8px; }
+.expert-detail-pane .expert-slot-grid .care-dates { grid-template-columns: repeat(auto-fit, minmax(53px, 1fr)); }
+.expert-detail-pane .expert-slot-grid .care-times .MuiButton-root { min-width: 64px; }
+.expert-availability-empty { display: flex; align-items: flex-start; gap: 12px; padding: 15px; border: 1px dashed #bfd4e1; border-radius: 11px; background: #f4f9fc; color: #355b7a; }
+.expert-availability-empty > svg { margin-top: 3px; flex: none; }
+.expert-availability-empty h5.MuiTypography-root { margin-bottom: 3px; }
+.expert-availability-empty p.MuiTypography-root { font-size: 12px; }
+.expert-booking-footer { margin-top: 14px; justify-content: flex-end; }
+.expert-booking-footer .expert-booking-meta { margin-right: auto; }
+@media (max-width: 1250px) { .expert-slot-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .expert-profile-actions .MuiButton-root { flex: 1 1 auto; }
+  .expert-fact-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,42 @@
+.plant-satellite {
+  --satellite-border: #c8dfe6;
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--satellite-border);
+  border-radius: 1rem;
+  background: #f5fafb;
+}
+.plant-satellite-header { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+.plant-satellite-header h2 { font-size: 1.1rem; font-weight: 750; }
+.plant-satellite-icon { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: .75rem; background: #dcefed; color: #146c64; font-size: 1.45rem; }
+.plant-satellite-edit { margin-inline-start: auto !important; }
+.plant-satellite-toolbar { justify-self: start; }
+.plant-satellite-toolbar .MuiToggleButton-root, .plant-satellite .MuiButton-root { text-transform: none; }
+.plant-satellite-content { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); align-items: start; gap: 1rem; }
+.plant-satellite-frame, .plant-satellite-map, .plant-satellite-map-status {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 18rem;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--satellite-border);
+  border-radius: .75rem;
+  background: #e6eef0;
+}
+.plant-satellite-map { position: relative; min-height: 0; aspect-ratio: 1; overflow: hidden; }
+.plant-satellite-map img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.plant-satellite-map-status { display: grid; place-items: center; padding: 1rem; text-align: center; }
+.plant-satellite-pin { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -100%); color: white; font-size: 2.25rem; filter: drop-shadow(0 1px 3px #122632); }
+.plant-satellite-credit { position: absolute; inset: auto 0 0; padding: .25rem .45rem; color: white; background: #122632df; font-size: .68rem; }
+.plant-satellite-raster { image-rendering: pixelated; }
+.plant-satellite-raster-overlay { opacity: .74; }
+.plant-satellite-details { min-width: 0; padding: .9rem 1rem; border: 1px solid var(--satellite-border); border-radius: .75rem; background: #fff; }
+.plant-satellite-readings { margin: 0; }
+.plant-satellite-readings > div { display: grid; gap: .15rem; padding: .55rem 0; border-bottom: 1px solid #e5eef2; }
+.plant-satellite-readings > div:last-child { border-bottom: 0; }
+.plant-satellite-readings dt { font-weight: 600; }
+.plant-satellite-readings dd { margin: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.plant-satellite-legend { height: .6rem; border-radius: 1rem; background: linear-gradient(to right, #993a31, #e7ac51, #bed470, #1c7441); }
+.plant-satellite-legend-labels { display: flex; justify-content: space-between; color: #425e6c; font-size: .75rem; }
+@media (max-width: 800px) { .plant-satellite-content { grid-template-columns: 1fr; } }

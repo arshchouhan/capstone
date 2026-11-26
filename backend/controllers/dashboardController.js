@@ -7,7 +7,7 @@ exports.get = async (req, res) => {
   const [plants, tasks, recentScans, taskCount] = await Promise.all([
     Plant.find({ owner }).sort({ createdAt: -1 }),
     CareTask.find({ owner }).populate('plant', 'name').sort({ due: 1 }).limit(12),
-    Scan.find({ owner, state: 'complete' }).sort({ completedAt: -1 }).limit(6),
+    Scan.find({ owner, state: 'complete', kind: { $ne: 'Insect Identifier' } }).sort({ completedAt: -1 }).limit(6),
     CareTask.countDocuments({ owner }),
   ]);
   ok(res, { plants, tasks, recentScans, taskCount });

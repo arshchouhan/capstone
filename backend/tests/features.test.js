@@ -27,6 +27,44 @@ test('plant records require owners and recurring schedules validate their freque
   await assert.rejects(new (require('../models/Plant'))({name:'Basil'}).validate());
   await assert.rejects(new (require('../models/CareTask'))({owner,plant,type:'Water',due:new Date(),frequency:2.5}).validate());
 });
+test('optional plant checks accept insect results and validate actual moisture readings', async () => {
+  const SoilMoistureCheck = require('../models/SoilMoistureCheck');
+  const Scan = require('../models/Scan');
+  const touch = new SoilMoistureCheck({ owner, plant, condition: 'Moist' });
+  await touch.validate();
+  assert.equal(touch.meterPercent, undefined);
+  await new SoilMoistureCheck({ owner, plant, condition: 'Dry', meterPercent: 0 }).validate();
+  await assert.rejects(new SoilMoistureCheck({ owner, plant, condition: 'Wet', meterPercent: 101 }).validate());
+  await assert.rejects(new SoilMoistureCheck({ owner, plant, condition: 'Unknown' }).validate());
+  await new Scan({ owner, plant, kind: 'Insect Identifier', result: { isPlant: false, status: 'Needs review' } }).validate();
+});
+test('plant location updates validate coordinate pairs and support old records', async t => {
+  const Plant = require('../models/Plant');
+  const controller = require('../controllers/plantController');
+  const record = new Plant({ _id: plant, owner, name: 'Basil' });
+  t.mock.method(Plant, 'findOne', async query => {
+    assert.equal(query.owner, owner);
+    return record;
+  });
+  t.mock.method(record, 'save', () => record.validate());
+  const req = { user: { _id: owner }, params: { plantId: String(plant) }, body: {} };
+  const res = { status() { return this; }, json(payload) { return payload; } };
+  await assert.rejects(controller.satellite(req, res), { status: 400 });
+  req.body = { coordinates: { latitude: 0, longitude: 77.123456, accuracy: 9, source: 'ignored' } };
+  await controller.update(req, res);
+  assert.deepEqual(record.coordinates.toObject(), { latitude: 0, longitude: 77.123456, accuracy: 9 });
+  req.body = { location: 'Balcony' };
+  await controller.update(req, res);
+  assert.equal(record.coordinates.longitude, 77.123456);
+  for (const coordinates of [{ latitude: 0 }, { latitude: 91, longitude: 0 }, { latitude: '0', longitude: 0 }]) {
+    req.body = { coordinates };
+    await assert.rejects(controller.update(req, res), { status: 400 });
+    await assert.rejects(controller.create(req, res), { status: 400, message: /latitude and longitude/ });
+  }
+  req.body = { coordinates: null };
+  await controller.update(req, res);
+  assert.equal(record.coordinates, null);
+});
 test('resource lookup always scopes plant access to the authenticated owner', async () => {
   const Plant=require('../models/Plant'), original=Plant.findOne;
   let query;

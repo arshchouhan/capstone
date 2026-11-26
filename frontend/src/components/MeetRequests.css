@@ -1,0 +1,16 @@
+.meet-flow { display: flex; flex-direction: column; gap: 14px; }
+.meet-flow-heading, .meet-flow-card {
+  border: 1px solid #d5e4ec; background: #fff; border-radius: 16px; padding: clamp(14px, 2vw, 20px); min-width: 0;
+}
+.meet-flow-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; background: linear-gradient(135deg, #eef8f6, #f1f7fc); }
+.meet-flow-heading > div { flex: 1; min-width: 150px; }
+.meet-flow-heading h3, .meet-flow-card h3, .meet-flow-card h4 { font-size: 16px; font-weight: 700; }
+.meet-flow-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #d5eee9; color: #214f54; }
+.meet-flow-card { display: grid; gap: 12px; }
+.meet-flow-secondary { color: #557186; font-size: 13px !important; }
+.meet-flow-row, .meet-flow-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.meet-flow-actions { justify-content: flex-end; }
+.meet-flow-record { display: grid; gap: 7px; border: 1px solid #dce8ef; background: #f7fafc; border-radius: 12px; padding: 12px; min-width: 0; }
+.meet-flow-record > .MuiButton-root { justify-self: start; }
+.meet-flow-card .MuiButton-root, .meet-flow-heading .MuiButton-root { text-transform: none; border-radius: 9px; }
+.dr-meet-workspace { display: grid; gap: 14px; padding: 18px; max-width: 1060px; margin: 0 auto; }

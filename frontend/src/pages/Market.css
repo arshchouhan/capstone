@@ -11,6 +11,7 @@
 .market-dashboard .market-product-image { background:#edf5fa; color:#7298b9; border-radius:10px; overflow:hidden; }
 .market-dashboard .market-product-image.mint { background:#edf5fa; }
 .market-dashboard .market-product-image img { width:100%; height:100%; object-fit:contain; }
+.market-listing-caption { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px; color:#355b7a; margin-top:6px; }
 .market-dashboard .market-product-bottom button { background:linear-gradient(110deg,#d7f6ef,#d9eafa); color:#172846; border:1px solid #bddde3; }
 .market-dashboard .market-product-bottom button:hover,.market-dashboard .market-cart-button:hover { background:linear-gradient(110deg,#c8eee5,#cbdef4); }
 .market-dashboard .market-search,.market-dashboard .market-product-controls select { border-color:#c4dfe9; border-radius:10px; }
@@ -36,6 +37,23 @@
 .market-heading-row p { margin: 3px 0 0; color: var(--market-muted); font-size: 14px; }
 .market-cart-button { border: 1px solid #59bca8; color: var(--market-green); background: white; border-radius: 7px; padding: 10px 15px; font-weight: 600 !important; }
 .market-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 24px 0 18px; flex-wrap: wrap; }
+.market-recommendations { margin:0 0 28px; }
+.market-recommendations-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.market-recommendations-kicker { display:inline-flex; align-items:center; gap:7px; color:#087e73; font-size:11px; font-weight:700; }
+.market-recommendations h2 { margin:5px 0 4px; font-size:17px; }
+.market-recommendations-heading p { margin:0; max-width:680px; color:#648097; font-size:12px; line-height:1.55; }
+.market-crop-filters { display:flex; flex-wrap:wrap; gap:7px; margin:15px 0 13px; }
+.market-crop-filters button { border:1px solid #d7e5ea; border-radius:999px; padding:7px 11px; color:#527ea5; background:#fff; font-size:11px; }
+.market-crop-filters button:hover,.market-crop-filters button.selected { border-color:#9fcec5; color:#087e73; background:#dff5ef; }
+.market-refresh-button { flex:0 0 auto; border:1px solid #bddde3; border-radius:9px; padding:7px 11px; color:#087e73; background:#fff; font-size:11px; }
+.market-refresh-button:disabled { opacity:.65; cursor:wait; }
+.market-recommendation-source { margin:14px 0 9px; color:#648097; font-size:11px; }
+.market-recommendation-grid { margin-top:0; }
+.market-merchant-product { display:block; color:inherit; text-decoration:none; }
+.market-merchant-product:hover { color:inherit; }
+.market-external-action { display:inline-flex; align-items:center; gap:6px; border-radius:9px; padding:8px 11px; color:#087e73; background:#e0f7ee; font-size:11px; font-weight:600; }
+.market-recommendation-loading,.market-recommendation-empty { margin-top:13px; padding:13px; border-radius:10px; color:#648097; background:#fff; font-size:12px; }
+.market-recommendation-status { margin:10px 0 0; color:#8a6736; font-size:11px; }
 .market-categories { display: flex; gap: 8px; flex-wrap: wrap; }
 .market-categories button { border: 0; border-radius: 22px; padding: 10px 16px; background: #f0f3f6; color: var(--market-ink); font-size: 11px; font-weight: 600; }
 .market-categories button.selected { background: var(--market-green); color: white; }
@@ -72,6 +90,7 @@
 }
 @media (max-width: 1000px) {
   .market-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .market-recommendation-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
 @media (max-width: 768px) {
   .dashboard-shell.modern-dashboard.market-dashboard { height: 100dvh; min-height: 0; overflow: hidden; }
@@ -86,4 +105,6 @@
   .market-product-controls .market-search { flex: 1; min-width: 0; }
   .market-product-image span { font-size: 12px; }
   .market-product-image svg { width: 34px; height: 34px; }
+  .market-recommendations { padding:14px; }
+  .market-recommendations-heading { flex-direction:column; }
 }

@@ -1,0 +1,2 @@
+const router=require('express').Router(),controller=require('../controllers/googleController'),{requireAuth}=require('../middleware/auth');
+router.use(requireAuth);router.get('/google/status',controller.status);router.post('/google/connect',controller.connect);router.get('/google/callback',controller.callback);router.delete('/google/connection',controller.disconnect);router.post('/appointments/:appointmentId/google-meet',controller.schedule);module.exports=router;

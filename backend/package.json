@@ -7,20 +7,29 @@
     "test": "node --test tests/*.test.js",
     "start": "node server.js",
     "seed:demo": "node scripts/seedDemo.js",
-    "verify:demo": "node scripts/verifyDemo.js"
+    "seed:plant-info": "node scripts/seedDemoPlantProfiles.js",
+    "verify:demo": "node scripts/verifyDemo.js",
+    "ai:install": ".\\ai_service\\.venv\\Scripts\\python.exe -m pip install -r ai_service/requirements.txt",
+    "ai:download": "node scripts/downloadPlantModel.js",
+    "ai:start": ".\\ai_service\\.venv\\Scripts\\python.exe ai_service/plant_disease_server.py"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1",
-    "mongoose": "^9.9.4",
+    "@huggingface/transformers": "^4.3.2",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^8.5.1",
     "cookie-parser": "^1.4.6",
-    "express-session": "^1.17.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "express": "^5.2.1",
+    "express-session": "^1.17.3",
+    "geotiff": "^3.0.5",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^9.9.4",
+    "onnxruntime-node": "1.30.0",
+    "proj4": "^2.23.0",
+    "sharp": "0.35.5"
   }
 }

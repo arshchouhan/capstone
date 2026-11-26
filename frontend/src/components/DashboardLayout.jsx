@@ -18,8 +18,7 @@ import {
   FaSignOutAlt,
   FaCheckCircle,
   FaChartBar,
-  FaTimes,
-  FaRobot
+  FaTimes
 } from 'react-icons/fa'
 
 
@@ -105,15 +104,13 @@ const DashboardLayout = ({ children, className = '', dashboardPath }) => {
             <FaBell />
             {notifications.some(notification=>!notification.readAt) && <span className="notification-dot" />}
           </button>
-          <button type="button" className="topbar-ai-button" onClick={()=>openRightPanel('ai')}><FaRobot /><span>Your AI</span></button>
-
         </div>
       </header>
 
       <div className="dashboard-body">
         {/* Left Sidebar */}
         <aside id="dashboard-sidebar" className="dashboard-sidebar">
-          {!isDoctorPortal && <button type="button" className={`sidebar-scan-action ${isActive(`${basePath}/scan`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/scan`)}><FaCamera /><span>Scan Plant</span></button>}
+          {!isDoctorPortal && <button type="button" className={`sidebar-scan-action ${isActive(`${basePath}/scan`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/scan`, { state: { newScan: true } })}><FaCamera /><span>Scan Plant</span></button>}
           <nav className="sidebar-nav">{isDoctorPortal ? <><button type="button" className={`nav-item ${isActive(`${basePath}/connections`) ? 'active' : ''}`} onClick={()=>navigate(`${basePath}/connections`)}><FaUsers className="nav-icon"/><span>My Connections</span></button><button type="button" className={`nav-item ${location.pathname.startsWith(`${basePath}/community`) ? 'active' : ''}`} onClick={()=>navigate(`${basePath}/community`)}><FaUsers className="nav-icon"/><span>Community</span></button></> : <>
             <div className={`nav-item ${isActive(`${basePath}/crops`) ? 'active' : ''}`} onClick={() => navigate(`${basePath}/crops`)}>
               <FaSeedling className="nav-icon" />
@@ -172,9 +169,9 @@ const DashboardLayout = ({ children, className = '', dashboardPath }) => {
           {pageLoading ? <DashboardPageSkeleton path={location.pathname} /> : children}
         </section>
 
-        {rightPanel === 'ai' && <aside className="right-slide-panel" aria-label="Your AI"><header className="right-slide-panel-header"><h2>Your AI</h2><button aria-label="Close AI panel" onClick={closeRightPanel}><FaTimes /></button></header><div className="right-slide-panel-content"><p>{isDoctorPortal?'Review the plant concerns shared by your growers.':'Choose a plant to review its latest analysis and care recommendations.'}</p><button type="button" className="panel-primary-action" onClick={()=>{closeRightPanel();navigate(isDoctorPortal?'/dr/dashboard/connections':'/farm/dashboard/crops')}}>{isDoctorPortal?'View your connections':'View my plants'}</button></div></aside>}
         {rightPanel && rightPanel !== 'ai' && <aside className="right-slide-panel" aria-label="Dashboard side panel">
-          <header className="right-slide-panel-header"><div><span>{rightPanel === 'schedule' ? 'CARE' : rightPanel === 'completed' ? 'TASKS' : rightPanel === 'analytics' ? 'INSIGHTS' : 'PROFILE'}</span><h2>{rightPanel === 'schedule' ? 'Upcoming care' : rightPanel === 'completed' ? 'Completed tasks' : rightPanel === 'analytics' ? 'Garden insights' : userName}</h2></div><button aria-label="Close side panel" onClick={closeRightPanel}><FaTimes /></button></header>
+          <header className="right-slide-panel-header"><div><span>{rightPanel === 'schedule' ? 'CARE' : rightPanel === 'completed' ? 'TASKS' : rightPanel === 'analytics' ? 'INSIGHTS' : 'PROFILE'}</span><h2>{rightPanel === 'schedule' ? 'Upcoming care' : rightPanel === 'completed' ? 'Completed tasks' : rightPanel === 'analytics' ? 'Garden insights' : userName}</h2>
+          </div><button aria-label="Close side panel" onClick={closeRightPanel}><FaTimes /></button></header>
           {rightPanelLoading ? <PanelSkeleton /> : <>{rightPanel === 'schedule' && <div className="right-slide-panel-content">{overview.tasks.map(task=><article key={task.id} className="panel-task"><span>{new Date(task.due).toLocaleDateString()}</span><div><strong>{task.type}</strong><p>{task.plant?.name}</p></div></article>)}{!overview.tasks.length && <EmptyState kind="care" title="No tasks scheduled" description="Add care tasks from a plant’s Care tab." />}{notifications.map(notification=><article key={notification.id} className="panel-task" onClick={()=>markRead(notification)}><FaBell /><div><strong>{notification.title}</strong><p>{notification.body}</p>{!notification.readAt && <button onClick={()=>markRead(notification)}>Mark read</button>}</div></article>)}</div>}
           {rightPanel === 'completed' && <div className="right-slide-panel-content">{completedTasks.map(task=><article key={task.id} className="panel-task"><FaCheckCircle /><div><strong>{task.type} · {task.plant?.name}</strong><p>{new Date(task.lastCompleted).toLocaleDateString()}</p></div></article>)}{!completedTasks.length && <EmptyState kind="care" title="No completed tasks yet" description="Completed care tasks appear here." />}</div>}
           {rightPanel === 'analytics' && <div className="right-slide-panel-content"><div className="panel-stat"><span>Plants in your garden</span><strong>{overview.plants.length}</strong></div><div className="panel-stat"><span>Plants needing care</span><strong>{overview.plants.filter(plant=>['Needs Care','At Risk'].includes(plant.status)).length}</strong></div><div className="panel-stat"><span>Recently completed scans</span><strong>{overview.recentScans.length}</strong></div><div className="panel-stat"><span>Care tasks completed</span><strong>{completedTasks.length} / {overview.tasks.length}</strong></div></div>}

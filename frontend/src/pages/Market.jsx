@@ -1,44 +1,116 @@
-import { useRef, useState } from 'react'
-import { FaSearch, FaShoppingCart, FaRegImage, FaTimes } from 'react-icons/fa'
+import { useEffect, useRef, useState } from 'react'
+import { FaExternalLinkAlt, FaShoppingCart, FaLeaf } from 'react-icons/fa'
 import DashboardLayout from '../components/DashboardLayout'
 import useApiData from '../hooks/useApiData'
-import { api, mediaUrl } from '../services/api'
-import EmptyState from '../components/EmptyState'
+import { api } from '../services/api'
 import './Market.css'
 
-const categories = ['All Products', 'Treatments', 'Fertilizers', 'Tools', 'Plants']
+const modelCrops=['Apple','Blueberry','Cherry','Corn','Grape','Orange','Peach','Pepper bell','Potato','Raspberry','Soybean','Squash','Strawberry','Tomato']
+const modelDiseaseClasses=[
+  ['Apple','Apple scab'],['Apple','Black rot'],['Apple','Cedar apple rust'],['Cherry','Powdery mildew'],['Corn','Cercospora leaf spot'],['Corn','Common rust'],['Corn','Northern leaf blight'],['Grape','Black rot'],['Grape','Esca black measles'],['Grape','Leaf blight'],['Orange','Citrus greening'],['Peach','Bacterial spot'],['Pepper bell','Bacterial spot'],['Potato','Early blight'],['Potato','Late blight'],['Squash','Powdery mildew'],['Strawberry','Leaf scorch'],['Tomato','Bacterial spot'],['Tomato','Early blight'],['Tomato','Late blight'],['Tomato','Leaf mold'],['Tomato','Septoria leaf spot'],['Tomato','Spider mites'],['Tomato','Target spot'],['Tomato','Tomato mosaic virus'],['Tomato','Tomato yellow leaf curl virus'],
+]
+const merchantSources=[['Amazon India','https://www.amazon.in/s?k='],['Flipkart','https://www.flipkart.com/search?q='],['eBay','https://www.ebay.com/sch/i.html?_nkw=']]
+const liveStatusMessages = {
+  'not-configured': 'Connect eBay in the backend to see live prices and photos.',
+  'credentials-rejected': 'eBay rejected the Production keys. Check the App ID and Cert ID in the backend configuration.',
+  'access-denied': 'eBay denied access to live search. Check Browse API access for the Production keyset.',
+  'no-results': 'No live eBay listings matched this search.',
+  unavailable: 'Live eBay search is temporarily unavailable.',
+}
+const modelFallbackProducts = crop => modelDiseaseClasses.filter(([item])=>!crop||item===crop).map(([item,condition],index)=>{
+  const [merchant,base]=merchantSources[index%merchantSources.length]
+  const query=`${item} ${condition} plant care supplies`
+  return {id:`${item}-${condition}-${merchant}`,merchant,title:`${item} · ${condition}`,description:`Explore products relevant to ${item} ${condition.toLowerCase()} care.`,url:`${base}${encodeURIComponent(query)}`,category:item,condition,external:true}
+})
+
+const previewCache = new Map()
+
+function MerchantPreview({ product, crop, enabled }) {
+  const anchor = useRef(null)
+  const [listing, setListing] = useState(null)
+  const category = product.category || crop
+  const condition = product.condition || ''
+  const path = `/market/recommendations?${new URLSearchParams({ preview: '1', merchant: product.merchant, crop: category, condition })}`
+
+  useEffect(() => {
+    if (!enabled) return
+    let active = true
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      observer.disconnect()
+      if (!previewCache.has(path)) {
+        previewCache.set(path, api(path).then(result => {
+          if (!['live', 'no-results'].includes(result.status)) previewCache.delete(path)
+          return result.product
+        }).catch(() => { previewCache.delete(path) }))
+      }
+      previewCache.get(path).then(item => { if (active) setListing(item || null) })
+    })
+    observer.observe(anchor.current)
+    return () => { active = false; observer.disconnect() }
+  }, [enabled, path])
+
+  return <div ref={anchor}>
+    {listing ? (
+      <a href={listing.url} target="_blank" rel="noreferrer" aria-label={`View ${listing.title} on ${listing.merchant}`}>
+        <div className="market-product-image mint"><img src={listing.image} alt="" loading="lazy" /></div>
+        <span className="market-listing-caption" title={listing.title}>{listing.merchant} · {listing.title}</span>
+      </a>
+    ) : (
+      <div className="market-product-image mint"><FaShoppingCart aria-hidden="true" /></div>
+    )}
+  </div>
+}
+
+function ProductGrid({ products, merchantSearch = false, previewMerchants = {}, crop = '' }) {
+  return <div className="market-product-grid market-recommendation-grid">{products.map(product => (
+    <article className="market-product-card market-merchant-product" key={product.id}>
+      {merchantSearch ? <MerchantPreview key={`${product.id}-${crop}`} product={product} crop={crop} enabled={previewMerchants[product.merchant]} /> : (
+        <div className="market-product-image mint">{product.image ? <img src={product.image} alt="" loading="lazy" /> : <FaShoppingCart />}</div>
+      )}
+      <h3>{product.title}</h3>
+      <p>{product.description}</p>
+      <div className="market-product-bottom">
+        <span className="market-price">{product.price || product.merchant}</span>
+        <a className="market-external-action" href={product.url} target="_blank" rel="noreferrer" aria-label={`${merchantSearch ? 'Search' : 'View'} ${product.title} on ${product.merchant || 'eBay'}`}>
+          {merchantSearch ? 'Search' : 'View'} <FaExternalLinkAlt aria-hidden="true" />
+        </a>
+      </div>
+    </article>
+  ))}</div>
+}
 
 export default function Market() {
-  const {data:products,error:productError} = useApiData('/products')
-  const {data:cartData,reload:reloadCart} = useApiData('/cart',{items:[]})
-  const [apiError,setApiError] = useState('')
-  const updateCart = async (productId,quantity) => { try{await api(`/cart/items/${productId}`,{method:'PUT',body:{quantity}});await reloadCart();setApiError('')}catch(err){setApiError(err.message)} }
-  const cartDialog = useRef(null)
-  const [category, setCategory] = useState('All Products')
-  const [search, setSearch] = useState('')
-  const [sort, setSort] = useState('featured')
-  const cart = Object.fromEntries((cartData.items || []).map(item=>[item.product?.id,item.quantity]))
-  const count = Object.values(cart).reduce((sum, quantity) => sum + quantity, 0)
-  const visibleProducts = products.filter(product => (category === 'All Products' || product.category === category) && `${product.name} ${product.description} ${product.category}`.toLowerCase().includes(search.toLowerCase())).sort((a, b) => sort === 'category' ? a.category.localeCompare(b.category) : String(a.id).localeCompare(String(b.id)))
+  const [crop,setCrop] = useState('')
+  const recommendationsPath = `/market/recommendations${crop?`?crop=${encodeURIComponent(crop)}`:''}`
+  const {data:recommendations,reload:reloadRecommendations,loading:recommendationsLoading,error:recommendationsError} = useApiData(recommendationsPath,null)
+  const catalogCrops = recommendations?.catalog?.crops?.length ? recommendations.catalog.crops : modelCrops
+  const hasCurrentCatalog = Boolean(recommendations?.catalog?.crops?.length)
+  const merchantRecommendations = recommendations?.marketplaceMode==='model-catalog-v1' && recommendations?.products?.length ? recommendations.products : modelFallbackProducts(crop)
+  const liveProducts = recommendationsError ? [] : recommendations?.liveProducts || []
+  const liveMessage = recommendationsError ? 'Live listings couldn’t load. You can still search merchants below.' : liveStatusMessages[recommendations?.liveStatus]
+  const recommendationTitle = recommendations?.personalized ? `Relevant to ${recommendations.context}` : (hasCurrentCatalog ? recommendations.context : 'Browse care supplies for every crop covered by the plant-disease model.')
 
   return (
     <DashboardLayout className="market-dashboard">
       <section className="market-content" aria-labelledby="market-heading">
-        <div className="market-heading-row"><div><h1 id="market-heading">Market</h1><p>Find the right care for every plant</p></div><button className="market-cart-button" onClick={() => cartDialog.current.showModal()}><FaShoppingCart /> Cart ({count})</button></div>
-        <div className="market-toolbar">
-          <div className="market-categories" aria-label="Product categories">{categories.map(item => <button key={item} aria-pressed={category === item} className={category === item ? 'selected' : ''} onClick={() => setCategory(item)}>{item}</button>)}</div>
-          <div className="market-product-controls"><label className="market-search"><FaSearch /><input aria-label="Search products" placeholder="Search products..." value={search} onChange={event => setSearch(event.target.value)} /></label><select aria-label="Sort products" value={sort} onChange={event => setSort(event.target.value)}><option value="featured">Sort by: Featured</option><option value="category">Sort by: Category</option></select></div>
-        </div>
-        <h2>Products</h2>{apiError && <p role="alert">{apiError}</p>}
-        <div className="market-product-grid">{visibleProducts.map(product => <article className="market-product-card" key={product.id}>
-          <div className={`market-product-image ${product.id % 2 === 0 ? 'mint' : ''}`}>{product.image ? <img src={mediaUrl(product.image)} alt={product.name} /> : <FaRegImage />}</div>
-          <h3>{product.name}</h3><p>{product.description}</p>
-          <div className="market-product-bottom"><span className="market-price">{new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR'}).format(product.price)}</span><button aria-label={`Add ${product.category.toLowerCase()} product ${product.id} to cart`} onClick={() => updateCart(product.id,(cart[product.id] || 0)+1)}><FaShoppingCart />{cart[product.id] ? `Add more (${cart[product.id]})` : 'Add to Cart'}</button></div>
-        </article>)}</div>
-        {!visibleProducts.length && <EmptyState kind="market" title="No products available" description={productError || 'Products will appear here when added to the catalog.'} />}
-        <span className="market-sr-only" role="status">{count} items in cart</span>
+        <div className="market-heading-row"><div><h1 id="market-heading">Market</h1><p>Explore relevant plant-care products from external merchants.</p></div></div>
+        <section className="market-recommendations" aria-labelledby="recommendations-heading">
+          <div className="market-recommendations-heading"><div><span className="market-recommendations-kicker"><FaLeaf /> Model-supported crop care</span><h2 id="recommendations-heading">Plant-care marketplace</h2><p>{recommendationTitle}</p></div><button type="button" className="market-refresh-button" onClick={reloadRecommendations} disabled={recommendationsLoading}>{recommendationsLoading?'Refreshing…':'Refresh'}</button></div>
+          <div className="market-crop-filters" aria-label="Browse marketplace by crop"><button type="button" className={!crop?'selected':''} aria-pressed={!crop} onClick={()=>setCrop('')}>All crops</button>{catalogCrops.map(item=><button type="button" key={item} className={crop===item?'selected':''} aria-pressed={crop===item} onClick={()=>setCrop(item)}>{item}</button>)}</div>
+          {recommendationsLoading ? <div className="market-recommendation-loading" role="status">Finding relevant products…</div> : (
+            <>
+              {liveProducts.length > 0 && <>
+                <div className="market-recommendation-source">Live eBay listings</div>
+                <ProductGrid products={liveProducts} />
+              </>}
+              {liveMessage && <p className="market-recommendation-status" role="status">{liveMessage}</p>}
+              <div className="market-recommendation-source">Merchant searches</div>
+              <ProductGrid products={merchantRecommendations} merchantSearch previewMerchants={recommendations?.merchantPreviews} crop={crop} />
+            </>
+          )}
+        </section>
       </section>
-      <dialog ref={cartDialog} className="market-cart-dialog"><div className="market-heading-row"><h2>Your cart ({count})</h2><button aria-label="Close cart" onClick={() => cartDialog.current.close()}><FaTimes /></button></div>{count ? <><p>Preview items — product details and prices are coming soon.</p>{products.filter(product => cart[product.id]).map(product => <div className="market-cart-item" key={product.id}><span>{product.category} · {product.name}<small>Quantity: {cart[product.id]}</small></span><button onClick={() => updateCart(product.id,0)}>Remove</button></div>)}</> : <p>Your cart is empty. Explore products to add an item.</p>}</dialog>
     </DashboardLayout>
   )
 }
